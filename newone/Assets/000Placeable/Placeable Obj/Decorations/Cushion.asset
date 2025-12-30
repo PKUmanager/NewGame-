@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220f42fd2be8412088d96b73d9d10822, type: 3}
+  m_Name: Cushion
+  m_EditorClassIdentifier: 
+  <Size>k__BackingField: {x: 0.828139, y: 0.828149}
+  <Prefab>k__BackingField: {fileID: 1595099997448587219, guid: 6f960001cb4e9c142af13f9f0888b458, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: e6590eabd16f0d4428450d008dd00bde, type: 3}
+  <GridType>k__BackingField: 0
+  <ObjectGroupInfo>k__BackingField: 1
+  <DynamicSize>k__BackingField: 0

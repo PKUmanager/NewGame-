@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5875381762976848924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414679687093295916}
+  - component: {fileID: 133086093506365123}
+  m_Layer: 0
+  m_Name: GameConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1414679687093295916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875381762976848924}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &133086093506365123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875381762976848924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e255ed0b9b6542e283955700669bf6f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnableSaveSystem>k__BackingField: 0
+  <SaveFilePath>k__BackingField: SpaceFusion/SF Grid Building System/Saves
+  <SaveFileName>k__BackingField: SaveFile
+  <PlacementLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
+  <CellVisualizationPrefab>k__BackingField: {fileID: 0}
+  <GridVisualizationPrefab>k__BackingField: {fileID: 2982566949137150042, guid: 3426721811457d44f8f2f04ddeec32e3, type: 3}
+  <GridVisualizationColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <GridVisualizationThickness>k__BackingField: 0.05
+  <AlwaysShowGrid>k__BackingField: 0
+  <ShowGridOnPlacement>k__BackingField: 1
+  <UsePreviewMaterial>k__BackingField: 0
+  <PreviewMaterialPrefab>k__BackingField: {fileID: 2100000, guid: fd7c14aaca8c18d4aa6027092cae1fc1, type: 2}
+  <PreviewYOffset>k__BackingField: 0.06
+  <CellIndicatorPrefab>k__BackingField: {fileID: 6562994487906786065, guid: fbbdff1bc1ae85e4381bf4ffff5797b1, type: 3}
+  <ValidPlacementColor>k__BackingField: {r: 0, g: 1, b: 0, a: 0.47058824}
+  <InValidPlacementColor>k__BackingField: {r: 1, g: 0, b: 0, a: 0.47058824}
+  <ValidRemovalColor>k__BackingField: {r: 1, g: 0, b: 0, a: 0.47058824}
+  <InValidRemovalColor>k__BackingField: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 0.47058824}
+  <PlaceableObjectDatabase>k__BackingField: {fileID: 11400000, guid: 579a4809e0357aa42a92bb40c79c6532, type: 2}
+  <HoldThreshold>k__BackingField: 0.6
+  <DragSpeed>k__BackingField: 10
+  <ZoomSpeed>k__BackingField: 10
+  <RotationSpeed>k__BackingField: 5
+  <XBoundary>k__BackingField: {x: 0, y: 20}
+  <YBoundary>k__BackingField: {x: 5, y: 10}
+  <ZBoundary>k__BackingField: {x: -8, y: 7}
+  <EnableAutoMove>k__BackingField: 0
+  <EdgeMarginForAutoMove>k__BackingField: 50
+  <RestrictAutoMoveForPlacement>k__BackingField: 1

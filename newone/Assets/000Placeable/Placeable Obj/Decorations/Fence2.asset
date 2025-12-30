@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220f42fd2be8412088d96b73d9d10822, type: 3}
+  m_Name: Fence2
+  m_EditorClassIdentifier: 
+  <Size>k__BackingField: {x: 1.835501, y: 0.054758}
+  <Prefab>k__BackingField: {fileID: 4803361784186368598, guid: 9e4ec891e01a3e8479c0e0e32c86618b, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3acaa71b140f4a5408991c9167152893, type: 3}
+  <GridType>k__BackingField: 0
+  <ObjectGroupInfo>k__BackingField: 1
+  <DynamicSize>k__BackingField: 0

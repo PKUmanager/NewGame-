@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8024343801042706890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8910095703949197141}
+  m_Layer: 0
+  m_Name: Chair07
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8910095703949197141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8024343801042706890}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.763437, y: -3.1058626, z: -183.827}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1974675494618293251}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2084548268512576488
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8910095703949197141}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.0313463
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0093283355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.0378256
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+      propertyPath: m_Name
+      value: Chair07
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+--- !u!4 &1974675494618293251 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3226ce8b234b2a4389eb21357700095, type: 3}
+  m_PrefabInstance: {fileID: 2084548268512576488}
+  m_PrefabAsset: {fileID: 0}

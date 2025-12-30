@@ -1,0 +1,4 @@
+repository "Grid test3@tj_pku_manager@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"

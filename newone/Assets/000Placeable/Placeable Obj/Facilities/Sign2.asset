@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220f42fd2be8412088d96b73d9d10822, type: 3}
+  m_Name: Sign2
+  m_EditorClassIdentifier: 
+  <Size>k__BackingField: {x: 1.278948, y: 0.113135}
+  <Prefab>k__BackingField: {fileID: 365808682256165571, guid: e804fe955fd75da45acbfe8051fb2a7c, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: f79075f62e7cafe46b8219cd5b977793, type: 3}
+  <GridType>k__BackingField: 0
+  <ObjectGroupInfo>k__BackingField: 0
+  <DynamicSize>k__BackingField: 0

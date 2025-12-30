@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220f42fd2be8412088d96b73d9d10822, type: 3}
+  m_Name: Table&Chairs4
+  m_EditorClassIdentifier: 
+  <Size>k__BackingField: {x: 2.330116, y: 2.873882}
+  <Prefab>k__BackingField: {fileID: 1252080503052319374, guid: 95dbe2b1f7157234b9225b007c513a9d, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: a2d25b81ed44bb142802bd9927b4c8a3, type: 3}
+  <GridType>k__BackingField: 0
+  <ObjectGroupInfo>k__BackingField: 0
+  <DynamicSize>k__BackingField: 0
