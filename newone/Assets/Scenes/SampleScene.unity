@@ -3902,7 +3902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &170230689
 Transform:
   m_ObjectHideFlags: 0
@@ -5168,13 +5168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8e9686a451aa847a4aa986d96fc2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 652309152}
-  questionPanel: {fileID: 1476686058}
-  inputField: {fileID: 0}
-  sendButton: {fileID: 0}
-  answerPanel: {fileID: 0}
-  answerText: {fileID: 0}
-  closeButton: {fileID: 0}
 --- !u!4 &221005360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8aad1db0251333b43b36de780007c73a, type: 3}
@@ -13460,7 +13453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 839.5834, y: 415.62497}
+  m_AnchoredPosition: {x: 840, y: 385}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587384902
@@ -15595,9 +15588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad9724839a5d9f44979955eb4656297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionPanel: {fileID: 1476686058}
-  answerPanel: {fileID: 1109285815}
-  npcTag: NPC
 --- !u!1 &655152476
 GameObject:
   m_ObjectHideFlags: 0
