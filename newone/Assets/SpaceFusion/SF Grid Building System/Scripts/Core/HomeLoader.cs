@@ -45,7 +45,7 @@ public class HomeLoader : MonoBehaviour
     // === 核心功能：加载某人的家 ===
     public async void LoadHome(string targetUsername)
     {
-        Debug.Log("正在前往 " + targetUsername + " 的家...");
+        Debug.Log("正在前往 " + targetUsername + " 的校园...");
 
         // 1. 【拆迁】清空旧建筑
         foreach (Transform child in buildingRoot)
@@ -67,7 +67,23 @@ public class HomeLoader : MonoBehaviour
         // 3. 【拿图纸】
         LCQuery<LCObject> buildQuery = new LCQuery<LCObject>("UserStructure");
         buildQuery.WhereEqualTo("owner", targetUser);
+        buildQuery.Include("owner");
         var dataList = await buildQuery.Find();
+
+        if (dataList.Count > 0)
+        {
+            // 取出第一条数据，看看它的主人是谁
+            LCUser owner = dataList[0]["owner"] as LCUser;
+            Debug.Log("正在参观：" + owner.Username+"的校园");
+
+            // 你以后可以在这里写：TitleText.text = owner.Username + " 的家";
+        }
+        else
+        {
+            Debug.Log("这个校园空荡荡的");
+        }
+
+
 
         // 4. 【施工】
         foreach (var data in dataList)
