@@ -45,22 +45,48 @@ public class AuthManager : MonoBehaviour
     // 注意：这里改成 TMP_Text，这样旧版Text和新版Text都能拖
     public TMP_Text statusText;
 
-    // --- 注册功能 ---
+
+    // --- 注册功能 (升级版) ---
     public async void OnRegisterClick()
     {
+        string uName = usernameInput.text;
+        string pwd = passwordInput.text;
+
+        // 1. 基本检查：防止空账号
+        if (string.IsNullOrEmpty(uName) || string.IsNullOrEmpty(pwd))
+        {
+            statusText.text = "账号或密码不能为空！";
+            return;
+        }
+
         LCUser user = new LCUser();
-        user.Username = usernameInput.text;
-        user.Password = passwordInput.text;
+        user.Username = uName;
+        user.Password = pwd;
+
+        statusText.text = "正在注册..."; // 给个反馈
 
         try
         {
-            await user.SignUp(); // 发送到云端
+            // 2. 尝试注册
+            await user.SignUp();
+
             statusText.text = "注册成功！请登录";
             Debug.Log("注册成功");
         }
         catch (LCException e)
         {
-            statusText.text = "注册失败: " + e.Message;
+            // 3. 【核心】专门处理用户名重复
+            if (e.Code == 202)
+            {
+                statusText.text = "注册失败：用户名 '" + uName + "' 已被占用，请换一个！";
+                Debug.LogWarning("用户名重复");
+            }
+            else
+            {
+                // 其他错误（比如断网了）
+                statusText.text = "注册失败: " + e.Message;
+                Debug.LogError("注册报错: " + e.Code);
+            }
         }
     }
 

@@ -33,6 +33,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             placedObject.data.direction = direction;
 
             obj.transform.position = worldPosition + PlaceableUtils.GetTotalOffset(offset, direction);
+
+            // ★★★ 【YWJ新增】 ★★★ 
+            // 必须先定义 rotationAngle，后面才能用它！
+            float rotationAngle = PlaceableUtils.GetRotationAngle(direction);
+
             obj.transform.rotation = Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
 
             // [核心修改] 针对 DynamicSize 的特殊处理
@@ -46,6 +51,26 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             ObjectGrouper.Instance.AddToGroup(obj, placeableObj.GridType);
             _placedObjectDictionary.Add(placedObject.data.guid, obj);
+
+            // =========================================================
+            // ★★★ 【新增】 云端上传代码 ★★★
+            // =========================================================
+            if (BuildSaver.Instance != null)
+            {
+                // 1. 获取名字：注意！必须确保 placeableObj.name 和 Resources 文件夹里的 Prefab 名字一样
+                // ★★★ 这行存的是它里面那个 Prefab 的名字！绝对和截图列表一致！ ★★★
+                string prefabName = placeableObj.Prefab.name;
+
+                // 2. 获取位置：使用物体当前的真实世界坐标
+                Vector3 finalPos = obj.transform.position;
+
+                // 3. 调用我们写的上传脚本
+                BuildSaver.Instance.SaveOneBuilding(prefabName, finalPos, rotationAngle);
+            }
+            // =========================================================
+
+
+
             return placedObject.data.guid;
         }
 
