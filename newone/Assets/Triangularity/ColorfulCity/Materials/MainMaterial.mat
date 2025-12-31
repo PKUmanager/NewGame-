@@ -141,7 +141,7 @@ Material:
     - _PixelSize: 3
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _Smoothness: 0.474
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -152,10 +152,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AmbientLight: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _BaseColor: {r: 0.7056604, g: 0.7056604, b: 0.7056604, a: 0.56078434}
+    - _BaseColor: {r: 0.90943396, g: 0.90943396, b: 0.90943396, a: 0.56078434}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeHighlightColor: {r: 0.93207544, g: 0.7720399, b: 0.7720399, a: 0}
-    - _EmissionColor: {r: 0.10943389, g: 0.10943389, b: 0.10943389, a: 0}
+    - _EmissionColor: {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0.5}
     - _PixelGridOrigin: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
