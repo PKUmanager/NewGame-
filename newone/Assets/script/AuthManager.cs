@@ -5,6 +5,36 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;  // 【新增】这一行必须加！
 
+
+
+public class RegisterUI : MonoBehaviour
+{
+    [Header("Inputs")]
+    [SerializeField] private TMP_InputField inputCampusName;
+
+    [Header("Buttons")]
+    [SerializeField] private Button btnRegister;
+
+    private const string KEY_CAMPUS_NAME = "CAMPUS_NAME";
+
+    private void Awake()
+    {
+        if (btnRegister != null)
+            btnRegister.onClick.AddListener(OnClickRegister);
+    }
+
+    private void OnClickRegister()
+    {
+        string campusName = inputCampusName != null ? inputCampusName.text.Trim() : "";
+        if (string.IsNullOrEmpty(campusName))
+            campusName = "玩家"; // 你想要的默认名
+
+        PlayerPrefs.SetString(KEY_CAMPUS_NAME, campusName);
+        PlayerPrefs.Save();
+
+        // 这里继续你原本的注册逻辑（切场景/关面板等）
+    }
+}
 public class AuthManager : MonoBehaviour
 {
     [Header("把UI拖进去")]
