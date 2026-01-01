@@ -1,21 +1,19 @@
-using LeanCloud;
-using LeanCloud.Storage; // ±ØĞëÒıÓÃ
+ï»¿using LeanCloud;
+using LeanCloud.Storage;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;  // ¡¾ĞÂÔö¡¿ÕâÒ»ĞĞ±ØĞë¼Ó£¡
-
-
 
 public class RegisterUI : MonoBehaviour
 {
     [Header("Inputs")]
-    [SerializeField] private TMP_InputField inputCampusName;
+    [SerializeField] private TMP_InputField inputUsername;
 
     [Header("Buttons")]
     [SerializeField] private Button btnRegister;
 
-    private const string KEY_CAMPUS_NAME = "CAMPUS_NAME";
+    private const string KEY_PLAYER_NAME = "PLAYER_NAME";
 
     private void Awake()
     {
@@ -25,37 +23,33 @@ public class RegisterUI : MonoBehaviour
 
     private void OnClickRegister()
     {
-        string campusName = inputCampusName != null ? inputCampusName.text.Trim() : "";
-        if (string.IsNullOrEmpty(campusName))
-            campusName = "Íæ¼Ò"; // ÄãÏëÒªµÄÄ¬ÈÏÃû
+        string username = inputUsername != null ? inputUsername.text.Trim() : "";
+        if (string.IsNullOrEmpty(username)) username = "ç©å®¶";
 
-        PlayerPrefs.SetString(KEY_CAMPUS_NAME, campusName);
+        PlayerPrefs.SetString(KEY_PLAYER_NAME, username);
         PlayerPrefs.Save();
 
-        // ÕâÀï¼ÌĞøÄãÔ­±¾µÄ×¢²áÂß¼­£¨ÇĞ³¡¾°/¹ØÃæ°åµÈ£©
+        // è¿™é‡Œå†™ä½ åŸæœ¬æ³¨å†ŒUIè¦åšçš„äº‹ï¼ˆä¸å½±å“ AuthManagerï¼‰
     }
-}
+} // âœ… æ³¨æ„ï¼šRegisterUI åˆ°è¿™é‡Œå¿…é¡»ç»“æŸï¼ˆè¿™ä¸€è¡Œéå¸¸å…³é”®ï¼‰
+
 public class AuthManager : MonoBehaviour
 {
-    [Header("°ÑUIÍÏ½øÈ¥")]
-    // ×¢Òâ£ºÇ°Ãæ¼ÓÁË TMP_
+    [Header("æŠŠUIæ‹–å‡ºå»")]
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
-
-    // ×¢Òâ£ºÕâÀï¸Ä³É TMP_Text£¬ÕâÑù¾É°æTextºÍĞÂ°æText¶¼ÄÜÍÏ
     public TMP_Text statusText;
 
+    private const string KEY_PLAYER_NAME = "PLAYER_NAME";
 
-    // --- ×¢²á¹¦ÄÜ (Éı¼¶°æ) ---
     public async void OnRegisterClick()
     {
-        string uName = usernameInput.text;
+        string uName = usernameInput.text.Trim();
         string pwd = passwordInput.text;
 
-        // 1. »ù±¾¼ì²é£º·ÀÖ¹¿ÕÕËºÅ
         if (string.IsNullOrEmpty(uName) || string.IsNullOrEmpty(pwd))
         {
-            statusText.text = "ÕËºÅ»òÃÜÂë²»ÄÜÎª¿Õ£¡";
+            statusText.text = "ç”¨æˆ·åå’Œå¯†ç ä¸èƒ½ä¸ºç©ºï¼";
             return;
         }
 
@@ -63,59 +57,35 @@ public class AuthManager : MonoBehaviour
         user.Username = uName;
         user.Password = pwd;
 
-        statusText.text = "ÕıÔÚ×¢²á..."; // ¸ø¸ö·´À¡
+        statusText.text = "æ­£åœ¨æ³¨å†Œ...";
 
         try
         {
-            // 2. ³¢ÊÔ×¢²á
             await user.SignUp();
-
-            statusText.text = "×¢²á³É¹¦£¡ÇëµÇÂ¼";
-            Debug.Log("×¢²á³É¹¦");
+            statusText.text = "æ³¨å†ŒæˆåŠŸï¼è¯·ç™»å½•";
         }
         catch (LCException e)
         {
-            // 3. ¡¾ºËĞÄ¡¿×¨ÃÅ´¦ÀíÓÃ»§ÃûÖØ¸´
-            if (e.Code == 202)
-            {
-                statusText.text = "×¢²áÊ§°Ü£ºÓÃ»§Ãû '" + uName + "' ÒÑ±»Õ¼ÓÃ£¬Çë»»Ò»¸ö£¡";
-                Debug.LogWarning("ÓÃ»§ÃûÖØ¸´");
-            }
-            else
-            {
-                // ÆäËû´íÎó£¨±ÈÈç¶ÏÍøÁË£©
-                statusText.text = "×¢²áÊ§°Ü: " + e.Message;
-                Debug.LogError("×¢²á±¨´í: " + e.Code);
-            }
+            statusText.text = "æ³¨å†Œå¤±è´¥ï¼š" + e.Message;
         }
     }
 
-    // --- µÇÂ¼¹¦ÄÜ ---
     public async void OnLoginClick()
     {
         try
         {
-            // 1. »ñÈ¡µÇÂ¼·µ»ØµÄÓÃ»§¶ÔÏó 'user'
             LCUser user = await LCUser.Login(usernameInput.text, passwordInput.text);
-
-            // 2. ¡¾ĞŞ¸´¡¿Ö±½ÓÊ¹ÓÃ 'user.Username'£¬¶ø²»ÊÇ LCUser.CurrentUser
-            statusText.text = "µÇÂ¼³É¹¦£¡»¶Ó­ " + user.Username;
-
-            // 2. ¡¾ĞŞ¸Ä2¡¿Ìø×ª³¡¾°´úÂë
-            // ÕâÀïµÄ "GameScene" ±ØĞë¸Ä³ÉÄãÕæÕıÓÎÏ·³¡¾°µÄÃû×Ö£¨±ÈÈç "Main" »ò "Level1"£©
-            // ÉÔÎ¢ÑÓ³Ù 1 ÃëÔÙÌø£¬ÈÃÍæ¼Ò¿´Çå¡°µÇÂ¼³É¹¦¡±Õâ¼¸¸ö×Ö£¨¿ÉÑ¡£©
-            Invoke("EnterGame", 1.0f);
+            statusText.text = "ç™»å½•æˆåŠŸï¼æ¬¢è¿ " + user.Username;
+            Invoke(nameof(EnterGame), 1.0f);
         }
         catch (LCException e)
         {
-            statusText.text = "µÇÂ¼Ê§°Ü: " + e.Message;
+            statusText.text = "ç™»å½•å¤±è´¥ï¼š" + e.Message;
         }
     }
 
-    // ×¨ÃÅĞ´¸öº¯ÊıÓÃÀ´Ìø³¡¾°£¬·½±ã Invoke µ÷ÓÃ
-    void EnterGame()
+    private void EnterGame()
     {
-        // £¡£¡£¡×¢Òâ£º°ÑÒıºÅÀïµÄÃû×Ö¸Ä³ÉÄãÊµ¼ÊµÄÓÎÏ·³¡¾°Ãû£¡£¡£¡
         SceneManager.LoadScene("SampleScene");
     }
-}
+} // âœ… AuthManager ä¹Ÿå¿…é¡»ç»“æŸ
