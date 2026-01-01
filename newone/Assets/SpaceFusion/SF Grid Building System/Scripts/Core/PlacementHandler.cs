@@ -27,6 +27,17 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             Vector3 offset, float cellSize)
         {
             var obj = Instantiate(placeableObj.Prefab);
+
+            // ★★★ 【核心修改】 这一句是关键！ ★★★
+            // 只要 HomeLoader 还在，就把新造的房子认它做“爸爸”（父物体）
+            // 这样 HomeLoader 清空的时候，就能把它一起带走了
+            // =========================================================
+            if (HomeLoader.Instance != null && HomeLoader.Instance.buildingRoot != null)
+            {
+                obj.transform.SetParent(HomeLoader.Instance.buildingRoot);
+            }
+            // =========================================================
+
             obj.AddComponent<PlacedObject>();
             var placedObject = obj.GetComponent<PlacedObject>();
             placedObject.Initialize(placeableObj, gridPosition);

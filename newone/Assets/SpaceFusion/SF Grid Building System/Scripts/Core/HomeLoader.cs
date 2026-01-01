@@ -9,6 +9,14 @@ public class HomeLoader : MonoBehaviour
 
     [Header("建筑生成的根节点")]
     public Transform buildingRoot;
+    // ★★★ 【新增 1】 把“回我家”按钮拖进来 ★★★
+    public GameObject returnHomeButton;
+
+    // ★★★ 【新增 1】 建造系统的总开关 ★★★
+    // 请在 Inspector 里把那个挂着 "GridBuildingSystem" 或 "PlacementHandler" 的物体拖进去
+    // ==========================================
+    public GameObject buildingSystemObject;
+
 
     // ==========================================
     // ★★★ 新增：建筑清单 ★★★
@@ -23,6 +31,9 @@ public class HomeLoader : MonoBehaviour
     {
         Instance = this;
         InitDictionary(); // 游戏一开始，先把列表转成字典
+                          // ★★★ 【新增 2】 游戏刚开始默认隐藏按钮 (默认在自己家) ★★★
+        if (returnHomeButton != null)
+            returnHomeButton.SetActive(false);
     }
 
     // 把 List 转成 Dictionary，方便按名字查找
@@ -46,6 +57,33 @@ public class HomeLoader : MonoBehaviour
     public async void LoadHome(string targetUsername)
     {
         Debug.Log("正在前往 " + targetUsername + " 的校园...");
+
+        // ★★★ 【新增 2】 判断是谁家，决定开不开建造 ★★★
+        // =========================================================
+        LCUser me = await LCUser.GetCurrent();
+
+        if (me != null && buildingSystemObject != null)
+        {
+            if (me.Username == targetUsername)
+            {
+                // 情况A：目标名字 = 我的名字 -> 回自己家了
+                // 动作：【开启】建造系统
+                buildingSystemObject.SetActive(true);
+
+                // 动作：隐藏“回我家”按钮
+                if (returnHomeButton) returnHomeButton.SetActive(false);
+            }
+            else
+            {
+                // 情况B：目标名字 != 我的名字 -> 去别人家了
+                // 动作：【关闭】建造系统 (拔电源！)
+                buildingSystemObject.SetActive(false);
+
+                // 动作：显示“回我家”按钮
+                if (returnHomeButton) returnHomeButton.SetActive(true);
+            }
+        }
+        // =========================================================
 
         // 1. 【拆迁】清空旧建筑
         foreach (Transform child in buildingRoot)
