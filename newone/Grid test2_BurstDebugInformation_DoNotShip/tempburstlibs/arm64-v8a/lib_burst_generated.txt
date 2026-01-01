@@ -1,4 +1,4 @@
-Library: F:\game\pkugame\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+Library: F:\game\NewGame-\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --platform=Android
 --backend=burst-llvm-18
 --target=ARMV8A_AARCH64
@@ -10,10 +10,10 @@ Library: F:\game\pkugame\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_bur
 --target-framework=NetFramework
 --float-mode=Fast
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=F:\game\pkugame\newone\Temp\Burst
+--temp-folder=F:\game\NewGame-\newone\Temp\Burst
 --key-folder=F:/unity/2022.3.62f2c1/Editor/Data/PlaybackEngines/AndroidPlayer
---decode-folder=F:\game\pkugame\newone\Library\Burst
---output=F:\game\pkugame\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+--decode-folder=F:\game\NewGame-\newone\Library\Burst
+--output=F:\game\NewGame-\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ZBinningJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ZBinningJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--77fc393cb521ac129b1392d4eb94d29a
@@ -27,10 +27,10 @@ Library: F:\game\pkugame\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_bur
 --float-precision=Standard
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=F:\game\pkugame\newone\Temp\Burst
+--temp-folder=F:\game\NewGame-\newone\Temp\Burst
 --key-folder=F:/unity/2022.3.62f2c1/Editor/Data/PlaybackEngines/AndroidPlayer
---decode-folder=F:\game\pkugame\newone\Library\Burst
---output=F:\game\pkugame\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+--decode-folder=F:\game\NewGame-\newone\Library\Burst
+--output=F:\game\NewGame-\newone\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
