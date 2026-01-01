@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7735095156178770357}
+  - component: {fileID: 8315470238609382432}
   m_Layer: 0
   m_Name: Bedded_Leaves2
   m_TagString: Untagged
@@ -34,6 +35,19 @@ Transform:
   - {fileID: 4784751625984008046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8315470238609382432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276635794598558966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1001 &444900436781158599
 PrefabInstance:
   m_ObjectHideFlags: 0

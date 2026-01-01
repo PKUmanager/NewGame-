@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5970404907328350127}
   - component: {fileID: 8583525108443339611}
   - component: {fileID: -4462721468149896688}
+  - component: {fileID: -6929792608684990141}
   m_Layer: 0
   m_Name: Play_Swing
   m_TagString: Untagged
@@ -128,3 +129,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2288675796537515592, guid: 212827d9fd1447442b3af5267fdb3f2f, type: 3}
+--- !u!114 &-6929792608684990141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5322093474552579706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

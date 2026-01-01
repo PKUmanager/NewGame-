@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2751249887527229437}
   - component: {fileID: 5835802815158930944}
   - component: {fileID: 4592300722968811048}
+  - component: {fileID: -4983359125033242348}
   m_Layer: 0
   m_Name: T_Asphalt1
   m_TagString: Untagged
@@ -122,3 +123,16 @@ MonoBehaviour:
   CenterOffset: {x: 0, y: 0.5, z: 0}
   BoundsSize: {x: 0.5, y: 0.02, z: 0.5}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &-4983359125033242348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132931444286734986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1

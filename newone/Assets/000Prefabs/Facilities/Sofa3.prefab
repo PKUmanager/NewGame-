@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6351309086232499998}
   - component: {fileID: 2235331442414646920}
+  - component: {fileID: 3887170467877362016}
   m_Layer: 0
   m_Name: Sofa3
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dc3f2b357c41b89074e2c0476d179a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3887170467877362016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875571495230529285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &8354350114629750776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53,6 +67,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6351309086232499998}
     m_Modifications:
+    - target: {fileID: -5151448463897955738, guid: 06fd3791bcb5ceb48852aeafcabba729, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1467654737830650394, guid: 06fd3791bcb5ceb48852aeafcabba729, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0000033527613

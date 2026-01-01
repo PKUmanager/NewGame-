@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8670133414359740776}
   - component: {fileID: 6896830921035007394}
   - component: {fileID: 7463369759390134062}
+  - component: {fileID: -5312196993468543713}
   m_Layer: 0
   m_Name: Bedding
   m_TagString: Untagged
@@ -106,3 +107,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5650708878375792279, guid: 9a9b9f9a491b4084da2728eb1c58a705, type: 3}
+--- !u!114 &-5312196993468543713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4951298079179891831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

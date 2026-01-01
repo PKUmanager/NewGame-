@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100004, guid: 4ea0e76cef048cc46acda53c7eb985e1, type: 3}
       propertyPath: m_Name
-      value: cj_xinshou_shitou04_51_03_6770out
+      value: Rockery
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 4ea0e76cef048cc46acda53c7eb985e1, type: 3}
       propertyPath: m_LocalScale.x
@@ -67,5 +67,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: 4ea0e76cef048cc46acda53c7eb985e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8063071610064830149}
   m_SourcePrefab: {fileID: 100100000, guid: 4ea0e76cef048cc46acda53c7eb985e1, type: 3}
+--- !u!1 &7559389006357545641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 4ea0e76cef048cc46acda53c7eb985e1, type: 3}
+  m_PrefabInstance: {fileID: 7559389006357513229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8063071610064830149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559389006357545641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3

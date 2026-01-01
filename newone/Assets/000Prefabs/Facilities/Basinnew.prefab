@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 5722502071234614346}
   - component: {fileID: 1065316672596304142}
   - component: {fileID: -3464640641522416771}
+  - component: {fileID: 4043319552400956470}
   m_Layer: 0
   m_Name: Basinnew
   m_TagString: Untagged
@@ -368,3 +369,16 @@ MonoBehaviour:
   CenterOffset: {x: 0.5, y: 2, z: 0.5}
   BoundsSize: {x: 1, y: 2, z: 1}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &4043319552400956470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709714248143360408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2

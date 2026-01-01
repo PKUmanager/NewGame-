@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100004, guid: e31ad09a5437011459d2094b77557631, type: 3}
       propertyPath: m_Name
-      value: cj_luoyang_shizuodeng01_51_01_3099out
+      value: Table&Chairs4
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: e31ad09a5437011459d2094b77557631, type: 3}
       propertyPath: m_LocalScale.x
@@ -67,5 +67,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: e31ad09a5437011459d2094b77557631, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -490422661459385969}
   m_SourcePrefab: {fileID: 100100000, guid: e31ad09a5437011459d2094b77557631, type: 3}
+--- !u!1 &6783556169145121879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: e31ad09a5437011459d2094b77557631, type: 3}
+  m_PrefabInstance: {fileID: 6783556169145023219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-490422661459385969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783556169145121879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2

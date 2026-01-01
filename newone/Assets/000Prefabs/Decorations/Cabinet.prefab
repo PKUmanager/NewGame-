@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 774091390629353266}
   - component: {fileID: -2217930351893506434}
+  - component: {fileID: 5458922176312447144}
   m_Layer: 0
   m_Name: Cabinet
   m_TagString: Untagged
@@ -138,3 +139,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5458922176312447144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122147188706641342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

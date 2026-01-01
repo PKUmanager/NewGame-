@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6447852811120841275}
   - component: {fileID: -1839047761533332244}
+  - component: {fileID: 1677392654207830442}
   m_Layer: 0
   m_Name: Bicycle
   m_TagString: Untagged
@@ -222,6 +223,19 @@ MonoBehaviour:
   CenterOffset: {x: 0, y: 1, z: 0}
   BoundsSize: {x: 0.5, y: 2, z: 2.5}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &1677392654207830442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2657812374927353649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &2733124736574101118
 GameObject:
   m_ObjectHideFlags: 0

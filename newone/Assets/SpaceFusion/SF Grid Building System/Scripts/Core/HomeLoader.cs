@@ -58,6 +58,8 @@ public class HomeLoader : MonoBehaviour
     {
         Debug.Log("正在前往 " + targetUsername + " 的校园...");
 
+
+
         // ★★★ 【新增 2】 判断是谁家，决定开不开建造 ★★★
         // =========================================================
         LCUser me = await LCUser.GetCurrent();
@@ -121,7 +123,13 @@ public class HomeLoader : MonoBehaviour
             Debug.Log("这个校园空荡荡的");
         }
 
-
+        // ★★★ 【新增步骤 A】 开始生成前，先告诉经理：把计数器归零！ ★★★
+        // =========================================================
+        if (NPCManager.Instance != null)
+        {
+            NPCManager.Instance.ClearCounts();
+        }
+        // =========================================================
 
         // 4. 【施工】
         foreach (var data in dataList)
@@ -147,6 +155,22 @@ public class HomeLoader : MonoBehaviour
             // 生成
             if (prefab != null)
             {
+                // ★★★ 【新增步骤 B】 生成前，看一眼这个建筑是什么类型，让经理记下来 ★★★
+                // =========================================================
+
+                // 获取预制体身上的“身份证”脚本
+                var attr = prefab.GetComponent<BuildingAttribute>();
+
+                // 如果有身份证，且经理在场，就增加计数
+                if (attr != null && NPCManager.Instance != null)
+                {
+                    // 注意：这里我们只增加计数，不立刻刷新NPC（为了性能，等循环完了再统一刷新）
+                    // 所以我在 NPCManager 里写了 AddBuildingCount，它会自动累加
+                    NPCManager.Instance.AddBuildingCount(attr.type);
+                }
+                // =========================================================
+
+                // 生成物体
                 Vector3 pos = new Vector3(x, 0, z);
                 Quaternion rot = Quaternion.Euler(0, r, 0);
                 Instantiate(prefab, pos, rot, buildingRoot);

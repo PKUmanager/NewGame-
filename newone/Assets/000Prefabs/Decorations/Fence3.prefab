@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1015199862410166598}
   - component: {fileID: 8206624343074083865}
+  - component: {fileID: 7853869536550937489}
   m_Layer: 0
   m_Name: Fence3
   m_TagString: Untagged
@@ -56,6 +57,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &7853869536550937489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386577610975190012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &2860858173876785627
 GameObject:
   m_ObjectHideFlags: 0

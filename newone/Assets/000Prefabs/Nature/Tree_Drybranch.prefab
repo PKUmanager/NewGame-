@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3dd9affa42ff787faa05b51302a9380c, type: 3}
@@ -57,9 +58,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d4bc6858a3a2523efadf121c0fe13d91, type: 2}
     - target: {fileID: 919132149155446097, guid: 3dd9affa42ff787faa05b51302a9380c, type: 3}
       propertyPath: m_Name
-      value: dryBranches
+      value: Tree_Drybranch
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3dd9affa42ff787faa05b51302a9380c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3306821339522851813}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3dd9affa42ff787faa05b51302a9380c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5929466056974320456}
   m_SourcePrefab: {fileID: 100100000, guid: 3dd9affa42ff787faa05b51302a9380c, type: 3}
 --- !u!1 &9048257361043090810 stripped
 GameObject:
@@ -74,8 +84,29 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9048257361043090810}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1.31, y: 0.15, z: 0.17}
   m_Center: {x: 0.03, y: 0, z: 0}
+--- !u!114 &-5929466056974320456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048257361043090810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3

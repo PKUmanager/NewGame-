@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2529437021272204802}
   - component: {fileID: 8915928027631585138}
   - component: {fileID: 852011385022334423}
+  - component: {fileID: 2487662911029702847}
   m_Layer: 0
   m_Name: Clocknew
   m_TagString: Untagged
@@ -62,6 +63,19 @@ MonoBehaviour:
   CenterOffset: {x: -0.4, y: 1, z: 0}
   BoundsSize: {x: 0.5, y: 2, z: 0.5}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &2487662911029702847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196166134528670370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &2886839322096238235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,6 +126,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925196029500703591, guid: c6574555abec73944a4a222cb35326ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700992426729228520, guid: c6574555abec73944a4a222cb35326ed, type: 3}
+      propertyPath: type
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

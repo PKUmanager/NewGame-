@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2320071078583133072}
   - component: {fileID: 3084014215164920202}
   - component: {fileID: -3205525554679164692}
+  - component: {fileID: -218909519406323724}
   m_Layer: 0
   m_Name: Bedded_Leavs1new
   m_TagString: Untagged
@@ -62,6 +63,19 @@ MonoBehaviour:
   CenterOffset: {x: -0.8, y: 1, z: 0}
   BoundsSize: {x: 1, y: 2, z: 1}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &-218909519406323724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328594145354456273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1001 &8337973819508806038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,6 +84,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2320071078583133072}
     m_Modifications:
+    - target: {fileID: 847138431754102175, guid: e51dd62a8bc496c42ae71f60e81d8e59, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3494839272842526210, guid: e51dd62a8bc496c42ae71f60e81d8e59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0034635179

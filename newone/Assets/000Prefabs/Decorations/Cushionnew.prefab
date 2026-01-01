@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1864783309141747968}
   - component: {fileID: 2678778000469601743}
   - component: {fileID: 2286636589749262722}
+  - component: {fileID: -1639106066401824483}
   m_Layer: 0
   m_Name: Cushionnew
   m_TagString: Untagged
@@ -62,6 +63,19 @@ MonoBehaviour:
   CenterOffset: {x: -0.4, y: 1, z: 0}
   BoundsSize: {x: 0.5, y: 2, z: 0.5}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &-1639106066401824483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595099997448587219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &6432424420388308670
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,14 +24,12 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         /// Initializes the PlacedObject data, which creates a new guid for unique identification of this object
         /// </summary>
         public string PlaceObject(Placeable placeableObj, Vector3 worldPosition, Vector3Int gridPosition, ObjectDirection direction,
-            Vector3 offset, float cellSize)
+             Vector3 offset, float cellSize)
         {
             var obj = Instantiate(placeableObj.Prefab);
 
-            // ★★★ 【核心修改】 这一句是关键！ ★★★
-            // 只要 HomeLoader 还在，就把新造的房子认它做“爸爸”（父物体）
-            // 这样 HomeLoader 清空的时候，就能把它一起带走了
             // =========================================================
+            // 归位逻辑：把房子放到 BuildingContainer 下面
             if (HomeLoader.Instance != null && HomeLoader.Instance.buildingRoot != null)
             {
                 obj.transform.SetParent(HomeLoader.Instance.buildingRoot);
@@ -45,17 +43,13 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             obj.transform.position = worldPosition + PlaceableUtils.GetTotalOffset(offset, direction);
 
-            // ★★★ 【YWJ新增】 ★★★ 
-            // 必须先定义 rotationAngle，后面才能用它！
+            // 计算旋转
             float rotationAngle = PlaceableUtils.GetRotationAngle(direction);
+            obj.transform.rotation = Quaternion.Euler(0, rotationAngle, 0);
 
-            obj.transform.rotation = Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
-
-            // [核心修改] 针对 DynamicSize 的特殊处理
+            // 动态大小处理
             if (placeableObj.DynamicSize)
             {
-                // 如果是地形(Terrain)，保持 Prefab 原始高度(Y)，只拉伸 X 和 Z
-                // 注意：请确保你的 GridDataType 枚举里确实有一个叫 'Terrain' 的类型，如果叫 'Ground' 或其他名字，请在这里替换
                 float targetHeight = placeableObj.GridType == GridDataType.Terrain ? obj.transform.localScale.y : cellSize;
                 obj.transform.localScale = new Vector3(cellSize, targetHeight, cellSize);
             }
@@ -64,23 +58,36 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _placedObjectDictionary.Add(placedObject.data.guid, obj);
 
             // =========================================================
-            // ★★★ 【新增】 云端上传代码 ★★★
+            // ★★★ 【新增 1】 告诉 NPC 经理：我造了个新东西，快统计一下！ ★★★
             // =========================================================
-            if (BuildSaver.Instance != null)
+
+            // 1. 获取这个建筑 Prefab 身上的“身份证” (BuildingAttribute)
+            var attr = placeableObj.Prefab.GetComponent<BuildingAttribute>();
+
+            // 2. 如果这东西有分类标签，并且 NPC经理 在场
+            if (attr != null && NPCManager.Instance != null)
             {
-                // 1. 获取名字：注意！必须确保 placeableObj.name 和 Resources 文件夹里的 Prefab 名字一样
-                // ★★★ 这行存的是它里面那个 Prefab 的名字！绝对和截图列表一致！ ★★★
-                string prefabName = placeableObj.Prefab.name;
-
-                // 2. 获取位置：使用物体当前的真实世界坐标
-                Vector3 finalPos = obj.transform.position;
-
-                // 3. 调用我们写的上传脚本
-                BuildSaver.Instance.SaveOneBuilding(prefabName, finalPos, rotationAngle);
+                // 3. 增加计数 (比如铺路+1)，并自动刷新 NPC 显示
+                NPCManager.Instance.AddBuildingCount(attr.type);
+            }
+            else
+            {
+                // (可选) 调试用，如果你发现 NPC 不出来，看看控制台有没有这句话
+                // Debug.LogWarning("注意：这个建筑没有挂 BuildingAttribute 脚本，或者 NPCManager 没在场景里");
             }
             // =========================================================
 
 
+            // =========================================================
+            // ★★★ 【新增 2】 云端上传代码 ★★★
+            // =========================================================
+            if (BuildSaver.Instance != null)
+            {
+                string prefabName = placeableObj.Prefab.name;
+                Vector3 finalPos = obj.transform.position;
+                BuildSaver.Instance.SaveOneBuilding(prefabName, finalPos, rotationAngle);
+            }
+            // =========================================================
 
             return placedObject.data.guid;
         }

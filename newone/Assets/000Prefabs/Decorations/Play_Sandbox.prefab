@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8750849028714371041}
   - component: {fileID: 2777507040973992039}
   - component: {fileID: -1165086445162123064}
+  - component: {fileID: -6644843195966935786}
   m_Layer: 0
   m_Name: Play_Sandbox
   m_TagString: Untagged
@@ -128,3 +129,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 301701038561486785, guid: 33fe60fe16f2c8049b02271382fb4d48, type: 3}
+--- !u!114 &-6644843195966935786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093660499286963764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

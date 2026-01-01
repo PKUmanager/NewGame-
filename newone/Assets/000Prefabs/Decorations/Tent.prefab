@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2652737260441103381}
   - component: {fileID: 2086620274872501913}
   - component: {fileID: -3748081335207238203}
+  - component: {fileID: -6623877269863791971}
   m_Layer: 0
   m_Name: Tent
   m_TagString: Untagged
@@ -129,3 +130,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1802365703587897644, guid: c2554c9f74a00fe4181212add5bb6bde, type: 3}
+--- !u!114 &-6623877269863791971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598340197789683136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

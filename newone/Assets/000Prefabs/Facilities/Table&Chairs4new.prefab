@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7804616806355050384}
   - component: {fileID: 7917842986992068423}
+  - component: {fileID: 5775980247173879406}
   m_Layer: 0
   m_Name: Table&Chairs4new
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dc3f2b357c41b89074e2c0476d179a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5775980247173879406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252080503052319374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &6545886093617724703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53,6 +67,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7804616806355050384}
     m_Modifications:
+    - target: {fileID: -490422661459385969, guid: 7993e1c88b7d44449b6faefabd7e8e7b, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6783556169144885367, guid: 7993e1c88b7d44449b6faefabd7e8e7b, type: 3}
       propertyPath: m_LocalScale.x
       value: 30

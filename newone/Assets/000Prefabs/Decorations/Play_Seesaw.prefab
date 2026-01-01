@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1864989095901990496}
   - component: {fileID: 8342783312764162314}
   - component: {fileID: -4101180655463424815}
+  - component: {fileID: -8286183518804081025}
   m_Layer: 0
   m_Name: Play_Seesaw
   m_TagString: Untagged
@@ -128,3 +129,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8608554340940411800, guid: 68a37543a1a193d4287207db1031d8dd, type: 3}
+--- !u!114 &-8286183518804081025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207510570429624245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

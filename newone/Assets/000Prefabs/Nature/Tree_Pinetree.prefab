@@ -75,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100004, guid: e62e5d368d4057a4582b10ba65a22a4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5526396498426107189}
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: e62e5d368d4057a4582b10ba65a22a4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6915603045409259939}
   m_SourcePrefab: {fileID: 100100000, guid: e62e5d368d4057a4582b10ba65a22a4f, type: 3}
 --- !u!1 &6094323316566962871 stripped
 GameObject:
@@ -97,3 +100,16 @@ MonoBehaviour:
   CenterOffset: {x: 0, y: 1, z: 0}
   BoundsSize: {x: 1, y: 2, z: 1}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &-6915603045409259939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094323316566962871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3

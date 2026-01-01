@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7281506928498762534}
   - component: {fileID: 4592164608756347060}
   - component: {fileID: 1917636536020670647}
+  - component: {fileID: -6716810101064561386}
   m_Layer: 0
   m_Name: Chair1
   m_TagString: Untagged
@@ -127,3 +128,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.40029907, y: 0.33752406, z: 0.024849057}
   m_Center: {x: -0.0000006109476, y: 0.5306978, z: 0.20059548}
+--- !u!114 &-6716810101064561386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9083170598403261171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2

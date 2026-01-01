@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 7992715529498157145}
   - component: {fileID: 7992715529511154937}
   - component: {fileID: -8391887563258324395}
+  - component: {fileID: -69962502228175124}
   m_Layer: 0
   m_Name: Bush2
   m_TagString: Untagged
@@ -188,6 +189,19 @@ MonoBehaviour:
   CenterOffset: {x: 0, y: 2, z: 0}
   BoundsSize: {x: 0.5, y: 2, z: 0.5}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &-69962502228175124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992715529498131577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1 &7992715529498131579
 GameObject:
   m_ObjectHideFlags: 0

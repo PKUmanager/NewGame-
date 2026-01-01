@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4494526019403375434}
   - component: {fileID: 7262460404770772266}
   - component: {fileID: -1380147266469537829}
+  - component: {fileID: -5932563272570964132}
   m_Layer: 0
   m_Name: Tree_Pinetreenew
   m_TagString: Untagged
@@ -62,6 +63,19 @@ MonoBehaviour:
   CenterOffset: {x: 0, y: 1, z: 0}
   BoundsSize: {x: 1.5, y: 2, z: 1.5}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &-5932563272570964132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8877556333449788186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1001 &7566541522310174509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,6 +84,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4494526019403375434}
     m_Modifications:
+    - target: {fileID: -6915603045409259939, guid: 8a8d29f29cdba584f8779b45d30da98e, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5526396498426107189, guid: 8a8d29f29cdba584f8779b45d30da98e, type: 3}
       propertyPath: UseCustomBounds
       value: 1

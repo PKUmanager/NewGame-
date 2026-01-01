@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5249478200577529610}
   - component: {fileID: 4296461109868289377}
   - component: {fileID: 2558097806451662811}
+  - component: {fileID: 1930301481943691009}
   m_Layer: 0
   m_Name: T_Wood2
   m_TagString: Untagged
@@ -105,3 +106,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1930301481943691009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131631306449219259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
