@@ -12713,7 +12713,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2104179326}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -24834,6 +24834,7 @@ MonoBehaviour:
   contentRoot: {fileID: 1633703369}
   itemSlotPrefab: {fileID: -5993305703135818995, guid: 8c950b61ab723a84aa0f885708d005d3, type: 3}
   btnClose: {fileID: 303586295}
+  backpackPanelRoot: {fileID: 1529682247}
 --- !u!114 &684784460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45356,7 +45357,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 336363735}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -52657,8 +52658,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1040910865}
   m_HandleRect: {fileID: 1040910864}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

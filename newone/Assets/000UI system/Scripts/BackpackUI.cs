@@ -24,6 +24,9 @@ public class BackpackUI : MonoBehaviour
 
     [Header("Close Button（Btn_Close）")]
     [SerializeField] private Button btnClose;
+    [SerializeField] private GameObject backpackPanelRoot;
+
+  
 
     // ====== 测试用：假背包数据（后面你接真实背包系统时替换这里） ======
     private List<ItemData> allItems = new List<ItemData>();
@@ -40,7 +43,8 @@ public class BackpackUI : MonoBehaviour
         if (tab装扮 != null) tab装扮.onClick.AddListener(() => SwitchCategory(Category.装扮));
 
         if (btnClose != null) btnClose.onClick.AddListener(() => gameObject.SetActive(false));
-
+        if (btnClose != null)
+            btnClose.onClick.AddListener(() => backpackPanelRoot.SetActive(false));
         // 初始化一些假数据
         BuildMockData();
     }
@@ -74,9 +78,13 @@ public class BackpackUI : MonoBehaviour
 
     private void ClearContent()
     {
-        for (int i = contentRoot.childCount - 1; i >= 0; i--)
+        if (contentRoot == null) return;
+
+        // 只删除格子（ItemSlotUI），避免把Viewport/布局/背景之类误删
+        var slots = contentRoot.GetComponentsInChildren<ItemSlotUI>(true);
+        foreach (var slot in slots)
         {
-            Destroy(contentRoot.GetChild(i).gameObject);
+            Destroy(slot.gameObject);
         }
     }
 
