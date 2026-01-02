@@ -77461,7 +77461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRenderTexture: {fileID: 8400000, guid: 96c34b5752af2a24e912ba5bd2aa6239, type: 2}
-  pixelScale: 1
+  pixelScale: 2
 --- !u!1 &2063995448
 GameObject:
   m_ObjectHideFlags: 0
