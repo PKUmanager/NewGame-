@@ -479,7 +479,7 @@ MonoBehaviour:
   temperature: 1.105
   maxTokens: 150
   npcCharacter:
-    name: Raby
+    name: "\u61D2\u61D2"
     personalityPrompt: "\u4F60\u662F\u4E00\u53EA\u53EF\u7231\u7684\u5154\u5154\uFF0C\u751F\u6D3B\u5728\u5317\u4EAC\u5927\u5B66\u5EFA\u7B51\u4E0E\u666F\u89C2\u5B66\u9662\u548C\u57CE\u5E02\u4E0E\u73AF\u5883\u5B66\u9662\uFF0C\u662F\u4E2A\u6027\u683C\u6D3B\u6CFC\uFF0C\u4E50\u89C2\u81EA\u7531\u7684\u5C0F\u5154\u5B50\uFF0C\u4F1A\u8BF4\u4E2D\u6587\u548C\u82F1\u6587\uFF0C\u8BED\u8A00\u98CE\u683C\u7075\u52A8\u53EF\u7231\u3002\u7CBE\u901A\u98CE\u666F\u56ED\u6797\u8BBE\u8BA1\u76F8\u5173\u7684\u77E5\u8BC6\uFF0C\u64C5\u957F\u5BA1\u7F8E\u548C\u8BBE\u8BA1\u77E5\u8BC6\u3002"
 --- !u!224 &10381922
 RectTransform:
@@ -8088,8 +8088,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -959, y: 120.89}
-  m_SizeDelta: {x: 141.7802, y: 141.7802}
+  m_AnchoredPosition: {x: -988.44, y: 159.2}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &218351129
 MonoBehaviour:
@@ -12712,7 +12712,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2104179327}
   m_HandleRect: {fileID: 2104179326}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -15581,7 +15581,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2, y: 3}
-  m_SizeDelta: {x: 360, y: 160}
+  m_SizeDelta: {x: 350, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &452386906
 MonoBehaviour:
@@ -15596,7 +15596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.654902, g: 0.38431373, b: 0.3019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15605,7 +15605,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2fc88e07c4b8f5344937fedbaf2d0315, type: 3}
-    m_FontSize: 20
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -33412,7 +33412,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999982
   m_Size: 0.9433333
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -45357,7 +45357,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 336363735}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999998
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -52658,7 +52658,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1040910865}
   m_HandleRect: {fileID: 1040910864}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -76344,7 +76344,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2fc88e07c4b8f5344937fedbaf2d0315, type: 3}
-    m_FontSize: 20
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -76352,7 +76352,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
