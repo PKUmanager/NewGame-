@@ -32,7 +32,13 @@ public class BackpackUI : MonoBehaviour
     private List<ItemData> allItems = new List<ItemData>();
 
     private Category currentCategory = Category.家具;
-
+    private void ClosePanel()
+    {
+        if (backpackPanelRoot != null)
+            backpackPanelRoot.SetActive(false);
+        else
+            gameObject.SetActive(false); // 兜底（防止没拖）
+    }
     private void Awake()
     {
         // 绑定标签点击
@@ -42,7 +48,8 @@ public class BackpackUI : MonoBehaviour
         if (tab材料 != null) tab材料.onClick.AddListener(() => SwitchCategory(Category.材料));
         if (tab装扮 != null) tab装扮.onClick.AddListener(() => SwitchCategory(Category.装扮));
 
-        if (btnClose != null) btnClose.onClick.AddListener(() => gameObject.SetActive(false));
+        if (btnClose != null)
+            btnClose.onClick.AddListener(ClosePanel);
         if (btnClose != null)
             btnClose.onClick.AddListener(() => backpackPanelRoot.SetActive(false));
         // 初始化一些假数据
@@ -51,6 +58,7 @@ public class BackpackUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("BackpackUI OnEnable: " + gameObject.name);
         // 每次打开背包时刷新当前分类
         RefreshList(currentCategory);
     }
