@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5EFA\u7B51\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 56d6695dce0c79342a85ecef822eb5af, type: 2}
-  m_sharedMaterial: {fileID: -6038642074433172675, guid: 56d6695dce0c79342a85ecef822eb5af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64434c82834beea4784c62ced0c0d950, type: 2}
+  m_sharedMaterial: {fileID: -921529973550770261, guid: 64434c82834beea4784c62ced0c0d950, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

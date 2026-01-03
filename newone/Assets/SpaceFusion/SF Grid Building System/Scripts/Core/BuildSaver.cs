@@ -95,6 +95,8 @@ public class BuildSaver : MonoBehaviour
             await currentUser.Save();
 
             Debug.Log("✅ 上传完成！");
+            if (TaskService.Instance != null)
+                TaskService.Instance.MarkUploadCompleted();
         }
         catch (LCException e)
         {

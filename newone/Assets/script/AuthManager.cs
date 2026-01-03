@@ -85,6 +85,8 @@ public class AuthManager : MonoBehaviour
 
             // 注册成功通常还需要手动点一下登录，或者你自己决定是否直接解锁
             if (startupUI != null) startupUI.SetLoggedIn(false);
+            if (TaskService.Instance != null)
+                TaskService.Instance.MarkLoginCompleted();
         }
         catch (LCException e)
         {
