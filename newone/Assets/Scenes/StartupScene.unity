@@ -463,6 +463,7 @@ MonoBehaviour:
   usernameInput: {fileID: 101450821}
   passwordInput: {fileID: 1072392251}
   statusText: {fileID: 1638354659}
+  startupUI: {fileID: 1122863684}
 --- !u!1 &100714443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,7 +1547,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 0.013
+  - 0
   m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 01

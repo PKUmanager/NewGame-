@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -8,32 +8,44 @@ public class StartupUI : MonoBehaviour
 {
     [Header("UI")]
     public Slider loadingSlider;
-    public TMP_Text loadingText;      // Èç¹ûÄãÓÃµÄÊÇ Text (Legacy)£¬¾Í¸Ä³É Text
+    public TMP_Text loadingText;
     public Button startButton;
 
     [Header("Target Scene Name")]
     public string targetSceneName = "SampleScene";
 
     private bool isLoading = false;
+    private bool isLoggedIn = false;   // âœ… æ–°å¢žï¼šæ˜¯å¦å·²ç™»å½•
 
     void Start()
     {
         if (loadingSlider != null) loadingSlider.value = 0f;
         if (loadingText != null) loadingText.text = "";
 
+        // âœ… å¼€å§‹æŒ‰é’®é»˜è®¤ä¸å¯ç‚¹
         if (startButton != null)
         {
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(OnStartGame);
+            startButton.interactable = false;
         }
+    }
+
+    // âœ… AuthManager ç™»å½•æˆåŠŸåŽä¼šè°ƒç”¨è¿™ä¸ª
+    public void SetLoggedIn(bool value)
+    {
+        isLoggedIn = value;
+        if (startButton != null)
+            startButton.interactable = isLoggedIn && !isLoading;
     }
 
     void OnStartGame()
     {
+        // âœ… æ²¡ç™»å½•å°±ç›´æŽ¥æ‹¦ä½
+        if (!isLoggedIn) return;
         if (isLoading) return;
-        isLoading = true;
 
-        // ·ÀÖ¹ÖØ¸´µã»÷
+        isLoading = true;
         if (startButton != null) startButton.interactable = false;
 
         StartCoroutine(LoadSceneAsync());
@@ -41,25 +53,21 @@ public class StartupUI : MonoBehaviour
 
     IEnumerator LoadSceneAsync()
     {
-        // ¿ªÊ¼ÕæÕý¼ÓÔØ
         AsyncOperation op = SceneManager.LoadSceneAsync(targetSceneName);
-        op.allowSceneActivation = false; // ÏÈ²»Á¢¿ÌÇÐ£¬µÈ½ø¶ÈÌõµ½ 100%
+        op.allowSceneActivation = false;
 
         while (!op.isDone)
         {
-            // op.progress ·¶Î§£º0 ~ 0.9£¨µ½ 0.9 ´ú±í¡°¼ÓÔØÍê³É£¬Ö»²î¼¤»î¡±£©
-            float raw = op.progress;
-            float progress01 = Mathf.Clamp01(raw / 0.9f); // Ó³Éä³É 0~1
+            float raw = op.progress;               // 0 ~ 0.9
+            float progress01 = Mathf.Clamp01(raw / 0.9f);
 
             if (loadingSlider != null) loadingSlider.value = progress01;
-
             if (loadingText != null)
             {
                 int percent = Mathf.RoundToInt(progress01 * 100f);
                 loadingText.text = $"Loading... {percent}%";
             }
 
-            // µ½ 100% ÔÙÇÐ
             if (progress01 >= 1f)
             {
                 if (loadingText != null) loadingText.text = "Loading... 100%";

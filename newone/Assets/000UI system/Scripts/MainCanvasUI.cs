@@ -101,7 +101,7 @@ public class MainCanvasUI : MonoBehaviour
 
         if (vitalitySlider != null) vitalitySlider.value = vitality;
     }
-
+   
     // =================== 挂机收益逻辑 ===================
     private static long UtcNowUnix()
     {
