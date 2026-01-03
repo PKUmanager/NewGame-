@@ -83,17 +83,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             // =========================================================
 
 
-            // =========================================================
-            // ★★★ 【新增 2】 云端上传代码 ★★★
-            // =========================================================
-            if (BuildSaver.Instance != null)
-            {
-                string prefabName = placeableObj.Prefab.name;
-                Vector3 finalPos = obj.transform.position;
-                BuildSaver.Instance.SaveOneBuilding(prefabName, finalPos, rotationAngle);
-            }
-            // =========================================================
-
             return placedObject.data.guid;
         }
 
@@ -170,5 +159,41 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             // destroy the object and set the reference of the list at the proper index to null
             Destroy(obj);
         }
+
+        // =========================================================
+        // ★★★ 【新增】 这是一个数据包结构，用来临时存一下建筑信息 ★★★
+        public struct BuildingInfo
+        {
+            public string name;
+            public Vector3 position;
+            public float rotation;
+        }
+
+        // ★★★ 【新增】 这个方法负责把当前场景里所有的建筑打包返回 ★★★
+        public List<BuildingInfo> GetAllBuildings()
+        {
+            List<BuildingInfo> list = new List<BuildingInfo>();
+
+            // 遍历所有已放置的物体
+            foreach (var kvp in _placedObjectDictionary)
+            {
+                GameObject obj = kvp.Value;
+                // 获取之前挂的 PlacedObject 脚本，里面有 prefab 数据
+                PlacedObject placedObj = obj.GetComponent<PlacedObject>();
+
+                if (placedObj != null && placedObj.placeable != null)
+                {
+                    BuildingInfo info = new BuildingInfo();
+                    // 注意：这里一定要取 Prefab 的名字，而不是 obj.name (obj.name会有Clone后缀)
+                    info.name = placedObj.placeable.Prefab.name;
+                    info.position = obj.transform.position;
+                    info.rotation = obj.transform.eulerAngles.y;
+
+                    list.Add(info);
+                }
+            }
+            return list;
+        }
     }
+
 }

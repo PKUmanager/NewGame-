@@ -36,6 +36,7 @@ public class HomeLoader : MonoBehaviour
             returnHomeButton.SetActive(false);
     }
 
+
     // 把 List 转成 Dictionary，方便按名字查找
     void InitDictionary()
     {
@@ -52,6 +53,24 @@ public class HomeLoader : MonoBehaviour
             }
         }
     }
+
+    // ★★★ 【新增】 游戏一开始，自动加载自己的家 ★★★
+    async void Start()
+    {
+        // 1. 稍微等一小会儿，确保 LeanCloud 初始化完成 (可选，但更稳)
+        await Task.Delay(100);
+
+        // 2. 获取当前登录用户
+        LCUser currentUser = await LCUser.GetCurrent();
+
+        // 3. 如果已经登录了，就自动加载我的家
+        if (currentUser != null)
+        {
+            Debug.Log("🎮 游戏启动，自动加载家园：" + currentUser.Username);
+            LoadHome(currentUser.Username);
+        }
+    }
+
 
     // === 核心功能：加载某人的家 ===
     public async void LoadHome(string targetUsername)
