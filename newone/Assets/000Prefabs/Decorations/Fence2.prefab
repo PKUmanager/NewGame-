@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5324143969996450028}
   - component: {fileID: -4898937157681337249}
   - component: {fileID: -1053839319511266709}
+  - component: {fileID: 6213160278274750533}
   m_Layer: 0
   m_Name: Fence2
   m_TagString: Untagged
@@ -70,6 +71,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+--- !u!114 &6213160278274750533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4803361784186368598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171b7dee96d8e81489ecdee9b3584276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseCustomBounds: 1
+  CenterOffset: {x: 0, y: 0.5, z: 0}
+  BoundsSize: {x: 1.75, y: 1, z: 0.25}
+  GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
 --- !u!1 &6937321353915938929
 GameObject:
   m_ObjectHideFlags: 0

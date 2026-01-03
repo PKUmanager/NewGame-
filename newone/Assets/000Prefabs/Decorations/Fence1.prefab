@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6041508444897412866}
   - component: {fileID: -2369917673268996650}
   - component: {fileID: -7397344704593043018}
+  - component: {fileID: -3487482841825386887}
   m_Layer: 0
   m_Name: Fence1
   m_TagString: Untagged
@@ -102,7 +103,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -120,3 +121,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+--- !u!114 &-3487482841825386887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248738227666134743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171b7dee96d8e81489ecdee9b3584276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseCustomBounds: 1
+  CenterOffset: {x: 0, y: 0.5, z: 0}
+  BoundsSize: {x: 2, y: 1, z: 0.25}
+  GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}

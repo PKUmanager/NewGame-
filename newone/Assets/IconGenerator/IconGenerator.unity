@@ -520,11 +520,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - name: Sofa1
-    obj: {fileID: 2100080381089572221, guid: b108324b915ec6746949f2a2335d2462, type: 3}
+  - name: 
+    obj: {fileID: 6577978906566253164, guid: 840e0b4d9925f80459647208422af0fb, type: 3}
   overlays: []
-  customFolder: Icons
-  distancePaddingFactor: 1.2
+  customFolder: 000Icons
+  distancePaddingFactor: 1
   rawIcon: {fileID: 0}
   icon: {fileID: 0}
   overlayIcons: []
