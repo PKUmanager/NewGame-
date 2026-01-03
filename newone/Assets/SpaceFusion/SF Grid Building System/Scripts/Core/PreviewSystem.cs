@@ -126,14 +126,26 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         /// </summary>
         public void UpdatePosition(Vector3 position, bool isValid, Placeable placeable, ObjectDirection direction = ObjectDirection.Down)
         {
+            // [核心修改] 获取网格旋转
+            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
+
             if (_previewObject)
             {
                 // only if obj is passed, RemoveState actually passes null because it's not needed there
                 if (placeable)
                 {
+                    // 1. 计算偏移
+                    var offset = PlaceableUtils.GetTotalOffset(_pivotOffset, direction);
+                    // [核心修改] 偏移量向量也要旋转！否则物体会偏离
+                    Vector3 rotatedOffset = gridRot * offset;
+
+                    // 2. 设置位置 (注意 Y 轴偏移通常不需要旋转，除非你的网格是斜的，这里暂时假设网格只是绕 Y 轴旋转)
                     _previewObject.transform.position =
-                        position + new Vector3(0, _config.PreviewYOffset, 0) + PlaceableUtils.GetTotalOffset(_pivotOffset, direction);
-                    _previewObject.transform.rotation = Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
+                        position + new Vector3(0, _config.PreviewYOffset, 0) + rotatedOffset;
+
+                    // [核心修改] 物体旋转 = 网格旋转 * 物体自身逻辑朝向
+                    _previewObject.transform.rotation = gridRot * Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
+
                     // RotationBasedObject size for cellIndicator
                     PrepareCellIndicator(PlaceableUtils.GetCorrectedObjectSize(placeable, direction, _cellSize));
                 }
@@ -191,6 +203,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         private void MoveCellIndicator(Vector3 position)
         {
             _cellIndicator.transform.position = position;
+            // [核心修改] 让底座指示器跟随网格旋转
+            if (PlacementSystem.Instance != null)
+            {
+                _cellIndicator.transform.rotation = PlacementSystem.Instance.GridRotation;
+            }
         }
     }
 }

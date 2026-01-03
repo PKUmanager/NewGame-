@@ -38,6 +38,10 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         private Vector3Int _pendingGridPosition;
         private bool _hasSelection;
 
+        // ★★★ [新增] 获取网格的旋转角度 ★★★
+        // 这样 PreviewSystem 和 PlacementHandler 都能知道网格歪了多少度
+        public Quaternion GridRotation => _grid != null ? _grid.transform.rotation : Quaternion.identity;
+
         private void Awake()
         {
             if (Instance != null)

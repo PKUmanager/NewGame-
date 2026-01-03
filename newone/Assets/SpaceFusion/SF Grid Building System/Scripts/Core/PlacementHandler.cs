@@ -41,11 +41,16 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             placedObject.Initialize(placeableObj, gridPosition);
             placedObject.data.direction = direction;
 
-            obj.transform.position = worldPosition + PlaceableUtils.GetTotalOffset(offset, direction);
+            // [核心修改] 引入网格旋转
+            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
 
-            // 计算旋转
+            // 1. 旋转偏移量
+            Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, direction);
+            obj.transform.position = worldPosition + rotatedOffset;
+
+            // 2. 旋转物体
             float rotationAngle = PlaceableUtils.GetRotationAngle(direction);
-            obj.transform.rotation = Quaternion.Euler(0, rotationAngle, 0);
+            obj.transform.rotation = gridRot * Quaternion.Euler(0, rotationAngle, 0);
 
             // 动态大小处理
             if (placeableObj.DynamicSize)
@@ -105,11 +110,16 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             placedObject.placeable = placeableObj;
             placedObject.Initialize(podata);
 
-            var offset = PlaceableUtils.CalculateOffset(obj, cellSize);
-            obj.transform.position = worldPosition + PlaceableUtils.GetTotalOffset(offset, podata.direction);
-            obj.transform.rotation = Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(podata.direction), 0);
+            // [核心修改] 读档时也应用旋转
+            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
 
-            // [核心修改] 读档时也做同样的逻辑处理
+            var offset = PlaceableUtils.CalculateOffset(obj, cellSize);
+            Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, podata.direction);
+
+            obj.transform.position = worldPosition + rotatedOffset;
+            obj.transform.rotation = gridRot * Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(podata.direction), 0);
+
+            // [核心修改] 动态大小处理
             if (placeableObj.DynamicSize)
             {
                 float targetHeight = placeableObj.GridType == GridDataType.Terrain ? obj.transform.localScale.y : cellSize;
@@ -128,8 +138,15 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         {
             var placedObject = obj.GetComponent<PlacedObject>();
             var offset = PlaceableUtils.CalculateOffset(obj, cellSize);
-            obj.transform.position = worldPosition + PlaceableUtils.GetTotalOffset(offset, direction);
-            obj.transform.rotation = Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
+
+            // [核心修改] 移动时也应用旋转
+            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
+
+            Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, direction);
+            obj.transform.position = worldPosition + rotatedOffset;
+
+            obj.transform.rotation = gridRot * Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
+
             placedObject.data.gridPosition = gridPosition;
             placedObject.data.direction = direction;
             // no need to update reference for moving object, since guid still stays the same 
