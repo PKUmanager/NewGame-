@@ -154,6 +154,24 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 return;
             }
 
+            // =========================================================
+            // ★★★ 【新增】 在拆除前，通知 NPC 经理减数 ★★★
+            // =========================================================
+            if (NPCManager.Instance != null)
+            {
+                // 获取原本挂在 Prefab 里的身份证脚本
+                // 注意：这里需要 GetComponent，因为 obj 是场景里的实例
+                var attr = obj.GetComponent<PlacedObject>().placeable.Prefab.GetComponent<BuildingAttribute>();
+
+                // 或者直接尝试从 obj 身上获取 (如果你把 BuildingAttribute 也挂在实例上的话)
+                if (attr == null) attr = obj.GetComponent<BuildingAttribute>();
+
+                if (attr != null)
+                {
+                    NPCManager.Instance.RemoveBuildingCount(attr.type);
+                }
+            }
+
             obj.GetComponent<PlacedObject>().RemoveFromSaveData();
             _placedObjectDictionary.Remove(guid);
             // destroy the object and set the reference of the list at the proper index to null

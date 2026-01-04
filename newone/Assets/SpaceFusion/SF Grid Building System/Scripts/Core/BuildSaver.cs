@@ -4,12 +4,21 @@ using LeanCloud.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
+using TMPro; // 引用 TMP
 
 public class BuildSaver : MonoBehaviour
 {
     public static BuildSaver Instance;
 
     public PlacementHandler placementHandler;
+
+    // ★★★ 【新增 1】 提示框 UI ★★★
+    [Header("提示框设置")]
+    public GameObject tipPanel;  // 拖入 TipPanel
+    public TMP_Text tipText;     // 拖入 TipText
+
+
+
 
     void Awake()
     {
@@ -23,6 +32,8 @@ public class BuildSaver : MonoBehaviour
         LCUser currentUser = await LCUser.GetCurrent();
         if (currentUser == null)
         {
+            // 【修改】 没登录时弹窗提示
+            ShowTip("❌ 请先登录！");
             Debug.LogError("请先登录！");
             return;
         }
@@ -33,16 +44,14 @@ public class BuildSaver : MonoBehaviour
             return;
         }
 
+        // 【修改】 开始上传时弹窗提示
+        ShowTip("⏳ 正在上传数据...");
         Debug.Log("⏳ 正在上传数据...");
 
         var allBuildings = placementHandler.GetAllBuildings();
-        Debug.Log($"检测到 {allBuildings.Count} 个建筑，准备上传...");
 
         try
         {
-            // =========================================================
-            // 【修复错误3】 DeleteAll 的正确写法
-            // =========================================================
             // 1. 建立查询
             LCQuery<LCObject> query = new LCQuery<LCObject>("UserStructure");
             query.WhereEqualTo("owner", currentUser);
@@ -54,9 +63,7 @@ public class BuildSaver : MonoBehaviour
             if (oldDataList.Count > 0)
             {
                 await LCObject.DeleteAll(oldDataList);
-                Debug.Log("旧存档已清理...");
             }
-            // =========================================================
 
             List<LCObject> cloudDataList = new List<LCObject>();
 
@@ -71,20 +78,14 @@ public class BuildSaver : MonoBehaviour
 
                 cloudDataList.Add(item);
 
-                // ★★★ 【修复】 给名字“洗澡”，去掉非法字符 ★★★
-                // =========================================================
-
-                // 1. 把空格、括号、横杠全部替换成下划线或者空字符
+                // 名字清洗逻辑
                 string safeName = info.name
-                    .Replace(" ", "_")   // 空格 -> 下划线
-                    .Replace("(", "")    // 左括号 -> 删掉
-                    .Replace(")", "")    // 右括号 -> 删掉
-                    .Replace("-", "_");  // 横杠 -> 下划线
+                    .Replace(" ", "_")
+                    .Replace("(", "")
+                    .Replace(")", "")
+                    .Replace("-", "_");
 
-                // 2. 使用“洗干净”的名字来做统计 Key
                 currentUser.Increment("stat_" + safeName, 1);
-
-                // =========================================================
             }
 
             if (cloudDataList.Count > 0)
@@ -94,13 +95,46 @@ public class BuildSaver : MonoBehaviour
 
             await currentUser.Save();
 
+            // =================================================
+            // ★★★ 【修改】 成功时弹窗！ ★★★
+            // =================================================
+            ShowTip("✅ 上传成功！");
             Debug.Log("✅ 上传完成！");
+
             if (TaskService.Instance != null)
                 TaskService.Instance.MarkUploadCompleted();
         }
         catch (LCException e)
         {
+            // =================================================
+            // ★★★ 【修改】 失败时弹窗！ ★★★
+            // =================================================
+            ShowTip("❌ 上传失败: " + e.Message);
             Debug.LogError("❌ 上传失败: " + e.Message);
         }
     }
+
+    // ★★★ 【新增 2】 控制提示框自动消失 ★★★
+    void ShowTip(string message)
+    {
+        if (tipPanel != null && tipText != null)
+        {
+            tipPanel.SetActive(true); // 显示
+            tipText.text = message;   // 改字
+
+            // 停止之前的倒计时，重新开始
+            CancelInvoke("HideTip");
+            Invoke("HideTip", 2.0f);  // 2秒后自动执行 HideTip
+        }
+        else
+        {
+            Debug.Log("提示(未绑定UI): " + message);
+        }
+    }
+
+    void HideTip()
+    {
+        if (tipPanel != null) tipPanel.SetActive(false);
+    }
+
 }

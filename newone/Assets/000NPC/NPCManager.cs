@@ -44,6 +44,19 @@ public class NPCManager : MonoBehaviour
         CheckConditions();
     }
 
+    // ★★★ 【新增】 减少计数（拆除时调用） ★★★
+    public void RemoveBuildingCount(BuildingType type)
+    {
+        if (counts.ContainsKey(type))
+        {
+            counts[type]--; // 数量减 1
+            // 保护一下，别减成负数
+            if (counts[type] < 0) counts[type] = 0;
+        }
+        // 减完立刻检查，如果数量不够了，NPC 就会自动消失
+        CheckConditions();
+    }
+
     // === 3. 核心：检查条件并开关 NPC ===
     public void CheckConditions()
     {

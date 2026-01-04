@@ -57,17 +57,24 @@ public class HomeLoader : MonoBehaviour
     // ★★★ 【新增】 游戏一开始，自动加载自己的家 ★★★
     async void Start()
     {
-        // 1. 稍微等一小会儿，确保 LeanCloud 初始化完成 (可选，但更稳)
-        await Task.Delay(100);
+        // 1. 给 SDK 一点初始化时间
+        await System.Threading.Tasks.Task.Delay(500); // 延长到 0.5秒，更稳
 
-        // 2. 获取当前登录用户
+        Debug.Log("🔄 [系统启动] 正在检查登录状态...");
+
+        // 2. 获取当前用户
         LCUser currentUser = await LCUser.GetCurrent();
 
-        // 3. 如果已经登录了，就自动加载我的家
         if (currentUser != null)
         {
-            Debug.Log("🎮 游戏启动，自动加载家园：" + currentUser.Username);
+            Debug.Log($"👤 检测到用户 [{currentUser.Username}]，开始加载家园...");
+
+            // ★★★ 核心调用 ★★★
             LoadHome(currentUser.Username);
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ 未检测到登录用户，家园保持为空。请登录。");
         }
     }
 
@@ -154,7 +161,7 @@ public class HomeLoader : MonoBehaviour
         foreach (var data in dataList)
         {
             // 读数据
-            string name = data["id"] as string; // 获取保存的名字，比如 "RedChair"
+            string name = data["prefabName"] as string; // 获取保存的名字，比如 "RedChair"
             float x = System.Convert.ToSingle(data["x"]);
             float z = System.Convert.ToSingle(data["z"]);
             float r = System.Convert.ToSingle(data["r"]);
