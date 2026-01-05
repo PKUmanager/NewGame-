@@ -68936,11 +68936,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <XBoundary>k__BackingField.x
-      value: -10
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <XBoundary>k__BackingField.y
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <YBoundary>k__BackingField.x
@@ -68948,7 +68948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <YBoundary>k__BackingField.y
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <ZBoundary>k__BackingField.x
@@ -68956,7 +68956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <ZBoundary>k__BackingField.y
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 133086093506365123, guid: ce4c09535dc998344a8fb075b3e5a3c4, type: 3}
       propertyPath: <AlwaysShowGrid>k__BackingField
