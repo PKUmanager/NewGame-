@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using LeanCloud;
+﻿using LeanCloud;
 using LeanCloud.Storage;
+using TMPro;
+using UnityEngine;
 
 public class AuthManager : MonoBehaviour
 {
@@ -14,11 +13,8 @@ public class AuthManager : MonoBehaviour
     [Header("解锁开始按钮用（把StartupUI拖进来）")]
     public StartupUI startupUI;
 
-    // =========================================================
-    // ★★★ 【新增 1】 这里加一个变量，用来绑定你的登录弹窗 ★★★
     [Header("登录弹窗（把LoginPanel拖进来）")]
     public GameObject loginWindow;
-    // =========================================================
 
     private const string KEY_PLAYER_NAME = "PLAYER_NAME";
 
@@ -28,7 +24,8 @@ public class AuthManager : MonoBehaviour
 
         if (currentUser != null)
         {
-            Debug.Log("✅ 自动登录成功，用户是：" + currentUser.Username);
+            // 自动登录成功
+            Debug.Log("☑ 自动登录成功，用户是：" + currentUser.Username);
 
             if (statusText != null)
                 statusText.text = "欢迎回来，" + currentUser.Username;
@@ -39,9 +36,10 @@ public class AuthManager : MonoBehaviour
             if (startupUI != null)
                 startupUI.SetLoggedIn(true);
 
-            // =========================================================
-            // ★★★ 【新增 2】 如果自动登录成功，也直接把弹窗关掉 ★★★
-            // =========================================================
+            // ✅ 自动登录也要算“登录完成”，否则领不到登录奖励
+            MarkLoginTaskDoneSafe();
+
+            // 关闭登录窗口
             if (loginWindow != null)
                 loginWindow.SetActive(false);
         }
@@ -64,14 +62,14 @@ public class AuthManager : MonoBehaviour
             return;
         }
 
-        LCUser user = new LCUser();
-        user.Username = uName;
-        user.Password = pwd;
-
         if (statusText != null) statusText.text = "正在注册...";
 
         try
         {
+            LCUser user = new LCUser();
+            user.Username = uName;
+            user.Password = pwd;
+
             await user.SignUp();
 
             if (statusText != null) statusText.text = "注册成功！请登录";
@@ -79,9 +77,8 @@ public class AuthManager : MonoBehaviour
             PlayerPrefs.SetString(KEY_PLAYER_NAME, uName);
             PlayerPrefs.Save();
 
-            if (startupUI != null) startupUI.SetLoggedIn(false);
-            if (TaskService.Instance != null)
-                TaskService.Instance.MarkLoginCompleted();
+            if (startupUI != null)
+                startupUI.SetLoggedIn(false);
         }
         catch (LCException e)
         {
@@ -114,20 +111,28 @@ public class AuthManager : MonoBehaviour
             if (startupUI != null)
                 startupUI.SetLoggedIn(true);
 
-            // =========================================================
-            // ★★★ 【新增 3】 登录成功后，立刻关闭弹窗！ ★★★
-            // =========================================================
+            // ✅ 手动登录也要标记“登录完成”
+            MarkLoginTaskDoneSafe();
+
+            // 关闭登录窗口
             if (loginWindow != null)
-            {
                 loginWindow.SetActive(false);
-            }
         }
         catch (LCException e)
         {
             if (statusText != null) statusText.text = "登录失败：" + e.Message;
-
-            if (startupUI != null)
-                startupUI.SetLoggedIn(false);
+            if (startupUI != null) startupUI.SetLoggedIn(false);
         }
+    }
+
+    private void MarkLoginTaskDoneSafe()
+    {
+        TaskService ts = TaskService.Instance;
+        if (ts == null) ts = FindObjectOfType<TaskService>();
+
+        if (ts != null)
+            ts.MarkLoginCompleted();
+        else
+            Debug.LogError("TaskService not found：无法标记登录任务（请确认场景里有 TaskService 物体且启用）");
     }
 }

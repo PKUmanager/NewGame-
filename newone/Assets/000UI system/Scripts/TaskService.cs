@@ -11,23 +11,20 @@ public enum RewardType
 [Serializable]
 public class TaskDefinition
 {
-    public string id;          // 唯一ID（别改）
-    public string title;       // UI标题
+    public string id;            // 唯一ID（别改）
+    public string title;         // UI标题
     public RewardType rewardType;
-    public int silverAmount;   // rewardType=Silver用
-    public string itemId;      // rewardType=Item用（例如 "BETA_EQUIP_001"）
+    public int silverAmount;     // rewardType=Silver用
+    public string itemId;        // rewardType=Item用（例如 "beta_badge"）
 }
 
-/// <summary>
-/// 任务状态：完成/已领取（都要持久化）
-/// </summary>
 public class TaskService : MonoBehaviour
 {
     public static TaskService Instance;
 
-    public event Action OnTaskChanged; // UI刷新用
+    public event Action OnTaskChanged;
 
-    // 你现在要的两个任务定义（最简单：直接写死）
+    // 任务定义（你现在是写死的，后续可改成ScriptableObject）
     private readonly List<TaskDefinition> defs = new List<TaskDefinition>()
     {
         new TaskDefinition
@@ -38,12 +35,12 @@ public class TaskService : MonoBehaviour
             silverAmount = 80
         },
         new TaskDefinition
-{
-    id = "TASK_UPLOAD_ONCE_BETA_ITEM",
-    title = "成功上传作品一次（领取内测限定道具）",
-    rewardType = RewardType.Item,
-    itemId = "beta_badge"   // ✅改成和 ItemDefinition 里的 Id 一模一样
-}
+        {
+            id = "TASK_UPLOAD_ONCE_BETA_ITEM",
+            title = "成功上传作品一次（领取内测限定道具）",
+            rewardType = RewardType.Item,
+            itemId = "beta_badge"
+        }
     };
 
     private const string KEY_DONE_PREFIX = "TASK_DONE_";
@@ -56,11 +53,12 @@ public class TaskService : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    // 给UI用：获取全部任务定义
+    // 给UI用：获取全部任务
     public List<TaskDefinition> GetAllTasks()
     {
         return defs;
@@ -83,32 +81,34 @@ public class TaskService : MonoBehaviour
         OnTaskChanged?.Invoke();
     }
 
-    
+    // ✅ 登录完成：解锁登录奖励任务
     public void MarkLoginCompleted()
     {
-       
         SetDone("TASK_LOGIN_CLAIM_80", true);
     }
 
-    
+    // ✅ 上传完成：解锁上传奖励任务
     public void MarkUploadCompleted()
     {
         SetDone("TASK_UPLOAD_ONCE_BETA_ITEM", true);
     }
 
-
+    // ✅ 领取奖励（UI按钮点这个）
     public bool Claim(string taskId)
     {
-        if (!IsDone(taskId)) return false;    // ✅没完成不能领
-        if (IsClaimed(taskId)) return false;  // ✅领过不能再领
+        if (!IsDone(taskId)) return false;
+        if (IsClaimed(taskId)) return false;
 
         TaskDefinition def = defs.Find(d => d.id == taskId);
         if (def == null) return false;
 
-        // 发奖励（你这里的逻辑OK）
+        // 发奖励
         if (def.rewardType == RewardType.Silver)
         {
-            if (PlayerData.Instance != null) PlayerData.Instance.AddSilver(def.silverAmount);
+            if (PlayerData.Instance != null)
+            {
+                PlayerData.Instance.AddSilver(def.silverAmount);
+            }
             else
             {
                 int cur = PlayerPrefs.GetInt("SILVER", 0);
@@ -120,8 +120,7 @@ public class TaskService : MonoBehaviour
         {
             if (string.IsNullOrEmpty(def.itemId)) return false;
 
-            // ✅ 用 InventoryManager（背包UI读它）
-            var im = InventoryManager.Instance;
+            InventoryManager im = InventoryManager.Instance;
             if (im == null) im = FindObjectOfType<InventoryManager>();
 
             if (im != null)
@@ -130,12 +129,12 @@ public class TaskService : MonoBehaviour
             }
             else
             {
-                Debug.LogError("InventoryManager not found. 奖励未发放：请确认场景里有 InventoryManager。");
+                Debug.LogError("InventoryManager not found：无法发放道具奖励（请确认场景里有 InventoryManager 且启用）");
                 return false;
             }
         }
 
-        // ✅ 这两行必须在 if/else 后面，确保任何奖励都能走到这里
+        // 标记已领取
         SetClaimed(taskId, true);
         return true;
     }
