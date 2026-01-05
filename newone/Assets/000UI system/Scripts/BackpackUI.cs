@@ -1,10 +1,10 @@
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BackpackUI : MonoBehaviour
 {
-    public enum Category { �Ҿ�, װ��, ֲ��, ����, װ�� }
+    public enum Category { 家具, 装饰, 植物, 材料, 装扮 }
 
     [Header("ScrollView Content")]
     [SerializeField] private Transform contentRoot;
@@ -12,7 +12,7 @@ public class BackpackUI : MonoBehaviour
     [Header("ItemSlot Prefab")]
     [SerializeField] private ItemSlotUI itemSlotPrefab;
 
-    private Category currentCategory = Category.�Ҿ�;
+    private Category currentCategory = Category.家具;
 
     private void OnEnable()
     {
@@ -36,10 +36,12 @@ public class BackpackUI : MonoBehaviour
     private void RefreshList(Category category)
     {
         ClearContent();
+
+        if (contentRoot == null || itemSlotPrefab == null) return;
         if (InventoryManager.Instance == null) return;
 
-        // Category -> ItemCategory
-        ItemCategory cat = (ItemCategory)System.Enum.Parse(typeof(ItemCategory), category.ToString());
+        // BackpackUI.Category -> ItemCategory
+        ItemCategory cat = (ItemCategory)Enum.Parse(typeof(ItemCategory), category.ToString());
 
         var items = InventoryManager.Instance.GetByCategory(cat);
         for (int i = 0; i < items.Count; i++)
@@ -53,8 +55,17 @@ public class BackpackUI : MonoBehaviour
     private void ClearContent()
     {
         if (contentRoot == null) return;
+
         var slots = contentRoot.GetComponentsInChildren<ItemSlotUI>(true);
         for (int i = 0; i < slots.Length; i++)
             Destroy(slots[i].gameObject);
+    }
+
+    // ✅ 给按钮绑定用（Unity Button OnClick 能传 int）
+    public void SelectCategory(int index)
+    {
+        index = Mathf.Clamp(index, 0, Enum.GetValues(typeof(Category)).Length - 1);
+        currentCategory = (Category)index;
+        RefreshCurrent();
     }
 }

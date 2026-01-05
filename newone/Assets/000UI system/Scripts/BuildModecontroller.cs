@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildModeController : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class BuildModeController : MonoBehaviour
 
     private void Awake()
     {
-        // Ĭ�ϣ��ǽ���ģʽ
+        // 默认：非建造模式
         SetBuildMode(false);
     }
 

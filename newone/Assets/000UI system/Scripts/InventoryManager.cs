@@ -63,7 +63,22 @@ public class InventoryManager : MonoBehaviour
         }
         return list;
     }
+    public void AddItem(string itemId, int delta)
+    {
+        if (string.IsNullOrEmpty(itemId) || delta == 0) return;
 
+        if (counts.ContainsKey(itemId))
+            counts[itemId] += delta;
+        else
+            counts[itemId] = delta;
+
+        if (counts[itemId] < 0) counts[itemId] = 0;
+
+        Save();
+
+        // 如果你有事件刷新UI（你Inspector里显示有 InventoryManager (Script)，大概率有）
+        OnInventoryChanged?.Invoke();
+    }
     private void Save()
     {
         var data = new InvData();

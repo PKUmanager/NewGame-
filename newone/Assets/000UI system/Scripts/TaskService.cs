@@ -38,12 +38,12 @@ public class TaskService : MonoBehaviour
             silverAmount = 80
         },
         new TaskDefinition
-        {
-            id = "TASK_UPLOAD_ONCE_BETA_ITEM",
-            title = "成功上传作品一次（领取内测限定道具）",
-            rewardType = RewardType.Item,
-            itemId = "BETA_EQUIP_001"
-        }
+{
+    id = "TASK_UPLOAD_ONCE_BETA_ITEM",
+    title = "成功上传作品一次（领取内测限定道具）",
+    rewardType = RewardType.Item,
+    itemId = "beta_badge"   // ✅改成和 ItemDefinition 里的 Id 一模一样
+}
     };
 
     private const string KEY_DONE_PREFIX = "TASK_DONE_";
@@ -118,12 +118,25 @@ public class TaskService : MonoBehaviour
         }
         else if (def.rewardType == RewardType.Item)
         {
-            InventoryService inv = InventoryService.Instance;
-            if (inv != null && !string.IsNullOrEmpty(def.itemId))
-                inv.GrantItem(def.itemId);
+            if (string.IsNullOrEmpty(def.itemId)) return false;
+
+            // ✅ 用 InventoryManager（背包UI读它）
+            var im = InventoryManager.Instance;
+            if (im == null) im = FindObjectOfType<InventoryManager>();
+
+            if (im != null)
+            {
+                im.AddItem(def.itemId, 1);
+            }
+            else
+            {
+                Debug.LogError("InventoryManager not found. 奖励未发放：请确认场景里有 InventoryManager。");
+                return false;
+            }
         }
 
-        SetClaimed(taskId, true); // ✅最后标记已领取
+        // ✅ 这两行必须在 if/else 后面，确保任何奖励都能走到这里
+        SetClaimed(taskId, true);
         return true;
     }
 }
