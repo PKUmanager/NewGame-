@@ -7,52 +7,50 @@ using UnityEngine;
 
 namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 {
-    /// <summary>
-    /// Handles placing and removing objects and keeps a list of all object references by guid
-    /// </summary>
     public class PlacementHandler : MonoBehaviour
     {
-        /// <summary>
-        /// keeps track of all objects that are already placed on the grid
-        /// dictionary is easier for removing & tracking objects than a simple list
-        /// </summary>
         private readonly Dictionary<string, GameObject> _placedObjectDictionary = new();
+        private PlacementGrid _cachedGrid;
 
+        // 安全获取网格旋转，防止读档时因为 System 未初始化而拿到 0 度，导致埋土里
+        private Quaternion GetSafeGridRotation()
+        {
+            if (PlacementSystem.Instance != null)
+                return PlacementSystem.Instance.GridRotation;
 
-        /// <summary>
-        /// Handles placing a new object to the grid
-        /// Initializes the PlacedObject data, which creates a new guid for unique identification of this object
-        /// </summary>
+            if (_cachedGrid == null)
+                _cachedGrid = FindObjectOfType<PlacementGrid>(true);
+
+            if (_cachedGrid != null)
+                return _cachedGrid.transform.rotation;
+
+            return Quaternion.identity;
+        }
+
         public string PlaceObject(Placeable placeableObj, Vector3 worldPosition, Vector3Int gridPosition, ObjectDirection direction,
              Vector3 offset, float cellSize)
         {
             var obj = Instantiate(placeableObj.Prefab);
 
-            // =========================================================
-            // 归位逻辑：把房子放到 BuildingContainer 下面
             if (HomeLoader.Instance != null && HomeLoader.Instance.buildingRoot != null)
             {
                 obj.transform.SetParent(HomeLoader.Instance.buildingRoot);
             }
-            // =========================================================
 
             obj.AddComponent<PlacedObject>();
             var placedObject = obj.GetComponent<PlacedObject>();
             placedObject.Initialize(placeableObj, gridPosition);
             placedObject.data.direction = direction;
 
-            // [核心修改] 引入网格旋转
-            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
+            // 应用网格旋转
+            Quaternion gridRot = GetSafeGridRotation();
 
-            // 1. 旋转偏移量
             Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, direction);
             obj.transform.position = worldPosition + rotatedOffset;
 
-            // 2. 旋转物体
             float rotationAngle = PlaceableUtils.GetRotationAngle(direction);
             obj.transform.rotation = gridRot * Quaternion.Euler(0, rotationAngle, 0);
 
-            // 动态大小处理
             if (placeableObj.DynamicSize)
             {
                 float targetHeight = placeableObj.GridType == GridDataType.Terrain ? obj.transform.localScale.y : cellSize;
@@ -62,34 +60,15 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             ObjectGrouper.Instance.AddToGroup(obj, placeableObj.GridType);
             _placedObjectDictionary.Add(placedObject.data.guid, obj);
 
-            // =========================================================
-            // ★★★ 【新增 1】 告诉 NPC 经理：我造了个新东西，快统计一下！ ★★★
-            // =========================================================
-
-            // 1. 获取这个建筑 Prefab 身上的“身份证” (BuildingAttribute)
             var attr = placeableObj.Prefab.GetComponent<BuildingAttribute>();
-
-            // 2. 如果这东西有分类标签，并且 NPC经理 在场
             if (attr != null && NPCManager.Instance != null)
             {
-                // 3. 增加计数 (比如铺路+1)，并自动刷新 NPC 显示
                 NPCManager.Instance.AddBuildingCount(attr.type);
             }
-            else
-            {
-                // (可选) 调试用，如果你发现 NPC 不出来，看看控制台有没有这句话
-                // Debug.LogWarning("注意：这个建筑没有挂 BuildingAttribute 脚本，或者 NPCManager 没在场景里");
-            }
-            // =========================================================
-
 
             return placedObject.data.guid;
         }
 
-        /// <summary>
-        /// Handles placing an object that is loaded from the saveFile (handling is a little bit different from placing a new object)
-        /// instead of the gridPosition we have podata as last parameter where we can Initialize the newly placed object with the previously saved guid, grid pos etc...
-        /// </summary>
         public string PlaceLoadedObject(Placeable placeableObj, Vector3 worldPosition, PlaceableObjectData podata, float cellSize)
         {
             var obj = Instantiate(placeableObj.Prefab);
@@ -99,16 +78,19 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             placedObject.placeable = placeableObj;
             placedObject.Initialize(podata);
 
-            // [核心修改] 读档时也应用旋转
-            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
+            Quaternion gridRot = GetSafeGridRotation();
 
-            var offset = PlaceableUtils.CalculateOffset(obj, cellSize);
+            // ★★★ [核心修复] ★★★ 
+            // 必须使用【Prefab】来计算偏移量！
+            // 因为场景里的 'obj' 已经是歪的(跟着网格转了)，算出来的偏移量是错的。
+            // 使用 Prefab 算出来的才是最原始、最标准的中心点。
+            var offset = PlaceableUtils.CalculateOffset(placeableObj.Prefab, cellSize);
+
             Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, podata.direction);
-
             obj.transform.position = worldPosition + rotatedOffset;
+
             obj.transform.rotation = gridRot * Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(podata.direction), 0);
 
-            // [核心修改] 动态大小处理
             if (placeableObj.DynamicSize)
             {
                 float targetHeight = placeableObj.GridType == GridDataType.Terrain ? obj.transform.localScale.y : cellSize;
@@ -120,16 +102,14 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             return podata.guid;
         }
 
-        /// <summary>
-        /// handles moving a placed object to his new position
-        /// </summary>
         public void PlaceMovedObject(GameObject obj, Vector3 worldPosition, Vector3Int gridPosition, ObjectDirection direction, float cellSize)
         {
             var placedObject = obj.GetComponent<PlacedObject>();
-            var offset = PlaceableUtils.CalculateOffset(obj, cellSize);
 
-            // [核心修改] 移动时也应用旋转
-            Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
+            // ★★★ [核心修复] 移动时也必须用 Prefab 算 Offset ★★★
+            var offset = PlaceableUtils.CalculateOffset(placedObject.placeable.Prefab, cellSize);
+
+            Quaternion gridRot = GetSafeGridRotation();
 
             Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, direction);
             obj.transform.position = worldPosition + rotatedOffset;
@@ -138,32 +118,18 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             placedObject.data.gridPosition = gridPosition;
             placedObject.data.direction = direction;
-            // no need to update reference for moving object, since guid still stays the same 
         }
 
-        /// <summary>
-        /// Based on the guid, we load the placed object from our dictionary and remove it from the SaveData and from the dictionary
-        /// then we destroy the instantiated object in the scene
-        /// </summary>
         public void RemoveObjectPositions(string guid)
         {
-            var obj = _placedObjectDictionary[guid];
-            if (!obj)
-            {
-                Debug.LogError($"Removing object error: {guid} is not saved in dictionary");
-                return;
-            }
+            if (!_placedObjectDictionary.ContainsKey(guid)) return;
 
-            // =========================================================
-            // ★★★ 【新增】 在拆除前，通知 NPC 经理减数 ★★★
-            // =========================================================
+            var obj = _placedObjectDictionary[guid];
+            if (!obj) return;
+
             if (NPCManager.Instance != null)
             {
-                // 获取原本挂在 Prefab 里的身份证脚本
-                // 注意：这里需要 GetComponent，因为 obj 是场景里的实例
                 var attr = obj.GetComponent<PlacedObject>().placeable.Prefab.GetComponent<BuildingAttribute>();
-
-                // 或者直接尝试从 obj 身上获取 (如果你把 BuildingAttribute 也挂在实例上的话)
                 if (attr == null) attr = obj.GetComponent<BuildingAttribute>();
 
                 if (attr != null)
@@ -174,12 +140,10 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             obj.GetComponent<PlacedObject>().RemoveFromSaveData();
             _placedObjectDictionary.Remove(guid);
-            // destroy the object and set the reference of the list at the proper index to null
             Destroy(obj);
         }
 
-        // =========================================================
-        // ★★★ 【新增】 这是一个数据包结构，用来临时存一下建筑信息 ★★★
+        // BuildSaver 所需的结构和方法
         public struct BuildingInfo
         {
             public string name;
@@ -187,22 +151,18 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             public float rotation;
         }
 
-        // ★★★ 【新增】 这个方法负责把当前场景里所有的建筑打包返回 ★★★
         public List<BuildingInfo> GetAllBuildings()
         {
             List<BuildingInfo> list = new List<BuildingInfo>();
 
-            // 遍历所有已放置的物体
             foreach (var kvp in _placedObjectDictionary)
             {
                 GameObject obj = kvp.Value;
-                // 获取之前挂的 PlacedObject 脚本，里面有 prefab 数据
                 PlacedObject placedObj = obj.GetComponent<PlacedObject>();
 
                 if (placedObj != null && placedObj.placeable != null)
                 {
                     BuildingInfo info = new BuildingInfo();
-                    // 注意：这里一定要取 Prefab 的名字，而不是 obj.name (obj.name会有Clone后缀)
                     info.name = placedObj.placeable.Prefab.name;
                     info.position = obj.transform.position;
                     info.rotation = obj.transform.eulerAngles.y;
@@ -213,5 +173,4 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             return list;
         }
     }
-
 }

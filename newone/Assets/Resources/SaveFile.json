@@ -1,1 +1,1948 @@
-{"placeableObjectDataCollection":{"13931337-8015-4712-aab9-407e3377f91a":{"direction":0,"gridPosition":{"x":3,"y":0,"z":7,"magnitude":7.615773,"sqrMagnitude":58},"assetIdentifier":"House T6","guid":"13931337-8015-4712-aab9-407e3377f91a"},"c9a5ccd8-759e-4d99-ae08-d9157a93cb2d":{"direction":0,"gridPosition":{"x":4,"y":0,"z":4,"magnitude":5.656854,"sqrMagnitude":32},"assetIdentifier":"House T1","guid":"c9a5ccd8-759e-4d99-ae08-d9157a93cb2d"},"94e11fde-2aba-4df9-8aff-2c8e9e6eb9cb":{"direction":2,"gridPosition":{"x":11,"y":0,"z":1,"magnitude":11.0453606,"sqrMagnitude":122},"assetIdentifier":"House T21","guid":"94e11fde-2aba-4df9-8aff-2c8e9e6eb9cb"},"7cebc5ef-bd3d-4ff9-8448-b49ec3833afd":{"direction":0,"gridPosition":{"x":3,"y":0,"z":0,"magnitude":3.0,"sqrMagnitude":9},"assetIdentifier":"Statue Ring","guid":"7cebc5ef-bd3d-4ff9-8448-b49ec3833afd"},"32bb8359-fe8a-472a-bb16-90310da41617":{"direction":0,"gridPosition":{"x":6,"y":0,"z":4,"magnitude":7.21110249,"sqrMagnitude":52},"assetIdentifier":"House T20","guid":"32bb8359-fe8a-472a-bb16-90310da41617"},"ae5c296c-e83e-475c-82c4-9dc8cf77213d":{"direction":2,"gridPosition":{"x":13,"y":0,"z":5,"magnitude":13.9283886,"sqrMagnitude":194},"assetIdentifier":"Log Stack Large","guid":"ae5c296c-e83e-475c-82c4-9dc8cf77213d"},"9a72d54d-f932-4d49-825c-2d578a377d8a":{"direction":3,"gridPosition":{"x":14,"y":0,"z":3,"magnitude":14.3178215,"sqrMagnitude":205},"assetIdentifier":"Sign","guid":"9a72d54d-f932-4d49-825c-2d578a377d8a"},"36abdd0b-3f9c-408a-8b0c-9f648d5834c9":{"direction":1,"gridPosition":{"x":1,"y":0,"z":0,"magnitude":1.0,"sqrMagnitude":1},"assetIdentifier":"Rocket","guid":"36abdd0b-3f9c-408a-8b0c-9f648d5834c9"},"7a3f9d7c-e9de-4425-b21f-85e755abc47b":{"direction":0,"gridPosition":{"x":11,"y":0,"z":4,"magnitude":11.7046995,"sqrMagnitude":137},"assetIdentifier":"Small Building A","guid":"7a3f9d7c-e9de-4425-b21f-85e755abc47b"},"fa367a2a-17e0-427b-8cd7-9d040ad23b4d":{"direction":0,"gridPosition":{"x":13,"y":0,"z":10,"magnitude":16.40122,"sqrMagnitude":269},"assetIdentifier":"Skyscraper F","guid":"fa367a2a-17e0-427b-8cd7-9d040ad23b4d"},"e8b09896-c667-43d3-8c6f-4c657e287b59":{"direction":2,"gridPosition":{"x":10,"y":0,"z":4,"magnitude":10.7703295,"sqrMagnitude":116},"assetIdentifier":"House T21","guid":"e8b09896-c667-43d3-8c6f-4c657e287b59"},"65f91220-c978-4f3c-9b8c-7fc8ba262081":{"direction":2,"gridPosition":{"x":13,"y":0,"z":2,"magnitude":13.1529465,"sqrMagnitude":173},"assetIdentifier":"Log Stack Large","guid":"65f91220-c978-4f3c-9b8c-7fc8ba262081"},"1046e5c3-f690-4f97-98f0-7077775ad715":{"direction":1,"gridPosition":{"x":15,"y":0,"z":3,"magnitude":15.2970581,"sqrMagnitude":234},"assetIdentifier":"Rocket","guid":"1046e5c3-f690-4f97-98f0-7077775ad715"},"6fbcebfe-1e9c-4b1d-b0f4-16037e2363f6":{"direction":2,"gridPosition":{"x":0,"y":0,"z":7,"magnitude":7.0,"sqrMagnitude":49},"assetIdentifier":"House T1","guid":"6fbcebfe-1e9c-4b1d-b0f4-16037e2363f6"},"9014d92f-c3d0-4229-ab12-cc79bfa6155c":{"direction":0,"gridPosition":{"x":17,"y":0,"z":10,"magnitude":19.7230835,"sqrMagnitude":389},"assetIdentifier":"Skyscraper C","guid":"9014d92f-c3d0-4229-ab12-cc79bfa6155c"},"41a021f5-4dc3-4d98-ad6d-1973deecb203":{"direction":0,"gridPosition":{"x":7,"y":0,"z":2,"magnitude":7.28011,"sqrMagnitude":53},"assetIdentifier":"Large Building F","guid":"41a021f5-4dc3-4d98-ad6d-1973deecb203"},"c22b4138-8f3b-4f84-8450-9c5a095173ca":{"direction":0,"gridPosition":{"x":4,"y":0,"z":10,"magnitude":10.7703295,"sqrMagnitude":116},"assetIdentifier":"House T1","guid":"c22b4138-8f3b-4f84-8450-9c5a095173ca"},"274bacdf-803e-46a4-81eb-8da38fc4a43a":{"direction":0,"gridPosition":{"x":8,"y":0,"z":10,"magnitude":12.8062487,"sqrMagnitude":164},"assetIdentifier":"House T1","guid":"274bacdf-803e-46a4-81eb-8da38fc4a43a"},"97bfe9ff-72da-4ee6-8010-ea3bc3dac3dc":{"direction":0,"gridPosition":{"x":0,"y":0,"z":10,"magnitude":10.0,"sqrMagnitude":100},"assetIdentifier":"House T1","guid":"97bfe9ff-72da-4ee6-8010-ea3bc3dac3dc"},"ddb99be9-651f-4ec4-bdd6-bd81086495cf":{"direction":0,"gridPosition":{"x":8,"y":0,"z":4,"magnitude":8.944272,"sqrMagnitude":80},"assetIdentifier":"Tree Detailed Fall","guid":"ddb99be9-651f-4ec4-bdd6-bd81086495cf"},"d323916f-9359-4ebe-9a45-70a6a80a69cc":{"direction":0,"gridPosition":{"x":10,"y":0,"z":2,"magnitude":10.1980391,"sqrMagnitude":104},"assetIdentifier":"Tree Palm","guid":"d323916f-9359-4ebe-9a45-70a6a80a69cc"},"232106fc-ab92-4872-b501-0886647af5eb":{"direction":0,"gridPosition":{"x":6,"y":0,"z":2,"magnitude":6.3245554,"sqrMagnitude":40},"assetIdentifier":"Tree Palm","guid":"232106fc-ab92-4872-b501-0886647af5eb"},"41b891ba-89c0-4108-aaee-a8e6189ca1c6":{"direction":0,"gridPosition":{"x":17,"y":0,"z":6,"magnitude":18.0277557,"sqrMagnitude":325},"assetIdentifier":"Tree Thin Fall","guid":"41b891ba-89c0-4108-aaee-a8e6189ca1c6"},"bac73ce4-1c65-4e30-b196-78d34d71afe3":{"direction":0,"gridPosition":{"x":6,"y":0,"z":7,"magnitude":9.219544,"sqrMagnitude":85},"assetIdentifier":"House T10","guid":"bac73ce4-1c65-4e30-b196-78d34d71afe3"},"c5301b40-00fb-49e1-b37a-8eaf768437f8":{"direction":0,"gridPosition":{"x":9,"y":0,"z":7,"magnitude":11.4017544,"sqrMagnitude":130},"assetIdentifier":"Large Building A","guid":"c5301b40-00fb-49e1-b37a-8eaf768437f8"},"7c861daa-48ad-4813-8e01-f18d55572a8f":{"direction":0,"gridPosition":{"x":19,"y":0,"z":10,"magnitude":21.470911,"sqrMagnitude":461},"assetIdentifier":"Skyscraper F","guid":"7c861daa-48ad-4813-8e01-f18d55572a8f"},"3869b12b-0fb4-4c81-a9fe-7aa51d38a3c8":{"direction":0,"gridPosition":{"x":14,"y":0,"z":6,"magnitude":15.2315464,"sqrMagnitude":232},"assetIdentifier":"Tree Detailed Dark","guid":"3869b12b-0fb4-4c81-a9fe-7aa51d38a3c8"},"25774604-9192-41e4-bb1e-fc8f8b6f631e":{"direction":2,"gridPosition":{"x":13,"y":0,"z":0,"magnitude":13.0,"sqrMagnitude":169},"assetIdentifier":"Rock Tall A","guid":"25774604-9192-41e4-bb1e-fc8f8b6f631e"},"2d4ed091-1251-4a61-a0e2-250a26cf0017":{"direction":0,"gridPosition":{"x":3,"y":0,"z":4,"magnitude":5.0,"sqrMagnitude":25},"assetIdentifier":"Small Building B","guid":"2d4ed091-1251-4a61-a0e2-250a26cf0017"},"7f0d2339-69b9-423a-a42f-ab7266e9fa89":{"direction":0,"gridPosition":{"x":2,"y":0,"z":3,"magnitude":3.60555124,"sqrMagnitude":13},"assetIdentifier":"Large Building C","guid":"7f0d2339-69b9-423a-a42f-ab7266e9fa89"},"4dc9863b-8e7e-4215-aee6-b0f254968388":{"direction":0,"gridPosition":{"x":9,"y":0,"z":4,"magnitude":9.848858,"sqrMagnitude":97},"assetIdentifier":"House T21","guid":"4dc9863b-8e7e-4215-aee6-b0f254968388"},"a4c72950-394b-42cd-9005-34fb66fbc260":{"direction":0,"gridPosition":{"x":18,"y":0,"z":2,"magnitude":18.1107712,"sqrMagnitude":328},"assetIdentifier":"Tree Thin Dark","guid":"a4c72950-394b-42cd-9005-34fb66fbc260"},"9d186cf5-c04e-47a6-a43e-ab2233cbf849":{"direction":0,"gridPosition":{"x":17,"y":0,"z":1,"magnitude":17.0293865,"sqrMagnitude":290},"assetIdentifier":"Tree Thin Fall","guid":"9d186cf5-c04e-47a6-a43e-ab2233cbf849"},"8e4e5284-c361-462b-b58a-073d7ce09faa":{"direction":1,"gridPosition":{"x":13,"y":0,"z":1,"magnitude":13.0384045,"sqrMagnitude":170},"assetIdentifier":"Log Stack Large","guid":"8e4e5284-c361-462b-b58a-073d7ce09faa"},"f1846748-7fc6-4954-b624-c626139f4e80":{"direction":1,"gridPosition":{"x":13,"y":0,"z":6,"magnitude":14.3178215,"sqrMagnitude":205},"assetIdentifier":"Log Stack Large","guid":"f1846748-7fc6-4954-b624-c626139f4e80"},"f585f639-85a7-4ca5-94f3-5a203bac51ab":{"direction":0,"gridPosition":{"x":15,"y":0,"z":6,"magnitude":16.1554947,"sqrMagnitude":261},"assetIdentifier":"Tree Thin Fall","guid":"f585f639-85a7-4ca5-94f3-5a203bac51ab"},"6a6f906f-a31d-4bb1-a08a-7c08528656e6":{"direction":0,"gridPosition":{"x":15,"y":0,"z":10,"magnitude":18.0277557,"sqrMagnitude":325},"assetIdentifier":"Skyscraper C","guid":"6a6f906f-a31d-4bb1-a08a-7c08528656e6"},"498f5751-a252-427f-9480-dbf36586281a":{"direction":0,"gridPosition":{"x":18,"y":0,"z":3,"magnitude":18.2482872,"sqrMagnitude":333},"assetIdentifier":"Tree Pine A","guid":"498f5751-a252-427f-9480-dbf36586281a"},"834e3fbf-3481-478d-9b88-d2ccb2b02ff5":{"direction":0,"gridPosition":{"x":18,"y":0,"z":4,"magnitude":18.4390888,"sqrMagnitude":340},"assetIdentifier":"Tree Pine A","guid":"834e3fbf-3481-478d-9b88-d2ccb2b02ff5"},"ad6a2c54-7a30-4df5-8bed-c40c4e259308":{"direction":0,"gridPosition":{"x":16,"y":0,"z":6,"magnitude":17.088007,"sqrMagnitude":292},"assetIdentifier":"Tree Detailed Fall","guid":"ad6a2c54-7a30-4df5-8bed-c40c4e259308"},"d91ae006-0103-4371-92d8-7142f7d3a79b":{"direction":0,"gridPosition":{"x":18,"y":0,"z":6,"magnitude":18.9736652,"sqrMagnitude":360},"assetIdentifier":"Tree Detailed Dark","guid":"d91ae006-0103-4371-92d8-7142f7d3a79b"},"889e9913-40ab-44a9-b502-033dde719f2d":{"direction":0,"gridPosition":{"x":16,"y":0,"z":1,"magnitude":16.03122,"sqrMagnitude":257},"assetIdentifier":"Tree Detailed Fall","guid":"889e9913-40ab-44a9-b502-033dde719f2d"},"7fc93026-3f79-4876-86b7-c3ff206b31e0":{"direction":0,"gridPosition":{"x":18,"y":0,"z":5,"magnitude":18.6815414,"sqrMagnitude":349},"assetIdentifier":"Tree Thin Dark","guid":"7fc93026-3f79-4876-86b7-c3ff206b31e0"},"fe0f2462-8dba-466d-a6ef-b146d393de2d":{"direction":0,"gridPosition":{"x":14,"y":0,"z":1,"magnitude":14.0356684,"sqrMagnitude":197},"assetIdentifier":"Tree Detailed Dark","guid":"fe0f2462-8dba-466d-a6ef-b146d393de2d"},"5b5fabb3-e4f6-4562-9910-7a366e2b98af":{"direction":0,"gridPosition":{"x":15,"y":0,"z":1,"magnitude":15.0332966,"sqrMagnitude":226},"assetIdentifier":"Tree Thin Fall","guid":"5b5fabb3-e4f6-4562-9910-7a366e2b98af"},"7714250f-f4c5-4b11-9412-b7263e7b571d":{"direction":1,"gridPosition":{"x":7,"y":0,"z":0,"magnitude":7.0,"sqrMagnitude":49},"assetIdentifier":"Rock Tall A","guid":"7714250f-f4c5-4b11-9412-b7263e7b571d"},"a899c767-5540-42d7-b967-14a75108db48":{"direction":0,"gridPosition":{"x":18,"y":0,"z":1,"magnitude":18.0277557,"sqrMagnitude":325},"assetIdentifier":"Tree Detailed Dark","guid":"a899c767-5540-42d7-b967-14a75108db48"},"7b82a16f-4001-4683-a48b-a4460470f42b":{"direction":0,"gridPosition":{"x":20,"y":0,"z":5,"magnitude":20.6155281,"sqrMagnitude":425},"assetIdentifier":"Barrels rail","guid":"7b82a16f-4001-4683-a48b-a4460470f42b"},"840953fa-5791-496f-8047-a4f370e5076c":{"direction":0,"gridPosition":{"x":24,"y":0,"z":4,"magnitude":24.33105,"sqrMagnitude":592},"assetIdentifier":"Supports High","guid":"840953fa-5791-496f-8047-a4f370e5076c"},"b11aecb5-0e58-43ac-b289-8a61aecc7b93":{"direction":0,"gridPosition":{"x":20,"y":0,"z":3,"magnitude":20.22375,"sqrMagnitude":409},"assetIdentifier":"Barrels rail","guid":"b11aecb5-0e58-43ac-b289-8a61aecc7b93"},"c28c893f-3490-4196-ab93-83046ca68406":{"direction":0,"gridPosition":{"x":20,"y":0,"z":4,"magnitude":20.3960781,"sqrMagnitude":416},"assetIdentifier":"Supports High","guid":"c28c893f-3490-4196-ab93-83046ca68406"},"34f21e84-f3df-4a71-bb0b-b115fad694e4":{"direction":2,"gridPosition":{"x":21,"y":0,"z":3,"magnitude":21.2132034,"sqrMagnitude":450},"assetIdentifier":"Craft Speeder D","guid":"34f21e84-f3df-4a71-bb0b-b115fad694e4"},"0efe87de-9132-416f-a359-05c6fb99d968":{"direction":0,"gridPosition":{"x":24,"y":0,"z":3,"magnitude":24.1867733,"sqrMagnitude":585},"assetIdentifier":"Barrels rail","guid":"0efe87de-9132-416f-a359-05c6fb99d968"},"78d91755-41bf-47a8-a1da-3d3323bd6420":{"direction":0,"gridPosition":{"x":11,"y":0,"z":5,"magnitude":12.083046,"sqrMagnitude":146},"assetIdentifier":"Chimney","guid":"78d91755-41bf-47a8-a1da-3d3323bd6420"},"7b8d6988-012f-4dff-ac9f-252025d580f8":{"direction":1,"gridPosition":{"x":2,"y":0,"z":7,"magnitude":7.28011,"sqrMagnitude":53},"assetIdentifier":"Crops Corn C","guid":"7b8d6988-012f-4dff-ac9f-252025d580f8"},"2df9f62e-37c6-4c7f-803c-6fdd65a6478d":{"direction":0,"gridPosition":{"x":9,"y":0,"z":1,"magnitude":9.055386,"sqrMagnitude":82},"assetIdentifier":"Chimney","guid":"2df9f62e-37c6-4c7f-803c-6fdd65a6478d"},"44b483e9-cdfc-4024-9812-c8c6fc2d13c4":{"direction":0,"gridPosition":{"x":7,"y":0,"z":1,"magnitude":7.071068,"sqrMagnitude":50},"assetIdentifier":"Chimney","guid":"44b483e9-cdfc-4024-9812-c8c6fc2d13c4"},"591fe41c-ca13-497a-8f22-89ec1505136d":{"direction":0,"gridPosition":{"x":5,"y":0,"z":8,"magnitude":9.433981,"sqrMagnitude":89},"assetIdentifier":"Crops Corn C","guid":"591fe41c-ca13-497a-8f22-89ec1505136d"},"e3276a62-0310-40eb-ba89-2e7295431fd1":{"direction":2,"gridPosition":{"x":2,"y":0,"z":8,"magnitude":8.246211,"sqrMagnitude":68},"assetIdentifier":"Crops Corn C","guid":"e3276a62-0310-40eb-ba89-2e7295431fd1"},"c15fa74f-ce6b-45f6-a135-8067ae5fafb6":{"direction":0,"gridPosition":{"x":5,"y":0,"z":7,"magnitude":8.602325,"sqrMagnitude":74},"assetIdentifier":"Crops Corn C","guid":"c15fa74f-ce6b-45f6-a135-8067ae5fafb6"},"0ff208f6-bb4c-4c51-9bbb-bff0fc33d865":{"direction":1,"gridPosition":{"x":22,"y":0,"z":9,"magnitude":23.7697277,"sqrMagnitude":565},"assetIdentifier":"Large Building G","guid":"0ff208f6-bb4c-4c51-9bbb-bff0fc33d865"},"b5fd8715-d8a8-41d3-a7a3-dd18e8e7030c":{"direction":0,"gridPosition":{"x":24,"y":0,"z":5,"magnitude":24.5153,"sqrMagnitude":601},"assetIdentifier":"Barrels rail","guid":"b5fd8715-d8a8-41d3-a7a3-dd18e8e7030c"},"632a32f2-ad2a-49e7-9dce-da407a9b0a3a":{"direction":0,"gridPosition":{"x":22,"y":0,"z":2,"magnitude":22.0907211,"sqrMagnitude":488},"assetIdentifier":"Barrels rail","guid":"632a32f2-ad2a-49e7-9dce-da407a9b0a3a"},"b61dc870-08f1-4eb8-b6b6-6bfefb6fa7e7":{"direction":0,"gridPosition":{"x":23,"y":0,"z":6,"magnitude":23.7697277,"sqrMagnitude":565},"assetIdentifier":"Chimney","guid":"b61dc870-08f1-4eb8-b6b6-6bfefb6fa7e7"},"0f3b0605-322d-4706-b948-64dcb2da4da6":{"direction":0,"gridPosition":{"x":23,"y":0,"z":2,"magnitude":23.086792,"sqrMagnitude":533},"assetIdentifier":"Chimney","guid":"0f3b0605-322d-4706-b948-64dcb2da4da6"},"244d9048-c0cc-477c-b237-c792428d68e1":{"direction":0,"gridPosition":{"x":21,"y":0,"z":2,"magnitude":21.0950222,"sqrMagnitude":445},"assetIdentifier":"Chimney","guid":"244d9048-c0cc-477c-b237-c792428d68e1"},"69289ae9-b541-4515-81c8-4caa7e00a546":{"direction":0,"gridPosition":{"x":21,"y":0,"z":6,"magnitude":21.84033,"sqrMagnitude":477},"assetIdentifier":"Chimney","guid":"69289ae9-b541-4515-81c8-4caa7e00a546"},"e09d6ba4-43c0-4e35-852c-cd5584cd3981":{"direction":1,"gridPosition":{"x":0,"y":0,"z":2,"magnitude":2.0,"sqrMagnitude":4},"assetIdentifier":"Shelf_2","guid":"e09d6ba4-43c0-4e35-852c-cd5584cd3981"},"ab764153-0e8d-44a2-8a1d-043a2670dcd6":{"direction":0,"gridPosition":{"x":25,"y":0,"z":11,"magnitude":27.313,"sqrMagnitude":746},"assetIdentifier":"Tree_Dry1","guid":"ab764153-0e8d-44a2-8a1d-043a2670dcd6"},"c970a269-7c40-4370-9a77-ac91dabff1e0":{"direction":0,"gridPosition":{"x":41,"y":0,"z":11,"magnitude":42.44997,"sqrMagnitude":1802},"assetIdentifier":"Tree_Dry1","guid":"c970a269-7c40-4370-9a77-ac91dabff1e0"},"4c9a2792-3795-442c-8fc2-0c3eac4db535":{"direction":0,"gridPosition":{"x":6,"y":0,"z":11,"magnitude":12.5299644,"sqrMagnitude":157},"assetIdentifier":"Tree_Dry1","guid":"4c9a2792-3795-442c-8fc2-0c3eac4db535"},"3e4ddc04-907e-41cc-ab99-41d82ccb9f62":{"direction":0,"gridPosition":{"x":55,"y":0,"z":11,"magnitude":56.0892143,"sqrMagnitude":3146},"assetIdentifier":"Tree_Dry1","guid":"3e4ddc04-907e-41cc-ab99-41d82ccb9f62"},"1fb31a97-bbf3-4e9b-b100-a2b4ae16ed59":{"direction":0,"gridPosition":{"x":35,"y":0,"z":11,"magnitude":36.6878738,"sqrMagnitude":1346},"assetIdentifier":"Tree_Dry1","guid":"1fb31a97-bbf3-4e9b-b100-a2b4ae16ed59"},"da5567fd-3eb3-4272-9a26-674dbb7da391":{"direction":0,"gridPosition":{"x":61,"y":0,"z":11,"magnitude":61.9838676,"sqrMagnitude":3842},"assetIdentifier":"Tree_Dry1","guid":"da5567fd-3eb3-4272-9a26-674dbb7da391"},"403fb17c-b9c6-41ac-83da-cff1c0e253e2":{"direction":0,"gridPosition":{"x":48,"y":0,"z":11,"magnitude":49.24429,"sqrMagnitude":2425},"assetIdentifier":"Tree_Dry1","guid":"403fb17c-b9c6-41ac-83da-cff1c0e253e2"},"dddbfbea-77aa-4410-b2c6-9f6c72d181af":{"direction":0,"gridPosition":{"x":1,"y":0,"z":10,"magnitude":10.0498753,"sqrMagnitude":101},"assetIdentifier":"Bins","guid":"dddbfbea-77aa-4410-b2c6-9f6c72d181af"},"3af5001b-d10f-4f67-b3dc-163845050a9d":{"direction":0,"gridPosition":{"x":18,"y":0,"z":11,"magnitude":21.0950222,"sqrMagnitude":445},"assetIdentifier":"Tree_Dry1","guid":"3af5001b-d10f-4f67-b3dc-163845050a9d"},"1de5399b-b09c-4a8e-b9eb-302aed3d9b96":{"direction":0,"gridPosition":{"x":12,"y":0,"z":11,"magnitude":16.27882,"sqrMagnitude":265},"assetIdentifier":"Tree_Dry1","guid":"1de5399b-b09c-4a8e-b9eb-302aed3d9b96"},"ca33b1cc-3662-4114-86fb-505cc4d8c8a7":{"direction":0,"gridPosition":{"x":22,"y":0,"z":0,"magnitude":22.0,"sqrMagnitude":484},"assetIdentifier":"Beach Chair","guid":"ca33b1cc-3662-4114-86fb-505cc4d8c8a7"},"f79f84ce-32cc-4347-b58a-65d9d664cd70":{"direction":2,"gridPosition":{"x":19,"y":0,"z":5,"magnitude":19.646883,"sqrMagnitude":386},"assetIdentifier":"Beach Chair","guid":"f79f84ce-32cc-4347-b58a-65d9d664cd70"},"17e061c9-a57e-4090-8cbb-3b7b42f3b271":{"direction":0,"gridPosition":{"x":11,"y":0,"z":3,"magnitude":11.4017544,"sqrMagnitude":130},"assetIdentifier":"Rack1","guid":"17e061c9-a57e-4090-8cbb-3b7b42f3b271"}}}
+{
+  "placeableObjectDataCollection": {
+    "96e8f63c-9bfd-4ab2-a856-78f34817d31e": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 55,
+        "y": 0,
+        "z": 5,
+        "magnitude": 55.2268066,
+        "sqrMagnitude": 3050
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "96e8f63c-9bfd-4ab2-a856-78f34817d31e"
+    },
+    "f9ae4e30-8aaf-40bf-b756-d8de558bbe21": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 43,
+        "y": 0,
+        "z": 4,
+        "magnitude": 43.1856461,
+        "sqrMagnitude": 1865
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "f9ae4e30-8aaf-40bf-b756-d8de558bbe21"
+    },
+    "077b09e8-fa72-48be-bff7-75f5a1ab036b": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 10,
+        "magnitude": 10.0,
+        "sqrMagnitude": 100
+      },
+      "assetIdentifier": "Bins",
+      "guid": "077b09e8-fa72-48be-bff7-75f5a1ab036b"
+    },
+    "2fc6e25a-3721-475d-bd23-e3b58960a9c8": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 21,
+        "y": 0,
+        "z": 4,
+        "magnitude": 21.3775578,
+        "sqrMagnitude": 457
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "2fc6e25a-3721-475d-bd23-e3b58960a9c8"
+    },
+    "6656a6a8-efbc-43e8-93e9-e40658f04b61": {
+      "direction": 1,
+      "gridPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0
+      },
+      "assetIdentifier": "Shelf_1",
+      "guid": "6656a6a8-efbc-43e8-93e9-e40658f04b61"
+    },
+    "78d067f7-f000-49ca-ad77-dd39c76dfcc3": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 17,
+        "y": 0,
+        "z": 4,
+        "magnitude": 17.4642487,
+        "sqrMagnitude": 305
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "78d067f7-f000-49ca-ad77-dd39c76dfcc3"
+    },
+    "22a0d1ce-7d55-47c8-be2f-67298d36bb6b": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 33,
+        "y": 0,
+        "z": 5,
+        "magnitude": 33.37664,
+        "sqrMagnitude": 1114
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "22a0d1ce-7d55-47c8-be2f-67298d36bb6b"
+    },
+    "ef67fc93-0889-4be0-9bd0-a0312675361a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 25,
+        "y": 0,
+        "z": 5,
+        "magnitude": 25.4950981,
+        "sqrMagnitude": 650
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ef67fc93-0889-4be0-9bd0-a0312675361a"
+    },
+    "af1ab69a-1967-4ca7-93fd-6c6075b5e3a0": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 17,
+        "y": 0,
+        "z": 5,
+        "magnitude": 17.7200451,
+        "sqrMagnitude": 314
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "af1ab69a-1967-4ca7-93fd-6c6075b5e3a0"
+    },
+    "341a6817-b7c4-48c2-b73e-6a0919e2d26b": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 44,
+        "y": 0,
+        "z": 4,
+        "magnitude": 44.1814423,
+        "sqrMagnitude": 1952
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "341a6817-b7c4-48c2-b73e-6a0919e2d26b"
+    },
+    "477fe585-c387-4c16-ab7b-2d1233b88b5e": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 58,
+        "y": 0,
+        "z": 5,
+        "magnitude": 58.21512,
+        "sqrMagnitude": 3389
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "477fe585-c387-4c16-ab7b-2d1233b88b5e"
+    },
+    "4afb4d39-7d9c-496b-8709-ef4c204783ad": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 59,
+        "y": 0,
+        "z": 11,
+        "magnitude": 60.0166626,
+        "sqrMagnitude": 3602
+      },
+      "assetIdentifier": "Lamp2",
+      "guid": "4afb4d39-7d9c-496b-8709-ef4c204783ad"
+    },
+    "ea7d0713-f87f-4b8f-ae75-69c37c135c65": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 18,
+        "y": 0,
+        "z": 5,
+        "magnitude": 18.6815414,
+        "sqrMagnitude": 349
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ea7d0713-f87f-4b8f-ae75-69c37c135c65"
+    },
+    "f79ac6c0-555b-40ef-a65e-0b6afc2c95a6": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 23,
+        "y": 0,
+        "z": 4,
+        "magnitude": 23.3452358,
+        "sqrMagnitude": 545
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "f79ac6c0-555b-40ef-a65e-0b6afc2c95a6"
+    },
+    "540065ff-7d5c-4bc5-98d7-8e51729f9d2b": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 56,
+        "y": 0,
+        "z": 10,
+        "magnitude": 56.88585,
+        "sqrMagnitude": 3236
+      },
+      "assetIdentifier": "Bin2",
+      "guid": "540065ff-7d5c-4bc5-98d7-8e51729f9d2b"
+    },
+    "af3474f3-5709-4f5b-bf9f-6397c005fb7d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 6,
+        "magnitude": 32.55764,
+        "sqrMagnitude": 1060
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "af3474f3-5709-4f5b-bf9f-6397c005fb7d"
+    },
+    "8e9c3763-56be-4886-a398-c1a00e6aef4a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 47,
+        "y": 0,
+        "z": 11,
+        "magnitude": 48.2700729,
+        "sqrMagnitude": 2330
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "8e9c3763-56be-4886-a398-c1a00e6aef4a"
+    },
+    "8bbdfd3e-099f-4a7c-90f6-16461ad566d2": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 20,
+        "y": 0,
+        "z": 5,
+        "magnitude": 20.6155281,
+        "sqrMagnitude": 425
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "8bbdfd3e-099f-4a7c-90f6-16461ad566d2"
+    },
+    "7ff454ea-ecd7-4c46-b6cf-a88b79bb2854": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 33,
+        "y": 0,
+        "z": 4,
+        "magnitude": 33.24154,
+        "sqrMagnitude": 1105
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "7ff454ea-ecd7-4c46-b6cf-a88b79bb2854"
+    },
+    "15af2e87-a3e2-48a5-a4a4-58629ad55878": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 10,
+        "magnitude": 12.2065554,
+        "sqrMagnitude": 149
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "15af2e87-a3e2-48a5-a4a4-58629ad55878"
+    },
+    "a822f58c-c8dc-4b83-b4b1-4aeb6a879d3e": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 42,
+        "y": 0,
+        "z": 4,
+        "magnitude": 42.1900444,
+        "sqrMagnitude": 1780
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a822f58c-c8dc-4b83-b4b1-4aeb6a879d3e"
+    },
+    "7e47f956-7ef1-4134-b1ba-171851141338": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 11,
+        "magnitude": 13.0384045,
+        "sqrMagnitude": 170
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "7e47f956-7ef1-4134-b1ba-171851141338"
+    },
+    "6df119a9-3d65-483c-9197-788ee732f47a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 35,
+        "y": 0,
+        "z": 4,
+        "magnitude": 35.22783,
+        "sqrMagnitude": 1241
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "6df119a9-3d65-483c-9197-788ee732f47a"
+    },
+    "db6b77b3-fde0-45bd-a98c-227216fe40ef": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 38,
+        "y": 0,
+        "z": 4,
+        "magnitude": 38.2099457,
+        "sqrMagnitude": 1460
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "db6b77b3-fde0-45bd-a98c-227216fe40ef"
+    },
+    "7e11433b-44f5-421c-8339-f7cdcb0c895a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 4,
+        "magnitude": 31.257,
+        "sqrMagnitude": 977
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "7e11433b-44f5-421c-8339-f7cdcb0c895a"
+    },
+    "a4ba931e-dbfa-4288-86a9-3d0b1066965c": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 57,
+        "y": 0,
+        "z": 4,
+        "magnitude": 57.14018,
+        "sqrMagnitude": 3265
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a4ba931e-dbfa-4288-86a9-3d0b1066965c"
+    },
+    "c36e5fc0-f441-49c5-b393-c6344a8ef42a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 50,
+        "y": 0,
+        "z": 4,
+        "magnitude": 50.1597443,
+        "sqrMagnitude": 2516
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c36e5fc0-f441-49c5-b393-c6344a8ef42a"
+    },
+    "a6dd4ef1-04e3-4f7f-ab90-4ea47e6cdf42": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 29,
+        "y": 0,
+        "z": 4,
+        "magnitude": 29.2745628,
+        "sqrMagnitude": 857
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a6dd4ef1-04e3-4f7f-ab90-4ea47e6cdf42"
+    },
+    "bceeb6e1-15c7-4a7b-a54a-e98cf23e12e1": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 34,
+        "y": 0,
+        "z": 5,
+        "magnitude": 34.36568,
+        "sqrMagnitude": 1181
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "bceeb6e1-15c7-4a7b-a54a-e98cf23e12e1"
+    },
+    "92d08fd7-f9ce-4990-819c-cdadc364c22a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 4,
+        "magnitude": 8.062258,
+        "sqrMagnitude": 65
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "92d08fd7-f9ce-4990-819c-cdadc364c22a"
+    },
+    "84c6f379-e438-48f0-a513-51ca0cda1733": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 61,
+        "y": 0,
+        "z": 5,
+        "magnitude": 61.2045746,
+        "sqrMagnitude": 3746
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "84c6f379-e438-48f0-a513-51ca0cda1733"
+    },
+    "83ceef1d-3a61-4096-b8cb-86505dc06a53": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 9,
+        "y": 0,
+        "z": 5,
+        "magnitude": 10.29563,
+        "sqrMagnitude": 106
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "83ceef1d-3a61-4096-b8cb-86505dc06a53"
+    },
+    "707afe27-8a70-47c6-9d5a-7e8a8a9ddf99": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 4,
+        "magnitude": 32.24903,
+        "sqrMagnitude": 1040
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "707afe27-8a70-47c6-9d5a-7e8a8a9ddf99"
+    },
+    "1db5fabf-974c-41e3-a0e4-1cc1e3312cf1": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 47,
+        "y": 0,
+        "z": 5,
+        "magnitude": 47.26521,
+        "sqrMagnitude": 2234
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "1db5fabf-974c-41e3-a0e4-1cc1e3312cf1"
+    },
+    "01b9beb3-896d-4219-bb48-3a1c6e3db244": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 51,
+        "y": 0,
+        "z": 11,
+        "magnitude": 52.17279,
+        "sqrMagnitude": 2722
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "01b9beb3-896d-4219-bb48-3a1c6e3db244"
+    },
+    "49f53f8f-2967-4ab9-8c6e-a15e529a3876": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 38,
+        "y": 0,
+        "z": 5,
+        "magnitude": 38.3275375,
+        "sqrMagnitude": 1469
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "49f53f8f-2967-4ab9-8c6e-a15e529a3876"
+    },
+    "4cb88f1f-e527-4b2a-82eb-46dd757c2c68": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 29,
+        "y": 0,
+        "z": 5,
+        "magnitude": 29.4278774,
+        "sqrMagnitude": 866
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4cb88f1f-e527-4b2a-82eb-46dd757c2c68"
+    },
+    "fc443ede-bdb8-4076-b447-2f0e1e412077": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 8,
+        "magnitude": 32.9848442,
+        "sqrMagnitude": 1088
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "fc443ede-bdb8-4076-b447-2f0e1e412077"
+    },
+    "8713ec8a-e36e-4f62-9e4d-5b3742cb1dc2": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 8,
+        "magnitude": 32.01562,
+        "sqrMagnitude": 1025
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "8713ec8a-e36e-4f62-9e4d-5b3742cb1dc2"
+    },
+    "6d05dc72-85c2-4bda-bec0-5f4e2367a1fd": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 43,
+        "y": 0,
+        "z": 5,
+        "magnitude": 43.2897224,
+        "sqrMagnitude": 1874
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "6d05dc72-85c2-4bda-bec0-5f4e2367a1fd"
+    },
+    "8b9b5a55-e9ff-418e-b84e-a2b2580d5e31": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 41,
+        "y": 0,
+        "z": 5,
+        "magnitude": 41.3037529,
+        "sqrMagnitude": 1706
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "8b9b5a55-e9ff-418e-b84e-a2b2580d5e31"
+    },
+    "ce4a36c1-425c-422e-84b9-d73a4abb9069": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 59,
+        "y": 0,
+        "z": 4,
+        "magnitude": 59.135437,
+        "sqrMagnitude": 3497
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ce4a36c1-425c-422e-84b9-d73a4abb9069"
+    },
+    "9902ae95-b763-4a1c-856a-39bcb7c3b108": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 6,
+        "magnitude": 31.5753059,
+        "sqrMagnitude": 997
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "9902ae95-b763-4a1c-856a-39bcb7c3b108"
+    },
+    "8f5f0671-4f0c-4ea7-b7f9-3c8fe8775839": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 8,
+        "magnitude": 10.630146,
+        "sqrMagnitude": 113
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "8f5f0671-4f0c-4ea7-b7f9-3c8fe8775839"
+    },
+    "ccdfcbe9-60d8-4477-8c37-8d1ed3df7478": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 13,
+        "y": 0,
+        "z": 11,
+        "magnitude": 17.0293865,
+        "sqrMagnitude": 290
+      },
+      "assetIdentifier": "Lamp2",
+      "guid": "ccdfcbe9-60d8-4477-8c37-8d1ed3df7478"
+    },
+    "01d6fb5d-b25d-45bd-a8eb-ea79522bd5c9": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 10,
+        "y": 0,
+        "z": 5,
+        "magnitude": 11.18034,
+        "sqrMagnitude": 125
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "01d6fb5d-b25d-45bd-a8eb-ea79522bd5c9"
+    },
+    "d7cf7344-6f05-478e-946a-b247dab44695": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 11,
+        "magnitude": 12.5299644,
+        "sqrMagnitude": 157
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "d7cf7344-6f05-478e-946a-b247dab44695"
+    },
+    "288fee8c-d9ec-449f-8a49-4a0a1df200cb": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 36,
+        "y": 0,
+        "z": 5,
+        "magnitude": 36.345562,
+        "sqrMagnitude": 1321
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "288fee8c-d9ec-449f-8a49-4a0a1df200cb"
+    },
+    "b9a47e33-2173-42e6-b24c-58720c9ebdd8": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 49,
+        "y": 0,
+        "z": 5,
+        "magnitude": 49.25444,
+        "sqrMagnitude": 2426
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "b9a47e33-2173-42e6-b24c-58720c9ebdd8"
+    },
+    "522aa9c2-eb16-4a5b-a3e3-542e2f91b7e5": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 6,
+        "magnitude": 9.219544,
+        "sqrMagnitude": 85
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "522aa9c2-eb16-4a5b-a3e3-542e2f91b7e5"
+    },
+    "b1e98388-3b7b-4088-85d2-3745bb9e9c85": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 60,
+        "y": 0,
+        "z": 4,
+        "magnitude": 60.1331863,
+        "sqrMagnitude": 3616
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "b1e98388-3b7b-4088-85d2-3745bb9e9c85"
+    },
+    "1eb1a55a-e12f-4ea2-abb6-b867d4d6233a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 22,
+        "y": 0,
+        "z": 4,
+        "magnitude": 22.36068,
+        "sqrMagnitude": 500
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "1eb1a55a-e12f-4ea2-abb6-b867d4d6233a"
+    },
+    "583340a5-fdcc-4756-a0bc-0e47442ba909": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 57,
+        "y": 0,
+        "z": 5,
+        "magnitude": 57.21888,
+        "sqrMagnitude": 3274
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "583340a5-fdcc-4756-a0bc-0e47442ba909"
+    },
+    "2c9443e5-5283-42b2-a5c1-a023c3369252": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 54,
+        "y": 0,
+        "z": 5,
+        "magnitude": 54.2309875,
+        "sqrMagnitude": 2941
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "2c9443e5-5283-42b2-a5c1-a023c3369252"
+    },
+    "f237413a-425f-4e1b-95bd-3f2c2c1289c4": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 52,
+        "y": 0,
+        "z": 4,
+        "magnitude": 52.1536179,
+        "sqrMagnitude": 2720
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "f237413a-425f-4e1b-95bd-3f2c2c1289c4"
+    },
+    "fdeb2760-2910-4fb3-a402-b6d0448281d6": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 13,
+        "y": 0,
+        "z": 5,
+        "magnitude": 13.9283886,
+        "sqrMagnitude": 194
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "fdeb2760-2910-4fb3-a402-b6d0448281d6"
+    },
+    "3aed3c5e-37d8-4539-9795-f58cc83d38e1": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 28,
+        "y": 0,
+        "z": 5,
+        "magnitude": 28.4429245,
+        "sqrMagnitude": 809
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "3aed3c5e-37d8-4539-9795-f58cc83d38e1"
+    },
+    "4ea2202a-38bb-4beb-9218-6117f41d3881": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 22,
+        "y": 0,
+        "z": 5,
+        "magnitude": 22.5610275,
+        "sqrMagnitude": 509
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4ea2202a-38bb-4beb-9218-6117f41d3881"
+    },
+    "5a985241-aa8c-446d-a2d4-b98857254482": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 40,
+        "y": 0,
+        "z": 5,
+        "magnitude": 40.3112869,
+        "sqrMagnitude": 1625
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "5a985241-aa8c-446d-a2d4-b98857254482"
+    },
+    "ef71d98b-af1d-4d14-a759-674da20783b8": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 19,
+        "y": 0,
+        "z": 4,
+        "magnitude": 19.4164886,
+        "sqrMagnitude": 377
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ef71d98b-af1d-4d14-a759-674da20783b8"
+    },
+    "23a0591a-30da-4453-b03e-82412f13811c": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 11,
+        "magnitude": 32.89377,
+        "sqrMagnitude": 1082
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "23a0591a-30da-4453-b03e-82412f13811c"
+    },
+    "cdda1879-3fde-48ef-aff8-6333f3fe7e88": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 41,
+        "y": 0,
+        "z": 4,
+        "magnitude": 41.19466,
+        "sqrMagnitude": 1697
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "cdda1879-3fde-48ef-aff8-6333f3fe7e88"
+    },
+    "a9e76325-3797-4eb5-b252-fd79a230f712": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 3,
+        "y": 0,
+        "z": 4,
+        "magnitude": 5.0,
+        "sqrMagnitude": 25
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a9e76325-3797-4eb5-b252-fd79a230f712"
+    },
+    "13a3b673-950e-45dc-ad66-62bcd6007633": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 34,
+        "y": 0,
+        "z": 4,
+        "magnitude": 34.2344856,
+        "sqrMagnitude": 1172
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "13a3b673-950e-45dc-ad66-62bcd6007633"
+    },
+    "94789989-803e-4f2e-8b4c-0fe04a132c8d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 14,
+        "y": 0,
+        "z": 5,
+        "magnitude": 14.8660688,
+        "sqrMagnitude": 221
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "94789989-803e-4f2e-8b4c-0fe04a132c8d"
+    },
+    "7ac125a3-774f-4ab4-a7a6-13a178d1e1de": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 53,
+        "y": 0,
+        "z": 4,
+        "magnitude": 53.15073,
+        "sqrMagnitude": 2825
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "7ac125a3-774f-4ab4-a7a6-13a178d1e1de"
+    },
+    "0dbc4dce-3131-4221-8e72-b9c36e404da2": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 10,
+        "magnitude": 33.5261078,
+        "sqrMagnitude": 1124
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "0dbc4dce-3131-4221-8e72-b9c36e404da2"
+    },
+    "39d86ab8-d4ec-4e78-a71a-587f2bfeb560": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 37,
+        "y": 0,
+        "z": 5,
+        "magnitude": 37.3363075,
+        "sqrMagnitude": 1394
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "39d86ab8-d4ec-4e78-a71a-587f2bfeb560"
+    },
+    "8fd46cb9-67b8-44a5-a82b-cd88542e8586": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 13,
+        "y": 0,
+        "z": 4,
+        "magnitude": 13.6014709,
+        "sqrMagnitude": 185
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "8fd46cb9-67b8-44a5-a82b-cd88542e8586"
+    },
+    "ee13012a-2a92-4c5e-904e-3b3d51db7bdb": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 60,
+        "y": 0,
+        "z": 5,
+        "magnitude": 60.2079735,
+        "sqrMagnitude": 3625
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ee13012a-2a92-4c5e-904e-3b3d51db7bdb"
+    },
+    "9c58dffe-9b42-49ac-a1cd-a062b7aae793": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 5,
+        "magnitude": 32.38827,
+        "sqrMagnitude": 1049
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "9c58dffe-9b42-49ac-a1cd-a062b7aae793"
+    },
+    "68a27d2a-9ff3-45c6-958d-1adec0cb8ad0": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 2,
+        "y": 0,
+        "z": 4,
+        "magnitude": 4.472136,
+        "sqrMagnitude": 20
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "68a27d2a-9ff3-45c6-958d-1adec0cb8ad0"
+    },
+    "1f312c07-89b6-45d7-8bcb-ba01213e7971": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 46,
+        "y": 0,
+        "z": 5,
+        "magnitude": 46.2709427,
+        "sqrMagnitude": 2141
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "1f312c07-89b6-45d7-8bcb-ba01213e7971"
+    },
+    "a6996715-5b3c-4162-a076-000f7daa0ec1": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 50,
+        "y": 0,
+        "z": 5,
+        "magnitude": 50.24938,
+        "sqrMagnitude": 2525
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a6996715-5b3c-4162-a076-000f7daa0ec1"
+    },
+    "c882232c-3a56-4bb3-b612-4578a52bec5f": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 24,
+        "y": 0,
+        "z": 5,
+        "magnitude": 24.5153,
+        "sqrMagnitude": 601
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c882232c-3a56-4bb3-b612-4578a52bec5f"
+    },
+    "6420bbb6-63dd-41f0-bdb9-665981f39a52": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 26,
+        "y": 0,
+        "z": 5,
+        "magnitude": 26.4764042,
+        "sqrMagnitude": 701
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "6420bbb6-63dd-41f0-bdb9-665981f39a52"
+    },
+    "e825f826-df24-422f-9b61-3342f2201d52": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 39,
+        "y": 0,
+        "z": 11,
+        "magnitude": 40.5216,
+        "sqrMagnitude": 1642
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "e825f826-df24-422f-9b61-3342f2201d52"
+    },
+    "1a94363a-b767-41b4-9e2b-1aeb3282efc7": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 5,
+        "y": 0,
+        "z": 5,
+        "magnitude": 7.071068,
+        "sqrMagnitude": 50
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "1a94363a-b767-41b4-9e2b-1aeb3282efc7"
+    },
+    "ddee11fe-c3d3-4192-9385-fe17401a6db1": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 43,
+        "y": 0,
+        "z": 11,
+        "magnitude": 44.38468,
+        "sqrMagnitude": 1970
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "ddee11fe-c3d3-4192-9385-fe17401a6db1"
+    },
+    "44f7b0b1-dc77-448f-9957-17880c044edd": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 18,
+        "y": 0,
+        "z": 4,
+        "magnitude": 18.4390888,
+        "sqrMagnitude": 340
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "44f7b0b1-dc77-448f-9957-17880c044edd"
+    },
+    "dec68c0b-0b0b-4080-943e-c86aa97f7882": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 10,
+        "y": 0,
+        "z": 4,
+        "magnitude": 10.7703295,
+        "sqrMagnitude": 116
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "dec68c0b-0b0b-4080-943e-c86aa97f7882"
+    },
+    "82b998bc-6a29-49c7-8803-473a8ee2ca61": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 15,
+        "y": 0,
+        "z": 4,
+        "magnitude": 15.5241747,
+        "sqrMagnitude": 241
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "82b998bc-6a29-49c7-8803-473a8ee2ca61"
+    },
+    "320b9b15-0e17-48d2-839e-572e39928041": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 20,
+        "y": 0,
+        "z": 11,
+        "magnitude": 22.8254242,
+        "sqrMagnitude": 521
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "320b9b15-0e17-48d2-839e-572e39928041"
+    },
+    "927f1e86-72fa-4c60-8484-cff2433a5096": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 35,
+        "y": 0,
+        "z": 11,
+        "magnitude": 36.6878738,
+        "sqrMagnitude": 1346
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "927f1e86-72fa-4c60-8484-cff2433a5096"
+    },
+    "7e90796b-9bba-4101-b974-8c7be03245e5": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 54,
+        "y": 0,
+        "z": 4,
+        "magnitude": 54.1479454,
+        "sqrMagnitude": 2932
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "7e90796b-9bba-4101-b974-8c7be03245e5"
+    },
+    "3d3aae11-3ef8-4cf8-a568-d0274613fbcd": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 45,
+        "y": 0,
+        "z": 4,
+        "magnitude": 45.17743,
+        "sqrMagnitude": 2041
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "3d3aae11-3ef8-4cf8-a568-d0274613fbcd"
+    },
+    "2604197f-ef33-4d2d-aa4f-037c68569d90": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 14,
+        "y": 0,
+        "z": 4,
+        "magnitude": 14.56022,
+        "sqrMagnitude": 212
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "2604197f-ef33-4d2d-aa4f-037c68569d90"
+    },
+    "9040119b-435c-4a45-856c-c34b38ce4bd7": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 36,
+        "y": 0,
+        "z": 4,
+        "magnitude": 36.2215424,
+        "sqrMagnitude": 1312
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "9040119b-435c-4a45-856c-c34b38ce4bd7"
+    },
+    "41f06f68-7dd4-4749-845d-75bea53aaa54": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 9,
+        "y": 0,
+        "z": 4,
+        "magnitude": 9.848858,
+        "sqrMagnitude": 97
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "41f06f68-7dd4-4749-845d-75bea53aaa54"
+    },
+    "e6d6c4b1-86da-4f00-af47-3ff30ca1b9dc": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 39,
+        "y": 0,
+        "z": 4,
+        "magnitude": 39.20459,
+        "sqrMagnitude": 1537
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "e6d6c4b1-86da-4f00-af47-3ff30ca1b9dc"
+    },
+    "457aa1dd-f3f4-4a9c-b2b9-7835884d1820": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 28,
+        "y": 0,
+        "z": 11,
+        "magnitude": 30.0832176,
+        "sqrMagnitude": 905
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "457aa1dd-f3f4-4a9c-b2b9-7835884d1820"
+    },
+    "a1c048ba-9828-4e2d-8787-dac1b325b10a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 55,
+        "y": 0,
+        "z": 4,
+        "magnitude": 55.1452637,
+        "sqrMagnitude": 3041
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a1c048ba-9828-4e2d-8787-dac1b325b10a"
+    },
+    "3a3b1fa3-e025-4019-b5bc-fbb6b5069a47": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 7,
+        "magnitude": 9.899495,
+        "sqrMagnitude": 98
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "3a3b1fa3-e025-4019-b5bc-fbb6b5069a47"
+    },
+    "29f49995-acc9-4aa4-b0c5-d6a7b1a45b22": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 9,
+        "magnitude": 33.24154,
+        "sqrMagnitude": 1105
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "29f49995-acc9-4aa4-b0c5-d6a7b1a45b22"
+    },
+    "94b7ed00-c585-4b50-abb4-828bb0dee6c8": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 12,
+        "y": 0,
+        "z": 4,
+        "magnitude": 12.6491108,
+        "sqrMagnitude": 160
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "94b7ed00-c585-4b50-abb4-828bb0dee6c8"
+    },
+    "c768fd83-19ac-428c-8bcb-9067154635a7": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 3,
+        "y": 0,
+        "z": 5,
+        "magnitude": 5.83095169,
+        "sqrMagnitude": 34
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c768fd83-19ac-428c-8bcb-9067154635a7"
+    },
+    "8c31afe8-2e77-40ea-9b5e-bdc15e9b17be": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 4,
+        "magnitude": 7.21110249,
+        "sqrMagnitude": 52
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "8c31afe8-2e77-40ea-9b5e-bdc15e9b17be"
+    },
+    "82ba1012-2024-46ee-afb3-cefe30c3f584": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 48,
+        "y": 0,
+        "z": 4,
+        "magnitude": 48.166378,
+        "sqrMagnitude": 2320
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "82ba1012-2024-46ee-afb3-cefe30c3f584"
+    },
+    "ddbd48a1-fcc9-4589-8e0e-66690825cb78": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 42,
+        "y": 0,
+        "z": 5,
+        "magnitude": 42.2965736,
+        "sqrMagnitude": 1789
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ddbd48a1-fcc9-4589-8e0e-66690825cb78"
+    },
+    "afefc9f4-1e42-4690-906a-33e6479a8141": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 8,
+        "y": 0,
+        "z": 5,
+        "magnitude": 9.433981,
+        "sqrMagnitude": 89
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "afefc9f4-1e42-4690-906a-33e6479a8141"
+    },
+    "1c44fcb3-d3de-4f06-a963-80ee45733a3d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 48,
+        "y": 0,
+        "z": 5,
+        "magnitude": 48.2597122,
+        "sqrMagnitude": 2329
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "1c44fcb3-d3de-4f06-a963-80ee45733a3d"
+    },
+    "354ccdf2-5c42-4487-8ab0-f0f51f3ff0de": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 10,
+        "magnitude": 11.6619034,
+        "sqrMagnitude": 136
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "354ccdf2-5c42-4487-8ab0-f0f51f3ff0de"
+    },
+    "ac3dc18e-bba0-4d91-a87d-2b814b1a1a8f": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 30,
+        "y": 0,
+        "z": 5,
+        "magnitude": 30.4138126,
+        "sqrMagnitude": 925
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ac3dc18e-bba0-4d91-a87d-2b814b1a1a8f"
+    },
+    "774d8cdf-6370-4a7a-bdaa-f7aeef4b5dad": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 56,
+        "y": 0,
+        "z": 5,
+        "magnitude": 56.22277,
+        "sqrMagnitude": 3161
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "774d8cdf-6370-4a7a-bdaa-f7aeef4b5dad"
+    },
+    "6eb7bea1-b2b4-490a-b974-943548038e8c": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 51,
+        "y": 0,
+        "z": 5,
+        "magnitude": 51.24451,
+        "sqrMagnitude": 2626
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "6eb7bea1-b2b4-490a-b974-943548038e8c"
+    },
+    "2d5da746-2a5c-4b3e-80ba-ace3b508cc31": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 56,
+        "y": 0,
+        "z": 4,
+        "magnitude": 56.1426735,
+        "sqrMagnitude": 3152
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "2d5da746-2a5c-4b3e-80ba-ace3b508cc31"
+    },
+    "69be24f5-e5f6-47c0-9893-f69ac6e78216": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 11,
+        "magnitude": 33.83785,
+        "sqrMagnitude": 1145
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "69be24f5-e5f6-47c0-9893-f69ac6e78216"
+    },
+    "61121f97-6c63-49b8-9054-7f141c0624d6": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 15,
+        "y": 0,
+        "z": 5,
+        "magnitude": 15.811388,
+        "sqrMagnitude": 250
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "61121f97-6c63-49b8-9054-7f141c0624d6"
+    },
+    "d4fa44ad-5a06-4dd9-9d89-a4bf999e7f95": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 62,
+        "y": 0,
+        "z": 5,
+        "magnitude": 62.2012863,
+        "sqrMagnitude": 3869
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "d4fa44ad-5a06-4dd9-9d89-a4bf999e7f95"
+    },
+    "c644a74d-6034-4950-b14f-85d2e70a15ea": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 44,
+        "y": 0,
+        "z": 5,
+        "magnitude": 44.28318,
+        "sqrMagnitude": 1961
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c644a74d-6034-4950-b14f-85d2e70a15ea"
+    },
+    "95b0f5f5-6b69-4c79-ac95-b5ac17e89acc": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 35,
+        "y": 0,
+        "z": 5,
+        "magnitude": 35.35534,
+        "sqrMagnitude": 1250
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "95b0f5f5-6b69-4c79-ac95-b5ac17e89acc"
+    },
+    "9a1aca1a-06a6-4798-8598-a63b9768f471": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 59,
+        "y": 0,
+        "z": 5,
+        "magnitude": 59.2114868,
+        "sqrMagnitude": 3506
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "9a1aca1a-06a6-4798-8598-a63b9768f471"
+    },
+    "1ee4e26e-9f4a-4f39-a863-015353867d82": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 47,
+        "y": 0,
+        "z": 4,
+        "magnitude": 47.1699066,
+        "sqrMagnitude": 2225
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "1ee4e26e-9f4a-4f39-a863-015353867d82"
+    },
+    "21277168-a9ae-4572-affc-eb87a4cf0dfc": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 5,
+        "magnitude": 31.4006367,
+        "sqrMagnitude": 986
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "21277168-a9ae-4572-affc-eb87a4cf0dfc"
+    },
+    "eb3c71d6-3297-4239-aee0-065416b9c71d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 5,
+        "y": 0,
+        "z": 4,
+        "magnitude": 6.40312433,
+        "sqrMagnitude": 41
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "eb3c71d6-3297-4239-aee0-065416b9c71d"
+    },
+    "879cf6ce-0214-470e-b7da-58ae5faec524": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 51,
+        "y": 0,
+        "z": 4,
+        "magnitude": 51.1566238,
+        "sqrMagnitude": 2617
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "879cf6ce-0214-470e-b7da-58ae5faec524"
+    },
+    "d0d78b1a-ce53-430c-97a7-2809b18b0112": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 7,
+        "magnitude": 9.219544,
+        "sqrMagnitude": 85
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "d0d78b1a-ce53-430c-97a7-2809b18b0112"
+    },
+    "5a504e37-7c44-4321-8bfa-130aded9c77f": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 16,
+        "y": 0,
+        "z": 5,
+        "magnitude": 16.7630539,
+        "sqrMagnitude": 281
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "5a504e37-7c44-4321-8bfa-130aded9c77f"
+    },
+    "e481024c-5b71-4f83-a007-d4d2274ef49a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 46,
+        "y": 0,
+        "z": 4,
+        "magnitude": 46.173584,
+        "sqrMagnitude": 2132
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "e481024c-5b71-4f83-a007-d4d2274ef49a"
+    },
+    "63c85ce1-1c54-42fc-9608-41504b16fd77": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 21,
+        "y": 0,
+        "z": 5,
+        "magnitude": 21.5870323,
+        "sqrMagnitude": 466
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "63c85ce1-1c54-42fc-9608-41504b16fd77"
+    },
+    "ee0fa742-3120-4b04-8118-85375f6e01b2": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 45,
+        "y": 0,
+        "z": 5,
+        "magnitude": 45.2769241,
+        "sqrMagnitude": 2050
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ee0fa742-3120-4b04-8118-85375f6e01b2"
+    },
+    "a6be577d-8ccf-44f2-9b82-38d594bc12f6": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 39,
+        "y": 0,
+        "z": 5,
+        "magnitude": 39.3192062,
+        "sqrMagnitude": 1546
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a6be577d-8ccf-44f2-9b82-38d594bc12f6"
+    },
+    "ecb45c36-ab8c-442c-a2eb-294727bb6da8": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 24,
+        "y": 0,
+        "z": 11,
+        "magnitude": 26.4007568,
+        "sqrMagnitude": 697
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "ecb45c36-ab8c-442c-a2eb-294727bb6da8"
+    },
+    "2318964f-fcfb-4db4-9bc7-9601b2f49334": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 8,
+        "magnitude": 10.0,
+        "sqrMagnitude": 100
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "2318964f-fcfb-4db4-9bc7-9601b2f49334"
+    },
+    "892b27ce-172e-4911-9ab2-59d3c65da4cd": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 27,
+        "y": 0,
+        "z": 5,
+        "magnitude": 27.45906,
+        "sqrMagnitude": 754
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "892b27ce-172e-4911-9ab2-59d3c65da4cd"
+    },
+    "c640ab04-405b-4a43-9817-70e9556cf011": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 2,
+        "y": 0,
+        "z": 5,
+        "magnitude": 5.38516474,
+        "sqrMagnitude": 29
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c640ab04-405b-4a43-9817-70e9556cf011"
+    },
+    "15f1e6b1-77f4-4f3d-9d89-39e8a33285f9": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 52,
+        "y": 0,
+        "z": 5,
+        "magnitude": 52.23983,
+        "sqrMagnitude": 2729
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "15f1e6b1-77f4-4f3d-9d89-39e8a33285f9"
+    },
+    "cd0a5381-8524-4ca4-8628-7a537c0ee30a": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 11,
+        "y": 0,
+        "z": 5,
+        "magnitude": 12.083046,
+        "sqrMagnitude": 146
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "cd0a5381-8524-4ca4-8628-7a537c0ee30a"
+    },
+    "03c5a3a5-f92e-4386-b9d7-e11ed0fb2461": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 61,
+        "y": 0,
+        "z": 4,
+        "magnitude": 61.13101,
+        "sqrMagnitude": 3737
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "03c5a3a5-f92e-4386-b9d7-e11ed0fb2461"
+    },
+    "4d66d70d-1176-4815-b634-06d5d196f752": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 8,
+        "y": 0,
+        "z": 4,
+        "magnitude": 8.944272,
+        "sqrMagnitude": 80
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4d66d70d-1176-4815-b634-06d5d196f752"
+    },
+    "852eb730-4457-4e7b-a4cc-dd5a52f873d5": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 10,
+        "y": 0,
+        "z": 11,
+        "magnitude": 14.8660688,
+        "sqrMagnitude": 221
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "852eb730-4457-4e7b-a4cc-dd5a52f873d5"
+    },
+    "ac058a7c-6008-42cd-8c4c-9dd236fe3cc6": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 7,
+        "magnitude": 31.7804966,
+        "sqrMagnitude": 1010
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "ac058a7c-6008-42cd-8c4c-9dd236fe3cc6"
+    },
+    "75ff3581-e68f-4e55-863f-82ce69385c15": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 5,
+        "magnitude": 7.81025,
+        "sqrMagnitude": 61
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "75ff3581-e68f-4e55-863f-82ce69385c15"
+    },
+    "9d954cd3-97b5-4270-ab21-c5e13a7789ec": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 53,
+        "y": 0,
+        "z": 5,
+        "magnitude": 53.2353249,
+        "sqrMagnitude": 2834
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "9d954cd3-97b5-4270-ab21-c5e13a7789ec"
+    },
+    "4ebc9ab7-bb0c-45cb-b388-dfbe645166c0": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 20,
+        "y": 0,
+        "z": 4,
+        "magnitude": 20.3960781,
+        "sqrMagnitude": 416
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4ebc9ab7-bb0c-45cb-b388-dfbe645166c0"
+    },
+    "937bfaf4-a51e-4d39-a8ff-6d23f5d49dbf": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 40,
+        "y": 0,
+        "z": 4,
+        "magnitude": 40.1995,
+        "sqrMagnitude": 1616
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "937bfaf4-a51e-4d39-a8ff-6d23f5d49dbf"
+    },
+    "fcbde91b-f93a-446b-b752-3db0ccb7b556": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 4,
+        "y": 0,
+        "z": 5,
+        "magnitude": 6.40312433,
+        "sqrMagnitude": 41
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "fcbde91b-f93a-446b-b752-3db0ccb7b556"
+    },
+    "5530a79a-3b19-4ae3-9b95-8e6696d7b696": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 9,
+        "magnitude": 10.8166542,
+        "sqrMagnitude": 117
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "5530a79a-3b19-4ae3-9b95-8e6696d7b696"
+    },
+    "add62164-033c-4585-9080-8d782da94ab4": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 11,
+        "y": 0,
+        "z": 4,
+        "magnitude": 11.7046995,
+        "sqrMagnitude": 137
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "add62164-033c-4585-9080-8d782da94ab4"
+    },
+    "49ccc544-8179-4d61-b303-2c639184a723": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 58,
+        "y": 0,
+        "z": 4,
+        "magnitude": 58.1377678,
+        "sqrMagnitude": 3380
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "49ccc544-8179-4d61-b303-2c639184a723"
+    },
+    "fddccd73-3d65-4186-8997-b440b9cbe414": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 28,
+        "y": 0,
+        "z": 4,
+        "magnitude": 28.2842712,
+        "sqrMagnitude": 800
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "fddccd73-3d65-4186-8997-b440b9cbe414"
+    },
+    "166866cb-584c-43e2-bbcc-f45bfcedcf86": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 23,
+        "y": 0,
+        "z": 5,
+        "magnitude": 23.5372047,
+        "sqrMagnitude": 554
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "166866cb-584c-43e2-bbcc-f45bfcedcf86"
+    },
+    "6467e206-96d3-45ca-b933-d80cd329e50b": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 30,
+        "y": 0,
+        "z": 4,
+        "magnitude": 30.2654915,
+        "sqrMagnitude": 916
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "6467e206-96d3-45ca-b933-d80cd329e50b"
+    },
+    "f9a4bfea-286a-452e-a071-1fffb30cc96d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 10,
+        "magnitude": 32.5729942,
+        "sqrMagnitude": 1061
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "f9a4bfea-286a-452e-a071-1fffb30cc96d"
+    },
+    "f7de58f8-1c6e-49df-929c-9d4e737c133c": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 37,
+        "y": 0,
+        "z": 4,
+        "magnitude": 37.2155876,
+        "sqrMagnitude": 1385
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "f7de58f8-1c6e-49df-929c-9d4e737c133c"
+    },
+    "b6485e09-2630-44d8-be28-54b8579b23e1": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 62,
+        "y": 0,
+        "z": 4,
+        "magnitude": 62.1289,
+        "sqrMagnitude": 3860
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "b6485e09-2630-44d8-be28-54b8579b23e1"
+    },
+    "c649519e-cff4-44be-82f8-27512bd8bea7": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 16,
+        "y": 0,
+        "z": 11,
+        "magnitude": 19.4164886,
+        "sqrMagnitude": 377
+      },
+      "assetIdentifier": "Tree_Dry1",
+      "guid": "c649519e-cff4-44be-82f8-27512bd8bea7"
+    },
+    "c5dc2a5b-36ec-452f-9cf1-3a73739f3485": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 25,
+        "y": 0,
+        "z": 4,
+        "magnitude": 25.3179779,
+        "sqrMagnitude": 641
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c5dc2a5b-36ec-452f-9cf1-3a73739f3485"
+    },
+    "b2f3c4a0-d477-4370-bf4b-277df6e15c8b": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 5,
+        "magnitude": 8.602325,
+        "sqrMagnitude": 74
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "b2f3c4a0-d477-4370-bf4b-277df6e15c8b"
+    },
+    "bbda4b46-b9f9-4aa8-9f6d-2837d51bfe12": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 31,
+        "y": 0,
+        "z": 9,
+        "magnitude": 32.2800255,
+        "sqrMagnitude": 1042
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "bbda4b46-b9f9-4aa8-9f6d-2837d51bfe12"
+    },
+    "a7559fa9-af74-4387-b356-4a4855dabdb3": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 32,
+        "y": 0,
+        "z": 7,
+        "magnitude": 32.75668,
+        "sqrMagnitude": 1073
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a7559fa9-af74-4387-b356-4a4855dabdb3"
+    },
+    "e8d2e654-79be-40e9-8674-90dc73c1214d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 19,
+        "y": 0,
+        "z": 5,
+        "magnitude": 19.646883,
+        "sqrMagnitude": 386
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "e8d2e654-79be-40e9-8674-90dc73c1214d"
+    },
+    "b917a899-2ccf-4b5b-944b-3e0ce62d0760": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 6,
+        "y": 0,
+        "z": 6,
+        "magnitude": 8.485281,
+        "sqrMagnitude": 72
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "b917a899-2ccf-4b5b-944b-3e0ce62d0760"
+    },
+    "4af9d562-2700-43ce-afbd-b9e51b080583": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 12,
+        "y": 0,
+        "z": 5,
+        "magnitude": 13.0,
+        "sqrMagnitude": 169
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4af9d562-2700-43ce-afbd-b9e51b080583"
+    },
+    "aff5f2ef-21d6-4ab0-9cf7-75c4221c769e": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 49,
+        "y": 0,
+        "z": 4,
+        "magnitude": 49.1629944,
+        "sqrMagnitude": 2417
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "aff5f2ef-21d6-4ab0-9cf7-75c4221c769e"
+    },
+    "4a4c5897-80fd-46a6-b313-d703af64d59e": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 16,
+        "y": 0,
+        "z": 4,
+        "magnitude": 16.4924221,
+        "sqrMagnitude": 272
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4a4c5897-80fd-46a6-b313-d703af64d59e"
+    },
+    "a14423ad-ad87-40cb-9a79-e7e340d81192": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 27,
+        "y": 0,
+        "z": 4,
+        "magnitude": 27.2946873,
+        "sqrMagnitude": 745
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "a14423ad-ad87-40cb-9a79-e7e340d81192"
+    },
+    "b09ec97b-c4ad-4151-88e0-1de8d5b912df": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 24,
+        "y": 0,
+        "z": 4,
+        "magnitude": 24.33105,
+        "sqrMagnitude": 592
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "b09ec97b-c4ad-4151-88e0-1de8d5b912df"
+    },
+    "87ae59a0-ee19-4d34-88a3-2e4922d0ac5e": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 26,
+        "y": 0,
+        "z": 4,
+        "magnitude": 26.3058929,
+        "sqrMagnitude": 692
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "87ae59a0-ee19-4d34-88a3-2e4922d0ac5e"
+    },
+    "4407ec9e-805c-44ce-9080-4a04ac98854d": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 4,
+        "y": 0,
+        "z": 4,
+        "magnitude": 5.656854,
+        "sqrMagnitude": 32
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "4407ec9e-805c-44ce-9080-4a04ac98854d"
+    },
+    "c9eadd38-f2bb-4e31-b907-cda0fcc52890": {
+      "direction": 0,
+      "gridPosition": {
+        "x": 7,
+        "y": 0,
+        "z": 9,
+        "magnitude": 11.4017544,
+        "sqrMagnitude": 130
+      },
+      "assetIdentifier": "Terrain Brick2",
+      "guid": "c9eadd38-f2bb-4e31-b907-cda0fcc52890"
+    },
+    "835d3036-5f24-4992-ab3d-11508e9d9000": {
+      "direction": 1,
+      "gridPosition": {
+        "x": 9,
+        "y": 0,
+        "z": 8,
+        "magnitude": 12.0415945,
+        "sqrMagnitude": 145
+      },
+      "assetIdentifier": "Bench3",
+      "guid": "835d3036-5f24-4992-ab3d-11508e9d9000"
+    }
+  }
+}

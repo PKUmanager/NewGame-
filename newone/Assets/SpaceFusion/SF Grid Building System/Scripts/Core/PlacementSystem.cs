@@ -8,6 +8,7 @@ using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Utils;
 using UnityEngine;
+using SysSave = SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem.SaveSystem;
 
 namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 {
@@ -21,7 +22,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         [SerializeField]
         private PlacementHandler placementHandler;
 
-        // EVENTS
         public event Action OnPlacementStateStart;
         public event Action OnPlacementStateEnd;
 
@@ -37,17 +37,13 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         private Vector3Int _pendingGridPosition;
         private bool _hasSelection;
+        private bool _isSelectionLocked = false;
 
-        // ★★★ [新增] 获取网格的旋转角度 ★★★
-        // 这样 PreviewSystem 和 PlacementHandler 都能知道网格歪了多少度
         public Quaternion GridRotation => _grid != null ? _grid.transform.rotation : Quaternion.identity;
 
         private void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(this);
-            }
+            if (Instance != null) Destroy(this);
             Instance = this;
         }
 
@@ -74,6 +70,8 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         public void StartPlacement(string assetIdentifier)
         {
             StopState();
+            _isSelectionLocked = false;
+
             _grid.SetVisualizationState(true);
             _stateHandler = new PlacementState(assetIdentifier, _grid, previewSystem, _database, _gridDataMap, placementHandler);
 
@@ -83,7 +81,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _hasSelection = false;
             OnPlacementStateStart?.Invoke();
 
-            // 建造模式：默认在屏幕中心显示预览
             UpdatePreviewAtScreenCenter();
         }
 
@@ -98,9 +95,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             ObjectGrouper.Instance.DisplayOnlyObjectsOfSelectedGridType(gridType);
 
             _hasSelection = false;
-
-            // 删除模式：可以选择是否在中心显示红框，这里保留显示作为提示，但不会自动删除
-            // UpdatePreviewAtScreenCenter(); 
         }
 
         public void StartRemovingAll()
@@ -114,8 +108,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             ObjectGrouper.Instance.DisplayAll();
 
             _hasSelection = false;
-
-            // UpdatePreviewAtScreenCenter();
         }
 
         public void Remove(PlacedObject placedObject)
@@ -131,6 +123,8 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         public void StartMoving(PlacedObject target)
         {
             StopState();
+            _isSelectionLocked = false;
+
             _stopStateAfterAction = true;
             _grid.SetVisualizationState(true);
             _stateHandler = new MovingState(target, _grid, previewSystem, _gridDataMap, placementHandler);
@@ -152,6 +146,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             _stopStateAfterAction = false;
             _hasSelection = false;
+            _isSelectionLocked = false;
 
             _stateHandler.EndState();
             _inputManager.OnClicked -= OnInputClick;
@@ -177,70 +172,55 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 Vector3Int centerGridPos = _grid.WorldToCell(hit.point);
                 _stateHandler.UpdateState(centerGridPos);
 
-                // 只有在非删除模式下，才把中心位置标记为“待确认”
-                // 删除模式下，我们只显示红框（Hover效果），不预选
                 if (!IsRemovalState())
                 {
                     _pendingGridPosition = centerGridPos;
                     _hasSelection = true;
                 }
-
                 _lastDetectedPosition = centerGridPos;
             }
         }
 
-        /// <summary>
-        /// [核心修改] 处理点击
-        /// </summary>
         private void OnInputClick()
         {
             if (InputManager.IsPointerOverUIObject()) return;
             if (_stateHandler == null) return;
 
             var mousePosition = _inputManager.GetSelectedMapPosition();
+
+            // ★★★ 【严防死守】 ★★★
+            // 只要收到 InvalidPosition，立刻 return，防止原点生成
+            if (mousePosition == InputManager.InvalidPosition) return;
+
             var gridPosition = _grid.WorldToCell(mousePosition);
 
-            // [逻辑判断] 区分 放置模式 和 删除模式
             if (IsRemovalState())
             {
-                // ============================
-                // 1. 删除模式：直接执行，不需要确认
-                // ============================
                 _stateHandler.OnAction(gridPosition);
-
-                // 删除后不需要保持选中状态
+                ForceSaveGame();
                 _hasSelection = false;
             }
             else
             {
-                // ============================
-                // 2. 建造/移动模式：更新预览，等待UI确认
-                // ============================
                 _stateHandler.UpdateState(gridPosition);
                 _pendingGridPosition = gridPosition;
                 _hasSelection = true;
+                _isSelectionLocked = true; // 锁定位置
             }
         }
 
-        /// <summary>
-        /// [新增辅助方法] 判断当前是否处于删除状态
-        /// </summary>
-        private bool IsRemovalState()
-        {
-            return _stateHandler is RemoveState || _stateHandler is RemoveAllState;
-        }
-
-        // Confirm 按钮只会在 建造/移动模式 下生效
         public void ConfirmPlacement()
         {
             if (_stateHandler == null) return;
-            // 如果是删除模式，Confirm按钮其实不应该出现，或者点击无效
             if (IsRemovalState()) return;
 
             if (!_hasSelection) return;
 
             _stateHandler.OnAction(_pendingGridPosition);
+            ForceSaveGame();
+
             _hasSelection = false;
+            _isSelectionLocked = false;
 
             if (_stopStateAfterAction)
             {
@@ -253,7 +233,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             }
         }
 
-        // Cancel 按钮用于退出任何模式
         public void CancelPlacement()
         {
             StopState();
@@ -271,6 +250,38 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             }
         }
 
-        private void Update() { }
+        private bool IsRemovalState()
+        {
+            return _stateHandler is RemoveState || _stateHandler is RemoveAllState;
+        }
+
+        private void ForceSaveGame()
+        {
+            if (GameManager.Instance != null && GameManager.Instance.saveData != null)
+            {
+                SysSave.Save(GameManager.Instance.saveData);
+            }
+        }
+
+        private void Update()
+        {
+            if (_stateHandler == null) return;
+            if (_isSelectionLocked) return;
+
+            var mousePosition = _inputManager.GetSelectedMapPosition();
+
+            // ★★★ 【严防死守】 ★★★
+            if (mousePosition == InputManager.InvalidPosition) return;
+
+            var gridPosition = _grid.WorldToCell(mousePosition);
+
+            _pendingGridPosition = gridPosition;
+            _hasSelection = true;
+
+            if (_lastDetectedPosition == gridPosition) return;
+
+            _stateHandler.UpdateState(gridPosition);
+            _lastDetectedPosition = gridPosition;
+        }
     }
 }
