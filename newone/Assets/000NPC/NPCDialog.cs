@@ -27,7 +27,7 @@ public class NPCDialog : MonoBehaviour
     private Image uiImage;
     private Animator animator; // 用来判断是否停下
     private bool isShowing = false;
-
+    private Image bubbleBgImage; // ★★★ 【新增】 用来控制背景图 ★★★
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -45,6 +45,14 @@ public class NPCDialog : MonoBehaviour
             Transform imgTrans = currentBubble.transform.Find("BubbleBg/ContentImage");
             if (imgTrans) uiImage = imgTrans.GetComponent<Image>();
 
+            // ★★★ 【新增 1】 找到背景图组件 ★★★
+            // 假设你在 Prefab 里的背景物体名字叫 "BubbleBg"
+            // =========================================================
+            Transform bgTrans = currentBubble.transform.Find("BubbleBg");
+            if (bgTrans != null)
+            {
+                bubbleBgImage = bgTrans.GetComponent<Image>();
+            }
             // 挂一个 Billboard 脚本让它永远对着相机
             if (currentBubble.GetComponent<FaceMyCamera>() == null)
                 currentBubble.AddComponent<FaceMyCamera>(); // 或者是 FaceMyCamera
@@ -102,17 +110,20 @@ public class NPCDialog : MonoBehaviour
         {
             // 显示图片模式
             if (uiText) uiText.gameObject.SetActive(false);
+            if (bubbleBgImage) bubbleBgImage.enabled = false;
+
             if (uiImage)
             {
                 uiImage.gameObject.SetActive(true);
                 uiImage.sprite = data.emoji;
-                uiImage.SetNativeSize(); // 保持图片比例
+                // uiImage.SetNativeSize(); // 保持图片比例
             }
         }
         else
         {
             // 显示文字模式
             if (uiImage) uiImage.gameObject.SetActive(false);
+            if (bubbleBgImage) bubbleBgImage.enabled = true;
             if (uiText)
             {
                 uiText.gameObject.SetActive(true);

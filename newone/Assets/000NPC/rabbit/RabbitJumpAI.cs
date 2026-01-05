@@ -11,13 +11,20 @@ public class RabbitDirectJump : MonoBehaviour
 
     [Header("组件")]
     public Animator animator;           // 拖入子物体 Visual
-    private Camera mainCam;
+    public Camera referenceCamera;
 
     private Vector3 startPos;           // 记录出生点
 
     void Start()
     {
-        mainCam = Camera.main; // 获取主摄像机
+        // 【修改点2】删掉 mainCam = Camera.main; 这行
+        // 改为检查是否拖入了摄像机
+        if (referenceCamera == null)
+        {
+            Debug.LogError("【严重错误】请在 Inspector 面板把 'NPC Camera' 拖给 Rabbit 脚本！");
+            // 为了防止报错卡死，如果没有拖，临时尝试找个主摄像机顶替（可选）
+            referenceCamera = Camera.main;
+        }
         startPos = transform.position;
         StartCoroutine(JumpLoop());
     }
@@ -34,16 +41,14 @@ public class RabbitDirectJump : MonoBehaviour
             Vector2 randomPoint = Random.insideUnitCircle * jumpRadius;
             Vector3 targetPos = startPos + new Vector3(randomPoint.x, 0, randomPoint.y);
 
-            // 3. 判断方向并触发动画
-            // 1. 算出移动的向量 (目标 - 当前)
-            Vector3 moveDirection = targetPos - transform.position;
-
-            // 2. 把这个世界方向，转换成“摄像机眼中的方向”
-            // 这一步会自动把摄像机的旋转考虑进去
-            Vector3 screenDir = mainCam.transform.InverseTransformDirection(moveDirection);
-
-            // 3. 现在判断 screenDir.x > 0 就是真正的“屏幕右边”
-            bool goRight = screenDir.x > 0;
+            // 【修改点3】使用 referenceCamera 计算方向
+            bool goRight = true;
+            if (referenceCamera != null)
+            {
+                Vector3 moveDirection = targetPos - transform.position;
+                Vector3 screenDir = referenceCamera.transform.InverseTransformDirection(moveDirection);
+                goRight = screenDir.x > 0;
+            }
 
             // 1. 先触发动画！
             if (goRight)
