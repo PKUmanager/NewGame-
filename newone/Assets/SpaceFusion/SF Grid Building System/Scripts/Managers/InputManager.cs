@@ -27,14 +27,14 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         private Vector2 _lastMousePositionMmb;
         private Vector2 _lastMousePositionRmb;
 
-        // 缓存最后一次有效的触摸位置
+        // 缓存：即使手指抬起，也记住最后一次手指在屏幕上的坐标
         private Vector2 _lastValidScreenPosition;
 
         private LayerMask _placementLayerMask;
         private float _holdThreshold;
         private float _edgeMarginForAutoMove;
 
-        // 定义无效位置
+        // 无效位置标记
         public static readonly Vector3 InvalidPosition = Vector3.negativeInfinity;
 
         private void Awake()
@@ -47,15 +47,19 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         private void Start()
         {
             var config = GameConfig.Instance;
-            _placementLayerMask = config.PlacementLayerMask;
-            _holdThreshold = config.HoldThreshold;
-            _edgeMarginForAutoMove = config.EdgeMarginForAutoMove;
+            if (config != null)
+            {
+                _placementLayerMask = config.PlacementLayerMask;
+                _holdThreshold = config.HoldThreshold;
+                _edgeMarginForAutoMove = config.EdgeMarginForAutoMove;
+            }
             _sceneCamera = GameManager.Instance.SceneCamera;
         }
 
         private void Update()
         {
-            // 1. 实时记录有效坐标，防止抬手瞬间丢失位置
+            // 1. 实时更新屏幕坐标缓存
+            // 只有当有手指触摸或者鼠标存在时才更新
             if (Input.touchCount > 0)
             {
                 _lastValidScreenPosition = Input.GetTouch(0).position;
@@ -65,7 +69,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 _lastValidScreenPosition = Input.mousePosition;
             }
 
-            // 2. 点击逻辑
+            // 2. 点击事件分发
             if (Input.GetMouseButtonDown(0))
             {
                 _isHolding = true;
@@ -95,10 +99,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 _holdTimer = 0;
             }
 
-            // PC端输入保留
+            // 电脑端快捷键保留
             if (Input.GetKeyDown(KeyCode.Escape)) OnExit?.Invoke();
             if (Input.GetKeyDown(KeyCode.R)) OnRotate?.Invoke();
 
+            // 辅助操作（中键/右键）
             if (Input.GetMouseButtonDown(2)) _lastMousePositionMmb = Input.mousePosition;
             if (Input.GetMouseButton(2))
             {
@@ -135,28 +140,41 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
             OnMouseAtScreenCorner?.Invoke(direction);
         }
 
+        // ★★★ 手机端关键：准确的 UI 遮挡检测 ★★★
         public static bool IsPointerOverUIObject()
         {
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return true;
+            // 1. 检查 EventSystem 是否存在
+            if (EventSystem.current == null) return false;
+
+            // 2. 检查触摸输入 (针对手机)
             if (Input.touchCount > 0)
             {
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch touch = Input.GetTouch(i);
+                    // 只要有一个手指按在 UI 上，就视为 UI 操作
                     if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
                     {
-                        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return true;
+                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return true;
                     }
                 }
             }
+
+            // 3. 检查鼠标输入 (针对电脑/模拟器)
+            if (EventSystem.current.IsPointerOverGameObject()) return true;
+
             return false;
         }
 
         public Vector3 GetSelectedMapPosition()
         {
+            // ★★★ 保护逻辑 ★★★
+            // 如果你在操作 UI，我直接返回无效位置。
+            // PlacementSystem 收到无效位置后，会停止更新，让物体停留在上一次的地方。
+            if (IsPointerOverUIObject()) return InvalidPosition;
+
             if (_sceneCamera == null) _sceneCamera = Camera.main;
 
-            // 使用缓存的有效位置，而不是 Input.mousePosition
             Vector3 screenPos = _lastValidScreenPosition;
             screenPos.z = _sceneCamera.nearClipPlane;
 
@@ -167,7 +185,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 return hit.point;
             }
 
-            // 没打中地面返回 InvalidPosition，绝对不返回 Zero
+            // 没打中地板，也返回无效位置
             return InvalidPosition;
         }
     }

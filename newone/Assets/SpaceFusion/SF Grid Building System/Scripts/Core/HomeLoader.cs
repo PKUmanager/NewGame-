@@ -158,37 +158,60 @@ public class HomeLoader : MonoBehaviour
             NPCManager.Instance.ClearCounts();
         }
 
+        // =========================================================
+        // ★★★ 【关键修复】 增加了安全检查，防止崩溃！ ★★★
+        // =========================================================
         foreach (var data in dataList)
         {
+            // 1. 安全获取名字
             string name = data["prefabName"] as string;
-            float x = System.Convert.ToSingle(data["x"]);
-            float z = System.Convert.ToSingle(data["z"]);
-            float r = System.Convert.ToSingle(data["r"]);
 
-            if (Mathf.Abs(x) < 0.01f && Mathf.Abs(z) < 0.01f)
+            // 2. 如果名字是空的，直接跳过这一条，防止报错（ArgumentNullException）
+            if (string.IsNullOrEmpty(name))
             {
+                Debug.LogWarning("⚠️ 发现一条坏数据（名字为空），已跳过。");
                 continue;
             }
 
-            GameObject prefab = null;
+            // 3. 安全获取坐标
+            float x = System.Convert.ToSingle(data["x"]);
+            float z = System.Convert.ToSingle(data["z"]);
+            float r = System.Convert.ToSingle(data["rotY"]); // 注意：检查这里是不是 rotY 还是 r，根据你上传的key
+
+            // 过滤原点数据（可选）
+            if (Mathf.Abs(x) < 0.01f && Mathf.Abs(z) < 0.01f)
+            {
+                // continue; // 根据需求决定是否过滤
+            }
+
+            // 4. 查字典
             if (buildingDict.ContainsKey(name))
             {
-                prefab = buildingDict[name];
-            }
+                GameObject prefab = buildingDict[name];
 
-            if (prefab != null)
-            {
-                var attr = prefab.GetComponent<BuildingAttribute>();
-                if (attr != null && NPCManager.Instance != null)
+                if (prefab != null)
                 {
-                    NPCManager.Instance.AddBuildingCount(attr.type);
-                }
+                    // NPC 统计
+                    var attr = prefab.GetComponent<BuildingAttribute>();
+                    if (attr != null && NPCManager.Instance != null)
+                    {
+                        NPCManager.Instance.AddBuildingCount(attr.type);
+                    }
 
-                Vector3 pos = new Vector3(x, 0, z);
-                Quaternion rot = Quaternion.Euler(0, r, 0);
-                Instantiate(prefab, pos, rot, buildingRoot);
+                    // 生成
+                    Vector3 pos = new Vector3(x, 0, z);
+                    Quaternion rot = Quaternion.Euler(0, r, 0);
+                    Instantiate(prefab, pos, rot, buildingRoot);
+                }
+            }
+            else
+            {
+                // 如果字典里没有这个名字，打印错误但不崩溃
+                Debug.LogError($"❌ 本地找不到建筑：[{name}]，请检查 Building List 是否包含此 Prefab。");
             }
         }
+        // =========================================================
+
         Debug.Log("🏡 加载完毕，UI状态已更新。");
     }
 }

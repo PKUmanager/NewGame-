@@ -80,8 +80,6 @@ public class GPSUnlocker : MonoBehaviour
             // 1. 直接点亮建造按钮
             if (mainBuildBtn) mainBuildBtn.interactable = true;
 
-            // 2. 让地块直接变绿
-            if (plotObject_B) plotObject_B.GetComponent<Renderer>().material.color = Color.green;
 
             // 3. 确保功能按钮显示
             if (functionButtons) functionButtons.SetActive(true);
@@ -199,8 +197,6 @@ public class GPSUnlocker : MonoBehaviour
         {
             // === 答对逻辑 ===
 
-            // 1. 变绿
-            if (plotObject_B) plotObject_B.GetComponent<Renderer>().material.color = Color.green;
 
             // 2. 关面板
             quizPanel.SetActive(false);
