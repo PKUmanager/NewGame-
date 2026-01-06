@@ -17,16 +17,26 @@ public class HomeLoader : MonoBehaviour
     [Header("主界面 UI 控制")]
     public GameObject mainBuildBtn;        // Building_Btn (建造)
     public GameObject mainVisitPreviewBtn; // Preview_Btn_Visit (进入预览)
-    // ★★★ 1. 新增：发现按钮
     public GameObject mainDiscoveryBtn;    // Discovery_Btn (发现)
 
     [Header("预览界面内部 UI 控制")]
     public GameObject previewConfirmBtn;   // 开始建造/确定 (主人用)
-    // ★★★ 2. 新增：退出预览按钮
     public GameObject previewExitBtn;      // 退出预览 (客人用)
+
+    // =========================================================
+    // ★★★ 【新增】 相机控制变量 ★★★
+    // =========================================================
+    [Header("相机控制")]
+    public Transform mainCameraRig; // 请在 Inspector 里把你的 CameraSystem 或 Main Camera 拖进来
+    private Vector3 defaultCameraPos; // 记录初始位置
+    private Quaternion defaultCameraRot; // 记录初始旋转
+    // =========================================================
 
     public List<GameObject> buildingList;
     private Dictionary<string, GameObject> buildingDict;
+
+    // ★★★ 【新增 1】 把挂着 TopBarUI_Legacy 的物体拖进来 ★★★
+    public TopBarUI_Legacy topBarUI;
 
     void Awake()
     {
@@ -50,6 +60,16 @@ public class HomeLoader : MonoBehaviour
 
     async void Start()
     {
+        // =========================================================
+        // ★★★ 【新增】 记住游戏刚开始时相机的默认位置 ★★★
+        // =========================================================
+        if (mainCameraRig != null)
+        {
+            defaultCameraPos = mainCameraRig.position;
+            defaultCameraRot = mainCameraRig.rotation;
+        }
+        // =========================================================
+
         await System.Threading.Tasks.Task.Delay(500);
         LCUser currentUser = await LCUser.GetCurrent();
 
@@ -61,6 +81,15 @@ public class HomeLoader : MonoBehaviour
 
     public async void LoadHome(string targetUsername)
     {
+        // ★★★ 【新增 2】 加载家园时，顺便更新左上角的名字！ ★★★
+        // =========================================================
+        if (topBarUI != null)
+        {
+            topBarUI.UpdateName(targetUsername);
+        }
+        // =========================================================
+
+        Debug.Log("正在前往 " + targetUsername + " 的家...");
         LCUser me = await LCUser.GetCurrent();
 
         if (me != null && buildingSystemObject != null)
@@ -72,13 +101,23 @@ public class HomeLoader : MonoBehaviour
                 if (returnHomeButton) returnHomeButton.SetActive(false);
 
                 // 1. 主界面按钮状态
-                if (mainBuildBtn) mainBuildBtn.SetActive(true);             // 显示【建造】
-                if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(true);     // 显示【发现】
-                if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(false); // 隐藏【预览入口】(主人不需要单纯的预览)
+                if (mainBuildBtn) mainBuildBtn.SetActive(true);
+                if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(true);
+                if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(false);
 
                 // 2. 预览界面内部按钮状态
-                if (previewConfirmBtn) previewConfirmBtn.SetActive(true);   // 显示【开始建造】
-                if (previewExitBtn) previewExitBtn.SetActive(false);        // 隐藏【退出预览】(假设主人用其他方式或不需要这个特定按钮)
+                if (previewConfirmBtn) previewConfirmBtn.SetActive(true);
+                if (previewExitBtn) previewExitBtn.SetActive(false);
+
+                // =========================================================
+                // ★★★ 【新增】 回家时，强制复位相机视角 ★★★
+                // =========================================================
+                if (mainCameraRig != null)
+                {
+                    mainCameraRig.position = defaultCameraPos;
+                    mainCameraRig.rotation = defaultCameraRot;
+                }
+                // =========================================================
             }
             else
             {
@@ -87,14 +126,13 @@ public class HomeLoader : MonoBehaviour
                 if (returnHomeButton) returnHomeButton.SetActive(true);
 
                 // 1. 主界面按钮状态
-                if (mainBuildBtn) mainBuildBtn.SetActive(false);            // 销毁/隐藏【建造】
-                if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(false);    // 销毁/隐藏【发现】
-                if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(true);  // 启用【预览入口】
+                if (mainBuildBtn) mainBuildBtn.SetActive(false);
+                if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(false);
+                if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(true);
 
                 // 2. 预览界面内部按钮状态
-                // 这样当你点开预览界面时，"开始建造"是灭的，"退出预览"是亮的
-                if (previewConfirmBtn) previewConfirmBtn.SetActive(false);  // 销毁/隐藏【开始建造】
-                if (previewExitBtn) previewExitBtn.SetActive(true);         // 启用【退出预览】
+                if (previewConfirmBtn) previewConfirmBtn.SetActive(false);
+                if (previewExitBtn) previewExitBtn.SetActive(true);
             }
         }
 

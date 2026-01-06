@@ -2,6 +2,7 @@
 using LeanCloud.Storage;
 using TMPro;
 using UnityEngine;
+using System.Threading.Tasks; // 【新增】必须有这个才能用 Delay
 
 public class AuthManager : MonoBehaviour
 {
@@ -36,10 +37,12 @@ public class AuthManager : MonoBehaviour
             if (startupUI != null)
                 startupUI.SetLoggedIn(true);
 
-            // ✅ 自动登录也要算“登录完成”，否则领不到登录奖励
+            // 自动登录也要算“登录完成”
             MarkLoginTaskDoneSafe();
 
-            // 关闭登录窗口
+            // ★★★ 【修改】 延迟 1 秒后关闭窗口，让字显示一会儿 ★★★
+            await Task.Delay(1000);
+
             if (loginWindow != null)
                 loginWindow.SetActive(false);
         }
@@ -111,10 +114,11 @@ public class AuthManager : MonoBehaviour
             if (startupUI != null)
                 startupUI.SetLoggedIn(true);
 
-            // ✅ 手动登录也要标记“登录完成”
             MarkLoginTaskDoneSafe();
 
-            // 关闭登录窗口
+            // ★★★ 【修改】 延迟 1.5 秒后关闭窗口，让玩家看清提示 ★★★
+            await Task.Delay(1500);
+
             if (loginWindow != null)
                 loginWindow.SetActive(false);
         }
@@ -133,6 +137,6 @@ public class AuthManager : MonoBehaviour
         if (ts != null)
             ts.MarkLoginCompleted();
         else
-            Debug.LogError("TaskService not found：无法标记登录任务（请确认场景里有 TaskService 物体且启用）");
+            Debug.LogError("TaskService not found：无法标记登录任务");
     }
 }

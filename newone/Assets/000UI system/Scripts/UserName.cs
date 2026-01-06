@@ -12,4 +12,12 @@ public class TopBarUI_Legacy : MonoBehaviour
         string username = PlayerPrefs.GetString(KEY_PLAYER_NAME, "玩家");
         nicknameText.text = username;
     }
+    // ★★★ 【新增】 公开的方法，让外部脚本调用修改名字 ★★★
+    public void UpdateName(string newName)
+    {
+        if (nicknameText != null)
+        {
+            nicknameText.text = newName;
+        }
+    }
 }
