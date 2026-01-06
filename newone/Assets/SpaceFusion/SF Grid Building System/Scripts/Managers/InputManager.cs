@@ -27,14 +27,17 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         private Vector2 _lastMousePositionMmb;
         private Vector2 _lastMousePositionRmb;
 
-        // 缓存：即使手指抬起，也记住最后一次手指在屏幕上的坐标
+        // 缓存最后一次有效的触摸位置
         private Vector2 _lastValidScreenPosition;
+
+        // ★★★ 新增标记：记录这次点击是否始于 UI ★★★
+        private bool _clickStartedOnUI = false;
 
         private LayerMask _placementLayerMask;
         private float _holdThreshold;
         private float _edgeMarginForAutoMove;
 
-        // 无效位置标记
+        // 定义无效位置
         public static readonly Vector3 InvalidPosition = Vector3.negativeInfinity;
 
         private void Awake()
@@ -58,52 +61,81 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
 
         private void Update()
         {
-            // 1. 实时更新屏幕坐标缓存
-            // 只有当有手指触摸或者鼠标存在时才更新
+            // 1. 更新屏幕坐标
             if (Input.touchCount > 0)
             {
                 _lastValidScreenPosition = Input.GetTouch(0).position;
             }
             else
             {
-                _lastValidScreenPosition = Input.mousePosition;
+                // 仅在非移动平台更新鼠标位置，防止手机抬手后坐标归零
+                if (!Application.isMobilePlatform)
+                {
+                    _lastValidScreenPosition = Input.mousePosition;
+                }
             }
 
-            // 2. 点击事件分发
+            // 2. 按下逻辑 (Down)
             if (Input.GetMouseButtonDown(0))
             {
-                _isHolding = true;
-                _holdTimer = 0;
-                OnLmbPress?.Invoke(_lastValidScreenPosition);
+                // ★★★ 核心检查：按下的瞬间，是否在 UI 上？ ★★★
+                if (IsPointerOverUIObject())
+                {
+                    _clickStartedOnUI = true; // 标记：这次操作是属于 UI 的
+                }
+                else
+                {
+                    _clickStartedOnUI = false; // 标记：这次操作是属于场景的
+                    _isHolding = true;
+                    _holdTimer = 0;
+                    OnLmbPress?.Invoke(_lastValidScreenPosition);
+                }
             }
 
+            // 3. 按住逻辑 (Hold)
             if (_isHolding)
             {
-                _holdTimer += Time.deltaTime;
-                if (_holdTimer > _holdThreshold)
+                // 如果这次操作是 UI 操作，直接跳过场景逻辑
+                if (_clickStartedOnUI)
                 {
-                    OnLmbHold?.Invoke(_lastValidScreenPosition);
+                    _isHolding = false;
+                }
+                else
+                {
+                    _holdTimer += Time.deltaTime;
+                    if (_holdTimer > _holdThreshold)
+                    {
+                        OnLmbHold?.Invoke(_lastValidScreenPosition);
+                    }
                 }
             }
 
+            // 4. 抬起逻辑 (Up)
             if (Input.GetMouseButtonUp(0))
             {
-                OnLmbRelease?.Invoke();
-
-                if (_holdTimer <= _holdThreshold)
+                // ★★★ 核心检查：抬起的瞬间 ★★★
+                // 只有当：(1) 按下时不在UI上 AND (2) 抬起时也不在UI上
+                // 才触发场景点击事件
+                if (!_clickStartedOnUI && !IsPointerOverUIObject())
                 {
-                    OnClicked?.Invoke();
+                    OnLmbRelease?.Invoke();
+
+                    if (_holdTimer <= _holdThreshold)
+                    {
+                        OnClicked?.Invoke();
+                    }
                 }
 
+                // 重置状态
                 _isHolding = false;
                 _holdTimer = 0;
+                _clickStartedOnUI = false;
             }
 
-            // 电脑端快捷键保留
+            // 快捷键和辅助操作保持不变
             if (Input.GetKeyDown(KeyCode.Escape)) OnExit?.Invoke();
             if (Input.GetKeyDown(KeyCode.R)) OnRotate?.Invoke();
 
-            // 辅助操作（中键/右键）
             if (Input.GetMouseButtonDown(2)) _lastMousePositionMmb = Input.mousePosition;
             if (Input.GetMouseButton(2))
             {
@@ -140,38 +172,34 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
             OnMouseAtScreenCorner?.Invoke(direction);
         }
 
-        // ★★★ 手机端关键：准确的 UI 遮挡检测 ★★★
         public static bool IsPointerOverUIObject()
         {
-            // 1. 检查 EventSystem 是否存在
             if (EventSystem.current == null) return false;
 
-            // 2. 检查触摸输入 (针对手机)
             if (Input.touchCount > 0)
             {
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch touch = Input.GetTouch(i);
-                    // 只要有一个手指按在 UI 上，就视为 UI 操作
-                    if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
-                    {
-                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return true;
-                    }
+                    // 包含所有触摸状态，确保任何时候碰到UI都返回true
+                    if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return true;
                 }
             }
 
-            // 3. 检查鼠标输入 (针对电脑/模拟器)
             if (EventSystem.current.IsPointerOverGameObject()) return true;
-
             return false;
         }
 
         public Vector3 GetSelectedMapPosition()
         {
-            // ★★★ 保护逻辑 ★★★
-            // 如果你在操作 UI，我直接返回无效位置。
-            // PlacementSystem 收到无效位置后，会停止更新，让物体停留在上一次的地方。
+            // 1. 如果手指在 UI 上，返回无效
             if (IsPointerOverUIObject()) return InvalidPosition;
+
+            // 2. ★★★ 如果这次操作本身就是从 UI 开始的（比如按住摇杆滑到了外面），也视为无效 ★★★
+            if (_clickStartedOnUI) return InvalidPosition;
+
+            // 3. 手机端如果完全没有触摸，返回无效
+            if (Application.isMobilePlatform && Input.touchCount == 0) return InvalidPosition;
 
             if (_sceneCamera == null) _sceneCamera = Camera.main;
 
@@ -185,7 +213,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 return hit.point;
             }
 
-            // 没打中地板，也返回无效位置
             return InvalidPosition;
         }
     }

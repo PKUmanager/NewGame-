@@ -2,6 +2,13 @@
 using LeanCloud.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
+// 引用核心命名空间
+using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
+using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
+using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
+// ★★★ 【修复 CS0103】 必须引用 Utils 才能找到 GameConfig ★★★
+using SpaceFusion.SF_Grid_Building_System.Scripts.Utils;
 
 public class HomeLoader : MonoBehaviour
 {
@@ -11,39 +18,34 @@ public class HomeLoader : MonoBehaviour
     public Transform buildingRoot;
     public GameObject returnHomeButton;
 
-    // 建造系统的总开关
     public GameObject buildingSystemObject;
 
-    [Header("主界面 UI 控制")]
-    public GameObject mainBuildBtn;        // Building_Btn (建造)
-    public GameObject mainVisitPreviewBtn; // Preview_Btn_Visit (进入预览)
-    public GameObject mainDiscoveryBtn;    // Discovery_Btn (发现)
+    [Header("UI 控制")]
+    public GameObject mainBuildBtn;
+    public GameObject mainVisitPreviewBtn;
+    public GameObject mainDiscoveryBtn;
+    public GameObject previewConfirmBtn;
+    public GameObject previewExitBtn;
 
-    [Header("预览界面内部 UI 控制")]
-    public GameObject previewConfirmBtn;   // 开始建造/确定 (主人用)
-    public GameObject previewExitBtn;      // 退出预览 (客人用)
-
-    // =========================================================
-    // ★★★ 【新增】 相机控制变量 ★★★
-    // =========================================================
     [Header("相机控制")]
-    public Transform mainCameraRig; // 请在 Inspector 里把你的 CameraSystem 或 Main Camera 拖进来
-    private Vector3 defaultCameraPos; // 记录初始位置
-    private Quaternion defaultCameraRot; // 记录初始旋转
-    // =========================================================
+    public Transform mainCameraRig;
+    private Vector3 defaultCameraPos;
+    private Quaternion defaultCameraRot;
+
+    // 引用 PlacementHandler 用于本地生成
+    public PlacementHandler placementHandler;
 
     public List<GameObject> buildingList;
     private Dictionary<string, GameObject> buildingDict;
 
-    // ★★★ 【新增 1】 把挂着 TopBarUI_Legacy 的物体拖进来 ★★★
     public TopBarUI_Legacy topBarUI;
 
     void Awake()
     {
         Instance = this;
         InitDictionary();
-        if (returnHomeButton != null)
-            returnHomeButton.SetActive(false);
+        if (returnHomeButton != null) returnHomeButton.SetActive(false);
+        if (placementHandler == null) placementHandler = FindObjectOfType<PlacementHandler>();
     }
 
     void InitDictionary()
@@ -60,15 +62,11 @@ public class HomeLoader : MonoBehaviour
 
     async void Start()
     {
-        // =========================================================
-        // ★★★ 【新增】 记住游戏刚开始时相机的默认位置 ★★★
-        // =========================================================
         if (mainCameraRig != null)
         {
             defaultCameraPos = mainCameraRig.position;
             defaultCameraRot = mainCameraRig.rotation;
         }
-        // =========================================================
 
         await System.Threading.Tasks.Task.Delay(500);
         LCUser currentUser = await LCUser.GetCurrent();
@@ -81,67 +79,42 @@ public class HomeLoader : MonoBehaviour
 
     public async void LoadHome(string targetUsername)
     {
-        // ★★★ 【新增 2】 加载家园时，顺便更新左上角的名字！ ★★★
-        // =========================================================
-        if (topBarUI != null)
-        {
-            topBarUI.UpdateName(targetUsername);
-        }
-        // =========================================================
+        if (topBarUI != null) topBarUI.UpdateName(targetUsername);
 
         Debug.Log("正在前往 " + targetUsername + " 的家...");
         LCUser me = await LCUser.GetCurrent();
 
-        if (me != null && buildingSystemObject != null)
+        // 1. 清空场景
+        foreach (Transform child in buildingRoot) { Destroy(child.gameObject); }
+        if (NPCManager.Instance != null) NPCManager.Instance.ClearCounts();
+
+        if (me != null)
         {
             if (me.Username == targetUsername)
             {
-                // === 情况 A: 回到自己家 (主人模式) ===
-                buildingSystemObject.SetActive(true);
-                if (returnHomeButton) returnHomeButton.SetActive(false);
+                // === 回到自己家 ===
+                SetupUIForOwner();
+                ResetCamera();
 
-                // 1. 主界面按钮状态
-                if (mainBuildBtn) mainBuildBtn.SetActive(true);
-                if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(true);
-                if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(false);
-
-                // 2. 预览界面内部按钮状态
-                if (previewConfirmBtn) previewConfirmBtn.SetActive(true);
-                if (previewExitBtn) previewExitBtn.SetActive(false);
-
-                // =========================================================
-                // ★★★ 【新增】 回家时，强制复位相机视角 ★★★
-                // =========================================================
-                if (mainCameraRig != null)
+                // ★★★ 优先尝试加载本地存档 ★★★
+                Debug.Log("🏠 正在加载本地存档...");
+                // 如果本地加载成功，直接返回，不再请求云端
+                if (LoadLocalSave())
                 {
-                    mainCameraRig.position = defaultCameraPos;
-                    mainCameraRig.rotation = defaultCameraRot;
+                    Debug.Log("✅ 本地存档加载成功，跳过云端同步。");
+                    return;
                 }
-                // =========================================================
+
+                Debug.Log("⚠️ 本地存档为空，尝试从云端拉取备份...");
             }
             else
             {
-                // === 情况 B: 参观好友家 (客人模式) ===
-                buildingSystemObject.SetActive(false);
-                if (returnHomeButton) returnHomeButton.SetActive(true);
-
-                // 1. 主界面按钮状态
-                if (mainBuildBtn) mainBuildBtn.SetActive(false);
-                if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(false);
-                if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(true);
-
-                // 2. 预览界面内部按钮状态
-                if (previewConfirmBtn) previewConfirmBtn.SetActive(false);
-                if (previewExitBtn) previewExitBtn.SetActive(true);
+                // === 去别人家 ===
+                SetupUIForGuest();
             }
         }
 
-        // --- 以下逻辑保持不变 ---
-
-        foreach (Transform child in buildingRoot)
-        {
-            Destroy(child.gameObject);
-        }
+        // === 云端加载逻辑 ===
 
         LCQuery<LCUser> userQuery = LCUser.GetQuery();
         userQuery.WhereEqualTo("username", targetUsername);
@@ -151,67 +124,143 @@ public class HomeLoader : MonoBehaviour
 
         LCQuery<LCObject> buildQuery = new LCQuery<LCObject>("UserStructure");
         buildQuery.WhereEqualTo("owner", targetUser);
+        buildQuery.Limit(1000); // 确保拉取所有建筑
         var dataList = await buildQuery.Find();
 
-        if (NPCManager.Instance != null)
-        {
-            NPCManager.Instance.ClearCounts();
-        }
-
-        // =========================================================
-        // ★★★ 【关键修复】 增加了安全检查，防止崩溃！ ★★★
-        // =========================================================
         foreach (var data in dataList)
         {
-            // 1. 安全获取名字
-            string name = data["prefabName"] as string;
+            // 使用安全方法获取名字
+            string name = GetStringSafe(data, "prefabName");
+            if (string.IsNullOrEmpty(name)) continue;
 
-            // 2. 如果名字是空的，直接跳过这一条，防止报错（ArgumentNullException）
-            if (string.IsNullOrEmpty(name))
+            // ★★★ 兼容新旧数据，防止 (0,0,0) 堆叠 ★★★
+            // 1. 尝试读新 Key (posX)
+            float x = GetFloatSafe(data, "posX");
+            float z = GetFloatSafe(data, "posZ");
+            float r = GetFloatSafe(data, "rotY");
+
+            // 2. 如果新 Key 没数据，尝试读旧 Key (x)
+            if (x == 0 && z == 0)
             {
-                Debug.LogWarning("⚠️ 发现一条坏数据（名字为空），已跳过。");
-                continue;
+                float oldX = GetFloatSafe(data, "x");
+                float oldZ = GetFloatSafe(data, "z");
+                if (oldX != 0 || oldZ != 0)
+                {
+                    x = oldX;
+                    z = oldZ;
+                    // 尝试补救旋转
+                    float oldR = GetFloatSafe(data, "r");
+                    if (r == 0 && oldR != 0) r = oldR;
+                }
             }
 
-            // 3. 安全获取坐标
-            float x = System.Convert.ToSingle(data["x"]);
-            float z = System.Convert.ToSingle(data["z"]);
-            float r = System.Convert.ToSingle(data["rotY"]); // 注意：检查这里是不是 rotY 还是 r，根据你上传的key
+            // 3. 过滤无效原点数据
+            if (Mathf.Abs(x) < 0.001f && Mathf.Abs(z) < 0.001f) continue;
 
-            // 过滤原点数据（可选）
-            if (Mathf.Abs(x) < 0.01f && Mathf.Abs(z) < 0.01f)
-            {
-                // continue; // 根据需求决定是否过滤
-            }
-
-            // 4. 查字典
             if (buildingDict.ContainsKey(name))
             {
                 GameObject prefab = buildingDict[name];
-
                 if (prefab != null)
                 {
-                    // NPC 统计
                     var attr = prefab.GetComponent<BuildingAttribute>();
                     if (attr != null && NPCManager.Instance != null)
                     {
                         NPCManager.Instance.AddBuildingCount(attr.type);
                     }
 
-                    // 生成
                     Vector3 pos = new Vector3(x, 0, z);
                     Quaternion rot = Quaternion.Euler(0, r, 0);
                     Instantiate(prefab, pos, rot, buildingRoot);
                 }
             }
+        }
+        Debug.Log("☁️ 云端数据加载完毕。");
+    }
+
+    // ★★★ [工具] 安全读取 float (防止 Keys 报错) ★★★
+    float GetFloatSafe(LCObject data, string key)
+    {
+        try
+        {
+            var val = data[key];
+            if (val != null) return Convert.ToSingle(val);
+        }
+        catch { }
+        return 0f;
+    }
+
+    // ★★★ [工具] 安全读取 string ★★★
+    string GetStringSafe(LCObject data, string key)
+    {
+        try
+        {
+            var val = data[key];
+            if (val != null) return val as string;
+        }
+        catch { }
+        return null;
+    }
+
+    // ★★★ 加载本地存档 (逻辑已修正为匹配你的数据库) ★★★
+    private bool LoadLocalSave()
+    {
+        SaveData saveData = SaveSystem.Load();
+        if (saveData == null || saveData.placeableObjectDataCollection.Count == 0) return false;
+
+        // 获取数据库引用
+        var database = GameConfig.Instance.PlaceableObjectDatabase;
+
+        foreach (var kvp in saveData.placeableObjectDataCollection)
+        {
+            PlaceableObjectData podata = kvp.Value;
+
+            // ★★★ 【修正】 使用 assetIdentifier 而不是 ID ★★★
+            // 因为你提供的 PlaceableObjectDatabase.cs 里只有 GetPlaceable(string)，没有 GetItem(int)
+            // assetIdentifier 是 Data 基类自带的，这样读取绝对安全
+            Placeable placeableObj = database.GetPlaceable(podata.assetIdentifier);
+
+            if (placeableObj != null)
+            {
+                Vector3 worldPos = new Vector3(podata.gridPosition.x, 0, podata.gridPosition.z);
+                placementHandler.PlaceLoadedObject(placeableObj, worldPos, podata, 1.0f);
+            }
             else
             {
-                // 如果字典里没有这个名字，打印错误但不崩溃
-                Debug.LogError($"❌ 本地找不到建筑：[{name}]，请检查 Building List 是否包含此 Prefab。");
+                Debug.LogWarning($"本地存档中的物品 [{podata.assetIdentifier}] 在数据库中未找到。");
             }
         }
-        // =========================================================
+        Debug.Log($"💾 本地存档加载成功: {saveData.placeableObjectDataCollection.Count} 个建筑");
+        return true;
+    }
 
-        Debug.Log("🏡 加载完毕，UI状态已更新。");
+    void SetupUIForOwner()
+    {
+        buildingSystemObject.SetActive(true);
+        if (returnHomeButton) returnHomeButton.SetActive(false);
+        if (mainBuildBtn) mainBuildBtn.SetActive(true);
+        if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(true);
+        if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(false);
+        if (previewConfirmBtn) previewConfirmBtn.SetActive(true);
+        if (previewExitBtn) previewExitBtn.SetActive(false);
+    }
+
+    void SetupUIForGuest()
+    {
+        buildingSystemObject.SetActive(false);
+        if (returnHomeButton) returnHomeButton.SetActive(true);
+        if (mainBuildBtn) mainBuildBtn.SetActive(false);
+        if (mainDiscoveryBtn) mainDiscoveryBtn.SetActive(false);
+        if (mainVisitPreviewBtn) mainVisitPreviewBtn.SetActive(true);
+        if (previewConfirmBtn) previewConfirmBtn.SetActive(false);
+        if (previewExitBtn) previewExitBtn.SetActive(true);
+    }
+
+    void ResetCamera()
+    {
+        if (mainCameraRig != null)
+        {
+            mainCameraRig.position = defaultCameraPos;
+            mainCameraRig.rotation = defaultCameraRot;
+        }
     }
 }

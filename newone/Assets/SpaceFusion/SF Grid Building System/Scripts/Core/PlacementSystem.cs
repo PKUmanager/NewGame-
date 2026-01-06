@@ -26,13 +26,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         public event Action OnPlacementStateEnd;
 
         private readonly Dictionary<GridDataType, GridData> _gridDataMap = new();
-
-        // 缓存变量：用于判定是否需要刷新画面
         private Vector3Int _lastDetectedPosition = Vector3Int.zero;
 
-        // ★★★ 手机端核心变量：位置锚点 ★★★
-        // 这个变量记录了最后一次有效的手指触地位置。
-        // 当手指点击 UI 时，Input 会失效，但这个变量会记住物体在哪里。
+        // 核心锚点：物体当前所在的有效位置
         private Vector3Int _pendingGridPosition;
 
         private IPlacementState _stateHandler;
@@ -42,8 +38,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         private PlacementGrid _grid;
         private bool _stopStateAfterAction;
-
-        private bool _hasSelection; // 当前是否已经选定了一个有效位置
+        private bool _hasSelection;
         private bool _isSelectionLocked = false;
 
         public Quaternion GridRotation => _grid != null ? _grid.transform.rotation : Quaternion.identity;
@@ -177,30 +172,37 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _gameConfig.PlacementLayerMask))
             {
                 Vector3Int centerGridPos = _grid.WorldToCell(hit.point);
-                _stateHandler.UpdateState(centerGridPos);
-
-                if (!IsRemovalState())
+                // 同样应用边界检查
+                if (_grid.IsWithinBounds(centerGridPos, new Vector2Int(1, 1)))
                 {
-                    _pendingGridPosition = centerGridPos;
-                    _hasSelection = true;
+                    _stateHandler.UpdateState(centerGridPos);
+                    if (!IsRemovalState())
+                    {
+                        _pendingGridPosition = centerGridPos;
+                        _hasSelection = true;
+                    }
+                    _lastDetectedPosition = centerGridPos;
                 }
-                _lastDetectedPosition = centerGridPos;
             }
         }
 
         private void OnInputClick()
         {
-            // 1. 如果点击的是 UI (手机按钮)，直接忽略点击操作，不进行放置
+            // InputManager 已经过滤了 UI 点击，这里只需再次确认
             if (InputManager.IsPointerOverUIObject()) return;
-
             if (_stateHandler == null) return;
 
             var mousePosition = _inputManager.GetSelectedMapPosition();
-
-            // 2. 如果点击的是天空/无效区域，忽略
             if (mousePosition == InputManager.InvalidPosition) return;
 
             var gridPosition = _grid.WorldToCell(mousePosition);
+
+            // ★★★ 核心修复：点击地块外 -> 不响应 ★★★
+            // 使用最小尺寸 (1,1) 做基础检查，防止点击到地块外的空地触发放置
+            if (!_grid.IsWithinBounds(gridPosition, new Vector2Int(1, 1)))
+            {
+                return;
+            }
 
             if (IsRemovalState())
             {
@@ -211,23 +213,19 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             else
             {
                 _stateHandler.UpdateState(gridPosition);
-                _pendingGridPosition = gridPosition; // 更新锚点
+                _pendingGridPosition = gridPosition;
                 _hasSelection = true;
-                _isSelectionLocked = true; // 手机上点击地面后，可以锁定位置
+                _isSelectionLocked = true;
             }
         }
 
-        // ★★★ 核心方法：确认建造 ★★★
         public void ConfirmPlacement()
         {
             if (_stateHandler == null) return;
             if (IsRemovalState()) return;
 
-            // 只有当有一个有效锚点时，才允许建造
             if (!_hasSelection) return;
 
-            // 使用锚点位置 _pendingGridPosition 进行建造
-            // 绝不重新获取 Input 位置，保证物体不动
             _stateHandler.OnAction(_pendingGridPosition);
             ForceSaveGame();
 
@@ -240,7 +238,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             }
             else
             {
-                // 连造模式：保留预览在原地
                 _stateHandler.UpdateState(_pendingGridPosition);
                 _hasSelection = true;
             }
@@ -251,18 +248,14 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             StopState();
         }
 
-        // ★★★ 核心方法：旋转 ★★★
         private void RotateStructure()
         {
             if (_stateHandler != null)
             {
                 _stateHandler.OnRotation();
-
-                // 如果当前预览物体已经显示出来了 (_hasSelection 为 true)
                 if (_hasSelection)
                 {
-                    // 强制在“最后一次已知的有效位置”原地旋转
-                    // 无论你现在手指在按钮上还是在哪里，都不影响这个位置
+                    // 旋转时，直接使用锚点位置，不再重新检测射线
                     _stateHandler.UpdateState(_pendingGridPosition);
                 }
             }
@@ -286,20 +279,27 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (_stateHandler == null) return;
             if (_isSelectionLocked) return;
 
-            // ★★★ 手机端防抖保护 ★★★
-            // 如果手指摸到了 UI (比如摇杆、旋转按钮)，或者根本没有触摸 Input
-            // InputManager 会返回 InvalidPosition。
-            // 此时直接 return，跳过更新。
-            // 结果：_pendingGridPosition 保持不变，物体“钉”在原地。
+            // UI 操作保护 (虽然 InputManager 已经做了，双重保险)
+            if (InputManager.IsPointerOverUIObject()) return;
 
             var mousePosition = _inputManager.GetSelectedMapPosition();
 
+            // 如果 InputManager 说位置无效（比如手在 UI 上，或没触摸），直接返回
+            // 结果：_lastDetectedPosition 不变，物体不动。
             if (mousePosition == InputManager.InvalidPosition) return;
 
-            // 只有检测到有效的地面点击时，才更新位置
             var gridPosition = _grid.WorldToCell(mousePosition);
 
-            _pendingGridPosition = gridPosition; // 更新锚点
+            // ★★★ 核心修复：移动出边界 -> 保持不动 ★★★
+            // 如果检测到的位置超出了网格范围，直接 Return，不更新状态。
+            // 结果：物体停留在离开网格前的位置，而不是吸附到边缘。
+            if (!_grid.IsWithinBounds(gridPosition, new Vector2Int(1, 1)))
+            {
+                return;
+            }
+
+            // 更新有效锚点
+            _pendingGridPosition = gridPosition;
             _hasSelection = true;
 
             if (_lastDetectedPosition == gridPosition) return;
