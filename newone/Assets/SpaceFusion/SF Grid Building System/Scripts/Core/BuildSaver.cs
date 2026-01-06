@@ -56,6 +56,10 @@ public class BuildSaver : MonoBehaviour
             LCQuery<LCObject> query = new LCQuery<LCObject>("UserStructure");
             query.WhereEqualTo("owner", currentUser);
 
+            // ★★★ 关键：这一步是为了防止堆积 ★★★
+            // 为了保险，把 Limit 设大一点，确保能把旧的都查出来删掉
+            query.Limit(1000);
+
             // 2. 先把旧数据全部找出来
             var oldDataList = await query.Find();
 
