@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2088439881795978870}
   - component: {fileID: 8528556202755597473}
   - component: {fileID: 7026171836589409983}
+  - component: {fileID: 192236532434950557}
   m_Layer: 0
   m_Name: Chair06new
   m_TagString: Untagged
@@ -62,6 +63,19 @@ MonoBehaviour:
   CenterOffset: {x: 0.35, y: 0.32, z: 0.6}
   BoundsSize: {x: 2.5, y: 1, z: 3}
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &192236532434950557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433240911157960772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c679ee501520d4ab3af0d8e5ac642f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &4810980804192525138
 PrefabInstance:
   m_ObjectHideFlags: 0
