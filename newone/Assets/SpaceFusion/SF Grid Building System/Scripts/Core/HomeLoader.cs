@@ -7,7 +7,6 @@ using System;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
 using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
-// ★★★ 【修复 CS0103】 必须引用 Utils 才能找到 GameConfig ★★★
 using SpaceFusion.SF_Grid_Building_System.Scripts.Utils;
 
 public class HomeLoader : MonoBehaviour
@@ -39,6 +38,9 @@ public class HomeLoader : MonoBehaviour
     private Dictionary<string, GameObject> buildingDict;
 
     public TopBarUI_Legacy topBarUI;
+
+    // ★★★ 【新增】 模版账号名字 (用于新用户初始化) ★★★
+    public string templateUserName = "YWJ";
 
     void Awake()
     {
@@ -81,37 +83,36 @@ public class HomeLoader : MonoBehaviour
     {
         if (topBarUI != null) topBarUI.UpdateName(targetUsername);
 
-        Debug.Log("正在前往 " + targetUsername + " 的家...");
+        Debug.Log("🚀 正在前往 " + targetUsername + " 的家...");
         LCUser me = await LCUser.GetCurrent();
 
         // 1. 清空场景
         foreach (Transform child in buildingRoot) { Destroy(child.gameObject); }
         if (NPCManager.Instance != null) NPCManager.Instance.ClearCounts();
 
-        if (me != null)
+        // 2. UI 状态切换
+        bool isMyHome = (me != null && me.Username == targetUsername);
+        if (isMyHome)
         {
-            if (me.Username == targetUsername)
-            {
-                // === 回到自己家 ===
-                SetupUIForOwner();
-                ResetCamera();
+            SetupUIForOwner();
+            ResetCamera();
 
-                // ★★★ 优先尝试加载本地存档 ★★★
-                Debug.Log("🏠 正在加载本地存档...");
-                // 如果本地加载成功，直接返回，不再请求云端
-                if (LoadLocalSave())
-                {
-                    Debug.Log("✅ 本地存档加载成功，跳过云端同步。");
-                    return;
-                }
-
-                Debug.Log("⚠️ 本地存档为空，尝试从云端拉取备份...");
-            }
-            else
+            // =========================================================
+            // ❌❌❌【修改点】 这一段必须注释掉！！！ ❌❌❌
+            // 不要让它读本地文件了，否则永远不去云端！
+            // =========================================================
+            /*
+            if (LoadLocalSave())
             {
-                // === 去别人家 ===
-                SetupUIForGuest();
+                Debug.Log("✅ 本地存档加载成功，跳过云端同步。");
+                return;
             }
+            */
+            // =========================================================
+        }
+        else
+        {
+            SetupUIForGuest();
         }
 
         // === 云端加载逻辑 ===
@@ -120,116 +121,120 @@ public class HomeLoader : MonoBehaviour
         userQuery.WhereEqualTo("username", targetUsername);
         LCUser targetUser = await userQuery.First();
 
-        if (targetUser == null) return;
+        if (targetUser == null)
+        {
+            Debug.LogError("查无此人");
+            return;
+        }
 
         LCQuery<LCObject> buildQuery = new LCQuery<LCObject>("UserStructure");
         buildQuery.WhereEqualTo("owner", targetUser);
-        buildQuery.Limit(1000); // 确保拉取所有建筑
+        buildQuery.Limit(1000);
         var dataList = await buildQuery.Find();
 
-        foreach (var data in dataList)
+        // =========================================================
+        // ★★★ 【新增】 如果是空号，去加载模版数据！ ★★★
+        // =========================================================
+        if (dataList.Count == 0 && isMyHome)
         {
-            // 使用安全方法获取名字
-            string name = GetStringSafe(data, "prefabName");
-            if (string.IsNullOrEmpty(name)) continue;
+            Debug.LogWarning($"⚠️ 用户 [{targetUsername}] 的家是空的，尝试加载新手模版 [{templateUserName}]...");
+            dataList = await GetTemplateData();
+        }
+        // =========================================================
 
-            // ★★★ 兼容新旧数据，防止 (0,0,0) 堆叠 ★★★
-            // 1. 尝试读新 Key (posX)
-            float x = GetFloatSafe(data, "posX");
-            float z = GetFloatSafe(data, "posZ");
-            float r = GetFloatSafe(data, "rotY");
-
-            // 2. 如果新 Key 没数据，尝试读旧 Key (x)
-            if (x == 0 && z == 0)
+        // 开始生成
+        if (dataList != null)
+        {
+            foreach (var data in dataList)
             {
-                float oldX = GetFloatSafe(data, "x");
-                float oldZ = GetFloatSafe(data, "z");
-                if (oldX != 0 || oldZ != 0)
+                string name = GetStringSafe(data, "prefabName");
+                if (string.IsNullOrEmpty(name)) continue;
+
+                float x = GetFloatSafe(data, "posX");
+                float z = GetFloatSafe(data, "posZ");
+                float r = GetFloatSafe(data, "rotY");
+
+                // 兼容逻辑
+                if (x == 0 && z == 0)
                 {
-                    x = oldX;
-                    z = oldZ;
-                    // 尝试补救旋转
-                    float oldR = GetFloatSafe(data, "r");
-                    if (r == 0 && oldR != 0) r = oldR;
+                    float oldX = GetFloatSafe(data, "x");
+                    float oldZ = GetFloatSafe(data, "z");
+                    if (oldX != 0 || oldZ != 0) { x = oldX; z = oldZ; }
                 }
-            }
 
-            // 3. 过滤无效原点数据
-            if (Mathf.Abs(x) < 0.001f && Mathf.Abs(z) < 0.001f) continue;
+                if (Mathf.Abs(x) < 0.001f && Mathf.Abs(z) < 0.001f) continue;
 
-            if (buildingDict.ContainsKey(name))
-            {
-                GameObject prefab = buildingDict[name];
-                if (prefab != null)
+                if (buildingDict.ContainsKey(name))
                 {
-                    var attr = prefab.GetComponent<BuildingAttribute>();
-                    if (attr != null && NPCManager.Instance != null)
+                    GameObject prefab = buildingDict[name];
+                    if (prefab != null)
                     {
-                        NPCManager.Instance.AddBuildingCount(attr.type);
-                    }
+                        var attr = prefab.GetComponent<BuildingAttribute>();
+                        if (attr != null && NPCManager.Instance != null)
+                        {
+                            NPCManager.Instance.AddBuildingCount(attr.type);
+                        }
 
-                    Vector3 pos = new Vector3(x, 0, z);
-                    Quaternion rot = Quaternion.Euler(0, r, 0);
-                    Instantiate(prefab, pos, rot, buildingRoot);
+                        Vector3 pos = new Vector3(x, 0, z);
+                        Quaternion rot = Quaternion.Euler(0, r, 0);
+                        Instantiate(prefab, pos, rot, buildingRoot);
+                    }
                 }
             }
         }
+
+        // 最后刷新NPC
+        if (NPCManager.Instance != null) NPCManager.Instance.CheckConditions();
+
         Debug.Log("☁️ 云端数据加载完毕。");
     }
 
-    // ★★★ [工具] 安全读取 float (防止 Keys 报错) ★★★
-    float GetFloatSafe(LCObject data, string key)
+    // ★★★ 【新增】 获取模版数据的方法 ★★★
+    async Task<System.Collections.ObjectModel.ReadOnlyCollection<LCObject>> GetTemplateData()
     {
-        try
+        LCQuery<LCUser> q = LCUser.GetQuery();
+        q.WhereEqualTo("username", templateUserName);
+        LCUser adminUser = await q.First();
+
+        if (adminUser == null)
         {
-            var val = data[key];
-            if (val != null) return Convert.ToSingle(val);
+            Debug.LogError($"❌ 模版账号 [{templateUserName}] 不存在！");
+            return null;
         }
-        catch { }
-        return 0f;
+
+        LCQuery<LCObject> bq = new LCQuery<LCObject>("UserStructure");
+        bq.WhereEqualTo("owner", adminUser);
+        return await bq.Find();
     }
 
-    // ★★★ [工具] 安全读取 string ★★★
+    // 工具方法
+    float GetFloatSafe(LCObject data, string key)
+    {
+        try { var val = data[key]; if (val != null) return Convert.ToSingle(val); } catch { }
+        return 0f;
+    }
     string GetStringSafe(LCObject data, string key)
     {
-        try
-        {
-            var val = data[key];
-            if (val != null) return val as string;
-        }
-        catch { }
+        try { var val = data[key]; if (val != null) return val as string; } catch { }
         return null;
     }
 
-    // ★★★ 加载本地存档 (逻辑已修正为匹配你的数据库) ★★★
+    // (这个本地方法留着不删，但不调用它)
     private bool LoadLocalSave()
     {
         SaveData saveData = SaveSystem.Load();
         if (saveData == null || saveData.placeableObjectDataCollection.Count == 0) return false;
-
-        // 获取数据库引用
         var database = GameConfig.Instance.PlaceableObjectDatabase;
-
         foreach (var kvp in saveData.placeableObjectDataCollection)
         {
             PlaceableObjectData podata = kvp.Value;
-
-            // ★★★ 【修正】 使用 assetIdentifier 而不是 ID ★★★
-            // 因为你提供的 PlaceableObjectDatabase.cs 里只有 GetPlaceable(string)，没有 GetItem(int)
-            // assetIdentifier 是 Data 基类自带的，这样读取绝对安全
             Placeable placeableObj = database.GetPlaceable(podata.assetIdentifier);
-
             if (placeableObj != null)
             {
                 Vector3 worldPos = new Vector3(podata.gridPosition.x, 0, podata.gridPosition.z);
                 placementHandler.PlaceLoadedObject(placeableObj, worldPos, podata, 1.0f);
             }
-            else
-            {
-                Debug.LogWarning($"本地存档中的物品 [{podata.assetIdentifier}] 在数据库中未找到。");
-            }
         }
-        Debug.Log($"💾 本地存档加载成功: {saveData.placeableObjectDataCollection.Count} 个建筑");
         return true;
     }
 

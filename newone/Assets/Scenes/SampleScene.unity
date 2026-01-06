@@ -25523,6 +25523,7 @@ MonoBehaviour:
   - {fileID: 433240911157960772, guid: 635c368a09aa91a439fe97930b5cf6e7, type: 3}
   - {fileID: 652967780733626823, guid: 830e5eb8d617bd9428d96bf69ed774be, type: 3}
   topBarUI: {fileID: 1851384722}
+  templateUserName: admin
 --- !u!114 &677620948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35094,8 +35095,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.0000071806066
-  m_Size: 0.943328
+  m_Value: -0.0000035903033
+  m_Size: 0.9432307
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -47457,8 +47458,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336363736}
   m_HandleRect: {fileID: 336363735}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -55078,7 +55079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.000114}
+  m_AnchoredPosition: {x: -0.000020980835, y: 17.000042}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -66377,7 +66378,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1730626505}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
