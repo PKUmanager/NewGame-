@@ -26,9 +26,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         public event Action OnPlacementStateEnd;
 
         private readonly Dictionary<GridDataType, GridData> _gridDataMap = new();
-        private Vector3Int _lastDetectedPosition = Vector3Int.zero;
 
-        // 核心锚点：物体当前所在的有效位置
+        // 缓存变量
+        private Vector3Int _lastDetectedPosition = Vector3Int.zero;
         private Vector3Int _pendingGridPosition;
 
         private IPlacementState _stateHandler;
@@ -73,7 +73,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         {
             StopState();
             _isSelectionLocked = false;
-
             _grid.SetVisualizationState(true);
             _stateHandler = new PlacementState(assetIdentifier, _grid, previewSystem, _database, _gridDataMap, placementHandler);
 
@@ -82,31 +81,30 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             _hasSelection = false;
             OnPlacementStateStart?.Invoke();
-
             UpdatePreviewAtScreenCenter();
         }
 
+        // ★★★ 【核心修改】 统一移除入口 ★★★
+        // 无论 UI 上绑定的是什么 GridType，我们都无视它，直接启动 RemoveAllState (全删除模式)
         public void StartRemoving(GridDataType gridType)
         {
-            StopState();
-            _grid.SetVisualizationState(true);
-            _stateHandler = new RemoveState(_grid, previewSystem, _gridDataMap[gridType], placementHandler);
-
-            _inputManager.OnClicked += OnInputClick;
-            _inputManager.OnExit += ObjectGrouper.Instance.DisplayAll;
-            ObjectGrouper.Instance.DisplayOnlyObjectsOfSelectedGridType(gridType);
-
-            _hasSelection = false;
+            StartRemovingAll(); // 直接转接到全删除逻辑
         }
 
+        // ★★★ 全删除模式实现 ★★★
         public void StartRemovingAll()
         {
             StopState();
             _grid.SetVisualizationState(true);
+
+            // 使用 RemoveAllState：这个状态会自动检测格子上的所有层级（地形、建筑等）并删除
             _stateHandler = new RemoveAllState(_grid, previewSystem, _gridDataMap, placementHandler);
 
             _inputManager.OnClicked += OnInputClick;
             _inputManager.OnExit += ObjectGrouper.Instance.DisplayAll;
+
+            // ★★★ 关键：显示所有物体 ★★★
+            // 既然是全删除，就不能只显示某一类，必须让玩家看到所有能删的东西
             ObjectGrouper.Instance.DisplayAll();
 
             _hasSelection = false;
@@ -114,6 +112,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         public void Remove(PlacedObject placedObject)
         {
+            // 这里保留针对性删除，用于代码逻辑调用（比如脚本自动删除）
             var gridType = placedObject.placeable.GridType;
             StopState();
             _stateHandler = new RemoveState(_grid, previewSystem, _gridDataMap[gridType], placementHandler);
@@ -126,7 +125,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         {
             StopState();
             _isSelectionLocked = false;
-
             _stopStateAfterAction = true;
             _grid.SetVisualizationState(true);
             _stateHandler = new MovingState(target, _grid, previewSystem, _gridDataMap, placementHandler);
@@ -137,7 +135,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             _hasSelection = false;
             OnPlacementStateStart?.Invoke();
-
             UpdatePreviewAtScreenCenter();
         }
 
@@ -172,7 +169,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _gameConfig.PlacementLayerMask))
             {
                 Vector3Int centerGridPos = _grid.WorldToCell(hit.point);
-                // 同样应用边界检查
+                // 边界检查
                 if (_grid.IsWithinBounds(centerGridPos, new Vector2Int(1, 1)))
                 {
                     _stateHandler.UpdateState(centerGridPos);
@@ -188,7 +185,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         private void OnInputClick()
         {
-            // InputManager 已经过滤了 UI 点击，这里只需再次确认
+            // UI 遮挡保护
             if (InputManager.IsPointerOverUIObject()) return;
             if (_stateHandler == null) return;
 
@@ -197,8 +194,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             var gridPosition = _grid.WorldToCell(mousePosition);
 
-            // ★★★ 核心修复：点击地块外 -> 不响应 ★★★
-            // 使用最小尺寸 (1,1) 做基础检查，防止点击到地块外的空地触发放置
+            // 边界保护
             if (!_grid.IsWithinBounds(gridPosition, new Vector2Int(1, 1)))
             {
                 return;
@@ -206,9 +202,13 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             if (IsRemovalState())
             {
+                // 删除模式下，直接执行删除，不需要“锁定”步骤
                 _stateHandler.OnAction(gridPosition);
                 ForceSaveGame();
                 _hasSelection = false;
+
+                // 删除后刷新一下预览状态（比如从红色变回绿色，或者变空）
+                _stateHandler.UpdateState(gridPosition);
             }
             else
             {
@@ -255,7 +255,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 _stateHandler.OnRotation();
                 if (_hasSelection)
                 {
-                    // 旋转时，直接使用锚点位置，不再重新检测射线
                     _stateHandler.UpdateState(_pendingGridPosition);
                 }
             }
@@ -278,27 +277,18 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         {
             if (_stateHandler == null) return;
             if (_isSelectionLocked) return;
-
-            // UI 操作保护 (虽然 InputManager 已经做了，双重保险)
             if (InputManager.IsPointerOverUIObject()) return;
 
             var mousePosition = _inputManager.GetSelectedMapPosition();
-
-            // 如果 InputManager 说位置无效（比如手在 UI 上，或没触摸），直接返回
-            // 结果：_lastDetectedPosition 不变，物体不动。
             if (mousePosition == InputManager.InvalidPosition) return;
 
             var gridPosition = _grid.WorldToCell(mousePosition);
 
-            // ★★★ 核心修复：移动出边界 -> 保持不动 ★★★
-            // 如果检测到的位置超出了网格范围，直接 Return，不更新状态。
-            // 结果：物体停留在离开网格前的位置，而不是吸附到边缘。
             if (!_grid.IsWithinBounds(gridPosition, new Vector2Int(1, 1)))
             {
                 return;
             }
 
-            // 更新有效锚点
             _pendingGridPosition = gridPosition;
             _hasSelection = true;
 

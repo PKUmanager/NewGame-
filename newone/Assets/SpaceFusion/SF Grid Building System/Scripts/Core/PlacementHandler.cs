@@ -3,6 +3,7 @@ using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Utils;
+using SpaceFusion.SF_Grid_Building_System.Scripts.Managers; // 引用 UndoManager
 using UnityEngine;
 
 namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
@@ -66,12 +67,25 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 NPCManager.Instance.AddBuildingCount(attr.type);
             }
 
+            // ★★★ [新增] 记录放置操作 ★★★
+            if (UndoManager.Instance != null)
+            {
+                UndoManager.Instance.RecordPlaceAction(placedObject.data.guid);
+            }
+
             return placedObject.data.guid;
         }
 
         public string PlaceLoadedObject(Placeable placeableObj, Vector3 worldPosition, PlaceableObjectData podata, float cellSize)
         {
             var obj = Instantiate(placeableObj.Prefab);
+
+            // 确保挂载到正确父节点 (保持 HomeLoader 的逻辑)
+            if (HomeLoader.Instance != null && HomeLoader.Instance.buildingRoot != null)
+            {
+                obj.transform.SetParent(HomeLoader.Instance.buildingRoot);
+            }
+
             obj.AddComponent<PlacedObject>();
             var placedObject = obj.GetComponent<PlacedObject>();
             placedObject.data.gridPosition = podata.gridPosition;
@@ -80,10 +94,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             Quaternion gridRot = GetSafeGridRotation();
 
-            // ★★★ [核心修复] ★★★ 
-            // 必须使用【Prefab】来计算偏移量！
-            // 因为场景里的 'obj' 已经是歪的(跟着网格转了)，算出来的偏移量是错的。
-            // 使用 Prefab 算出来的才是最原始、最标准的中心点。
+            // 保持之前的修复：使用 Prefab 计算 Offset
             var offset = PlaceableUtils.CalculateOffset(placeableObj.Prefab, cellSize);
 
             Vector3 rotatedOffset = gridRot * PlaceableUtils.GetTotalOffset(offset, podata.direction);
@@ -97,8 +108,21 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 obj.transform.localScale = new Vector3(cellSize, targetHeight, cellSize);
             }
 
-            _placedObjectDictionary.Add(placedObject.data.guid, obj);
+            // 防止撤回时重复添加 key 导致报错
+            if (!_placedObjectDictionary.ContainsKey(placedObject.data.guid))
+            {
+                _placedObjectDictionary.Add(placedObject.data.guid, obj);
+            }
+
             ObjectGrouper.Instance.AddToGroup(obj, placeableObj.GridType);
+
+            // ★★★ [新增] 记录放置操作 (用于撤回“撤回删除”的操作) ★★★
+            // 只有当 UndoManager 没有在执行 Undo 时，RecordPlaceAction 才会生效，所以这里直接调用很安全
+            if (UndoManager.Instance != null)
+            {
+                UndoManager.Instance.RecordPlaceAction(placedObject.data.guid);
+            }
+
             return podata.guid;
         }
 
@@ -106,7 +130,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         {
             var placedObject = obj.GetComponent<PlacedObject>();
 
-            // ★★★ [核心修复] 移动时也必须用 Prefab 算 Offset ★★★
+            // 保持之前的修复
             var offset = PlaceableUtils.CalculateOffset(placedObject.placeable.Prefab, cellSize);
 
             Quaternion gridRot = GetSafeGridRotation();
@@ -127,9 +151,17 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             var obj = _placedObjectDictionary[guid];
             if (!obj) return;
 
+            var placedObjComp = obj.GetComponent<PlacedObject>();
+
+            // ★★★ [新增] 在删除前，记录数据用于撤回 ★★★
+            if (UndoManager.Instance != null && placedObjComp != null)
+            {
+                UndoManager.Instance.RecordRemoveAction(placedObjComp.data);
+            }
+
             if (NPCManager.Instance != null)
             {
-                var attr = obj.GetComponent<PlacedObject>().placeable.Prefab.GetComponent<BuildingAttribute>();
+                var attr = placedObjComp.placeable.Prefab.GetComponent<BuildingAttribute>();
                 if (attr == null) attr = obj.GetComponent<BuildingAttribute>();
 
                 if (attr != null)
@@ -138,7 +170,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 }
             }
 
-            obj.GetComponent<PlacedObject>().RemoveFromSaveData();
+            placedObjComp.RemoveFromSaveData();
             _placedObjectDictionary.Remove(guid);
             Destroy(obj);
         }
