@@ -106,7 +106,7 @@ public class AuthManager : MonoBehaviour
         {
             LCUser user = await LCUser.Login(uName, pwd);
 
-            if (statusText != null) statusText.text = "登录成功！欢迎 " + user.Username;
+            if (statusText != null) statusText.text = "登录成功！欢迎 ";
 
             PlayerPrefs.SetString(KEY_PLAYER_NAME, user.Username);
             PlayerPrefs.Save();
