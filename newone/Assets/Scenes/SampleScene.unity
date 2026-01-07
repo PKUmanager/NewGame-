@@ -35107,8 +35107,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.0000017951517
-  m_Size: 0.9433197
+  m_Value: 0.0000017951517
+  m_Size: 0.9433333
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -55091,7 +55091,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.000013}
+  m_AnchoredPosition: {x: -0.000020980835, y: 16.999943}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -68185,7 +68185,7 @@ PrefabInstance:
     - target: {fileID: 2691936996016739382, guid: 6ad444ab0f22ffa4eaf30a798243a0be, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1f38d8e06e13b704c9183a1cc6d278c7, type: 3}
+      objectReference: {fileID: 21300000, guid: 8910c0ce091bf9a4581abd5018ea5ae8, type: 3}
     - target: {fileID: 2798286960335587460, guid: 6ad444ab0f22ffa4eaf30a798243a0be, type: 3}
       propertyPath: m_Name
       value: Grid Shop & Remove UI
@@ -68253,14 +68253,14 @@ PrefabInstance:
     - target: {fileID: 6109393566856438265, guid: 6ad444ab0f22ffa4eaf30a798243a0be, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1f38d8e06e13b704c9183a1cc6d278c7, type: 3}
+      objectReference: {fileID: 21300000, guid: 8910c0ce091bf9a4581abd5018ea5ae8, type: 3}
     - target: {fileID: 6379442859456192698, guid: 6ad444ab0f22ffa4eaf30a798243a0be, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6420291555358337752, guid: 6ad444ab0f22ffa4eaf30a798243a0be, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6420291555358337752, guid: 6ad444ab0f22ffa4eaf30a798243a0be, type: 3}
       propertyPath: m_SizeDelta.y
