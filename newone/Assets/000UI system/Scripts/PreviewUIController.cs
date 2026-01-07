@@ -27,8 +27,9 @@ public class PreviewUIController : MonoBehaviour
         if (btnExitBuild != null)
             btnExitBuild.SetActive(false);
 
+        // ✅ 你要“预览时隐藏 FunctionButtons”
         if (functionButtons != null)
-            functionButtons.SetActive(true);
+            functionButtons.SetActive(false);
     }
 
     // ===== 取消预览 =====
@@ -47,6 +48,9 @@ public class PreviewUIController : MonoBehaviour
         if (btnExitBuild != null)
             btnExitBuild.SetActive(true);
 
+        // ✅ 退出预览后恢复 FunctionButtons 显示（按你需求：取消预览时需要关闭/打开？）
+        // 你之前说“取消预览的时候需要把functionbutton关闭”，那这里就保持 false；
+        // 如果你希望取消预览后显示功能按钮，把 false 改成 true。
         if (functionButtons != null)
             functionButtons.SetActive(false);
     }

@@ -30208,6 +30208,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: VisitPreviewCameraController, Assembly-CSharp
+        m_MethodName: ExitFriendHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &831284864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35095,8 +35107,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.0000035903033
-  m_Size: 0.9432307
+  m_Value: -0.0000017951517
+  m_Size: 0.9433197
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -38799,9 +38811,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PreviewCameraSwitcher, Assembly-CSharp
-        m_MethodName: SwitchToPreview
+      - m_Target: {fileID: 1668955782}
+        m_TargetAssemblyTypeName: FriendVisitPreviewCameraController, Assembly-CSharp
+        m_MethodName: EnterPreview
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -47458,7 +47470,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336363736}
   m_HandleRect: {fileID: 336363735}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -55079,7 +55091,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.000042}
+  m_AnchoredPosition: {x: -0.000020980835, y: 17.000013}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -60026,9 +60038,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PreviewCameraSwitcher, Assembly-CSharp
-        m_MethodName: SwitchToMain
+      - m_Target: {fileID: 1668955782}
+        m_TargetAssemblyTypeName: FriendVisitPreviewCameraController, Assembly-CSharp
+        m_MethodName: ExitPreview
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62920,6 +62932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668955780}
   - component: {fileID: 1668955779}
+  - component: {fileID: 1668955782}
   m_Layer: 0
   m_Name: CameraSystem
   m_TagString: Untagged
@@ -62956,6 +62969,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668955782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668955778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25777a4c5324c9f4c97ee89c3bca078e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1571251587}
+  npcCameraPrefabOrSceneCamera: {fileID: 948389252}
+  friendMainView: {fileID: 1941960693}
+  friendPreviewView: {fileID: 2027420509}
+  previewButton: {fileID: 1070308212}
+  cancelPreviewButton: {fileID: 1589025328}
+  functionButtons: {fileID: 151664579}
+  btnCancelBuild: {fileID: 0}
+  btnExitBuild: {fileID: 0}
 --- !u!1001 &1669817195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75409,6 +75443,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941254550}
   m_Mesh: {fileID: -8338350590738654856, guid: c29acb722f4afb349bf4271c1553adee, type: 3}
+--- !u!1 &1941960692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1941960693}
+  m_Layer: 0
+  m_Name: FriendMainView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1941960693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941960692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.2432104, y: -0.33036605, z: 0.08852133, w: 0.9076734}
+  m_LocalPosition: {x: 100, y: 120, z: -82.19583}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: -40, z: 0}
 --- !u!1 &1946738494
 GameObject:
   m_ObjectHideFlags: 0
@@ -79026,6 +79091,37 @@ Transform:
   - {fileID: 337919822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2027420508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2027420509}
+  m_Layer: 0
+  m_Name: FriendPreviewView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2027420509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027420508}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.09281083, y: -0.825532, z: 0.14237155, w: 0.5381575}
+  m_LocalPosition: {x: 38.7, y: 22.85, z: 24.20416}
+  m_LocalScale: {x: 0.62652, y: 0.6, z: 0.59001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 19.57, y: -113.8, z: 0}
 --- !u!4 &2029400004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8aad1db0251333b43b36de780007c73a, type: 3}
@@ -83983,6 +84079,8 @@ SceneRoots:
   - {fileID: 393605170}
   - {fileID: 146747705}
   - {fileID: 2026247072}
+  - {fileID: 1941960693}
+  - {fileID: 2027420509}
   - {fileID: 618862729}
   - {fileID: 1485030545}
   - {fileID: 595304344}
