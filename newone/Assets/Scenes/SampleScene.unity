@@ -6022,7 +6022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &170230689
 Transform:
   m_ObjectHideFlags: 0
@@ -35230,8 +35230,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.0012099344
-  m_Size: 0.9429426
+  m_Value: 0
+  m_Size: 0.9429958
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -55703,7 +55703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.020498}
+  m_AnchoredPosition: {x: -0.000020980835, y: 17.000011}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -66750,10 +66750,10 @@ MonoBehaviour:
   submitBtnObj: {fileID: 202431052}
   feedbackText: {fileID: 498510324}
   inputFieldComponent: {fileID: 2077318196}
-  plotB_MinLat: 39.99543
-  plotB_MaxLat: 39.9957
-  plotB_MinLon: 116.30969
-  plotB_MaxLon: 116.30984
+  plotB_MinLat: 39.99573
+  plotB_MaxLat: 39.99579
+  plotB_MinLon: 116.3097
+  plotB_MaxLon: 116.31
   questionB_Text: "\u56FE\u4E2D\u753B\u7684\u662F\u5730\u5757\u4E2D\u7684\u54EA\u4E2A\u7269\u4EF6\uFF1F"
   questionB_Image: {fileID: 21300000, guid: cac7353838822494285ca953cee3bf09, type: 3}
   answerB_Correct: "\u4E95\u76D6"
