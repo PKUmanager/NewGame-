@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Interfaces;
@@ -27,7 +27,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         private readonly Dictionary<GridDataType, GridData> _gridDataMap = new();
 
-        // »º´æ±äÁ¿
+        // ç¼“å­˜å˜é‡
         private Vector3Int _lastDetectedPosition = Vector3Int.zero;
         private Vector3Int _pendingGridPosition;
 
@@ -55,6 +55,8 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _gameConfig = GameConfig.Instance;
             _database = _gameConfig.PlaceableObjectDatabase;
             _inputManager = InputManager.Instance;
+
+            // åˆå§‹åŒ–æ—¶æ¸…ç©ºæ‰€æœ‰ç½‘æ ¼æ•°æ®ï¼Œé˜²æ­¢æ®‹ç•™
             foreach (GridDataType gridType in Enum.GetValues(typeof(GridDataType)))
             {
                 _gridDataMap[gridType] = new GridData();
@@ -62,11 +64,39 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             StopState();
         }
 
+        // =========================================================
+        // â˜…â˜…â˜… ã€æ ¸å¿ƒä¿®å¤ã€‘ å¼ºåŠ›é˜²å´©æºƒåŠ è½½ â˜…â˜…â˜…
+        // =========================================================
         public void InitializeLoadedObject(PlaceableObjectData podata)
         {
-            _stateHandler = new LoadedObjectPlacementState(podata, _grid, _database, _gridDataMap, placementHandler);
-            _stateHandler.OnAction(podata.gridPosition);
-            _stateHandler = null;
+            if (podata == null || string.IsNullOrEmpty(podata.assetIdentifier)) return;
+
+            // 1. å®‰å…¨æ£€æŸ¥ï¼šæ˜¯å¦æœ‰è¯¥ç‰©ä½“é…ç½®
+            var itemData = _database.GetPlaceable(podata.assetIdentifier);
+            if (itemData == null)
+            {
+                Debug.LogWarning($"[PlacementSystem] æ•°æ®åº“ä¸­æ‰¾ä¸åˆ°ç‰©ä½“: {podata.assetIdentifier}ï¼Œè·³è¿‡ã€‚");
+                return;
+            }
+
+            // 2. å°è¯•ç”Ÿæˆï¼Œå¦‚æœä½ç½®å†²çªï¼ˆå­—å…¸å·²åŒ…å«ï¼‰ï¼Œæ•è·é”™è¯¯å¹¶è·³è¿‡
+            try
+            {
+                _stateHandler = new LoadedObjectPlacementState(podata, _grid, _database, _gridDataMap, placementHandler);
+                _stateHandler.OnAction(podata.gridPosition);
+            }
+            catch (Exception e)
+            {
+                // â˜…â˜…â˜… å…³é”®ï¼šåæ‰é”™è¯¯ï¼Œä¸è¦è®©ç¨‹åºå´©æºƒ â˜…â˜…â˜…
+                // è¿™æ ·å³ä½¿å½“å‰ç‰©ä½“ä½ç½®é‡å ï¼ˆæŠ¥é”™ Dictionary already containsï¼‰ï¼Œ
+                // å¾ªç¯ä¹Ÿä¼šç»§ç»­ï¼Œåé¢çš„ç‰©ä½“ä¾ç„¶èƒ½åŠ è½½å‡ºæ¥ï¼
+                Debug.LogWarning($"âš ï¸ [è‡ªåŠ¨è·³è¿‡å†²çªç‰©ä½“] ç‰©ä½“ {podata.assetIdentifier} åœ¨ä½ç½® {podata.gridPosition} ç”Ÿæˆå¤±è´¥ã€‚åŸå› : {e.Message}");
+            }
+            finally
+            {
+                // æ— è®ºæˆåŠŸå¤±è´¥ï¼Œå¿…é¡»é‡ç½®çŠ¶æ€ï¼Œé˜²æ­¢å½±å“ä¸‹ä¸€ä¸ªç‰©ä½“
+                _stateHandler = null;
+            }
         }
 
         public void StartPlacement(string assetIdentifier)
@@ -84,27 +114,19 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             UpdatePreviewAtScreenCenter();
         }
 
-        // ¡ï¡ï¡ï ¡¾ºËĞÄĞŞ¸Ä¡¿ Í³Ò»ÒÆ³ıÈë¿Ú ¡ï¡ï¡ï
-        // ÎŞÂÛ UI ÉÏ°ó¶¨µÄÊÇÊ²Ã´ GridType£¬ÎÒÃÇ¶¼ÎŞÊÓËü£¬Ö±½ÓÆô¶¯ RemoveAllState (È«É¾³ıÄ£Ê½)
         public void StartRemoving(GridDataType gridType)
         {
-            StartRemovingAll(); // Ö±½Ó×ª½Óµ½È«É¾³ıÂß¼­
+            StartRemovingAll();
         }
 
-        // ¡ï¡ï¡ï È«É¾³ıÄ£Ê½ÊµÏÖ ¡ï¡ï¡ï
         public void StartRemovingAll()
         {
             StopState();
             _grid.SetVisualizationState(true);
-
-            // Ê¹ÓÃ RemoveAllState£ºÕâ¸ö×´Ì¬»á×Ô¶¯¼ì²â¸ñ×ÓÉÏµÄËùÓĞ²ã¼¶£¨µØĞÎ¡¢½¨ÖşµÈ£©²¢É¾³ı
             _stateHandler = new RemoveAllState(_grid, previewSystem, _gridDataMap, placementHandler);
 
             _inputManager.OnClicked += OnInputClick;
             _inputManager.OnExit += ObjectGrouper.Instance.DisplayAll;
-
-            // ¡ï¡ï¡ï ¹Ø¼ü£ºÏÔÊ¾ËùÓĞÎïÌå ¡ï¡ï¡ï
-            // ¼ÈÈ»ÊÇÈ«É¾³ı£¬¾Í²»ÄÜÖ»ÏÔÊ¾Ä³Ò»Àà£¬±ØĞëÈÃÍæ¼Ò¿´µ½ËùÓĞÄÜÉ¾µÄ¶«Î÷
             ObjectGrouper.Instance.DisplayAll();
 
             _hasSelection = false;
@@ -112,7 +134,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         public void Remove(PlacedObject placedObject)
         {
-            // ÕâÀï±£ÁôÕë¶ÔĞÔÉ¾³ı£¬ÓÃÓÚ´úÂëÂß¼­µ÷ÓÃ£¨±ÈÈç½Å±¾×Ô¶¯É¾³ı£©
             var gridType = placedObject.placeable.GridType;
             StopState();
             _stateHandler = new RemoveState(_grid, previewSystem, _gridDataMap[gridType], placementHandler);
@@ -169,7 +190,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _gameConfig.PlacementLayerMask))
             {
                 Vector3Int centerGridPos = _grid.WorldToCell(hit.point);
-                // ±ß½ç¼ì²é
                 if (_grid.IsWithinBounds(centerGridPos, new Vector2Int(1, 1)))
                 {
                     _stateHandler.UpdateState(centerGridPos);
@@ -185,7 +205,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         private void OnInputClick()
         {
-            // UI ÕÚµ²±£»¤
             if (InputManager.IsPointerOverUIObject()) return;
             if (_stateHandler == null) return;
 
@@ -194,7 +213,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             var gridPosition = _grid.WorldToCell(mousePosition);
 
-            // ±ß½ç±£»¤
             if (!_grid.IsWithinBounds(gridPosition, new Vector2Int(1, 1)))
             {
                 return;
@@ -202,12 +220,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
             if (IsRemovalState())
             {
-                // É¾³ıÄ£Ê½ÏÂ£¬Ö±½ÓÖ´ĞĞÉ¾³ı£¬²»ĞèÒª¡°Ëø¶¨¡±²½Öè
                 _stateHandler.OnAction(gridPosition);
                 ForceSaveGame();
                 _hasSelection = false;
-
-                // É¾³ıºóË¢ĞÂÒ»ÏÂÔ¤ÀÀ×´Ì¬£¨±ÈÈç´ÓºìÉ«±ä»ØÂÌÉ«£¬»òÕß±ä¿Õ£©
                 _stateHandler.UpdateState(gridPosition);
             }
             else

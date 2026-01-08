@@ -69,6 +69,20 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Utils
             };
         }
 
+        // ★★★ 【修复】 新增此方法，用于 HomeLoader 反向解析旋转 ★★★
+        public static ObjectDirection GetDirection(int rotationAngle)
+        {
+            // 处理负数角度或超过360的角度
+            int normalizedAngle = (rotationAngle % 360 + 360) % 360;
+
+            // 允许一定的误差 (比如存的是 90.0001)
+            if (normalizedAngle >= 45 && normalizedAngle < 135) return ObjectDirection.Left;   // ~90
+            if (normalizedAngle >= 135 && normalizedAngle < 225) return ObjectDirection.Up;    // ~180
+            if (normalizedAngle >= 225 && normalizedAngle < 315) return ObjectDirection.Right; // ~270
+
+            return ObjectDirection.Down; // ~0
+        }
+
         public static int GetRotationAngle(ObjectDirection direction)
         {
             return direction switch
@@ -125,7 +139,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Utils
             };
         }
 
-        // [还原] 使用你之前的 Switch 逻辑，而不是 Quaternion
         private static Vector3 GetRotatedPivotOffset(float rot, Vector3 pivotOffset)
         {
             var adjustedOffset = pivotOffset;

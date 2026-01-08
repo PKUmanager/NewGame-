@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
-using LeanCloud;           // 【修复错误1】 必须加这个！
+using LeanCloud;
 using LeanCloud.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
-using TMPro; // 引用 TMP
+using SpaceFusion.SF_Grid_Building_System.Scripts.Managers;
+using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
+using TMPro;
 
 public class BuildSaver : MonoBehaviour
 {
     public static BuildSaver Instance;
-
     public PlacementHandler placementHandler;
 
-    // ★★★ 【新增 1】 提示框 UI ★★★
     [Header("提示框设置")]
-    public GameObject tipPanel;  // 拖入 TipPanel
-    public TMP_Text tipText;     // 拖入 TipText
-
-
-
+    public GameObject tipPanel;
+    public TMP_Text tipText;
 
     void Awake()
     {
@@ -32,43 +29,36 @@ public class BuildSaver : MonoBehaviour
         LCUser currentUser = await LCUser.GetCurrent();
         if (currentUser == null)
         {
-            // 【修改】 没登录时弹窗提示
             ShowTip("❌ 请先登录！");
-            Debug.LogError("请先登录！");
             return;
         }
 
         if (placementHandler == null)
         {
-            Debug.LogError("找不到 PlacementHandler！");
+            ShowTip("❌ 系统错误：找不到 PlacementHandler");
             return;
         }
 
-        // 【修改】 开始上传时弹窗提示
-        ShowTip("⏳ 正在上传数据...");
-        Debug.Log("⏳ 正在上传数据...");
-
-        var allBuildings = placementHandler.GetAllBuildings();
+        ShowTip("⏳ 正在清理旧存档...");
+        Debug.Log("开始上传流程...");
 
         try
         {
-            // 1. 建立查询
-            LCQuery<LCObject> query = new LCQuery<LCObject>("UserStructure");
-            query.WhereEqualTo("owner", currentUser);
-
-            // ★★★ 关键：这一步是为了防止堆积 ★★★
-            // 为了保险，把 Limit 设大一点，确保能把旧的都查出来删掉
-            query.Limit(1000);
-
-            // 2. 先把旧数据全部找出来
-            var oldDataList = await query.Find();
-
-            // 3. 如果有旧数据，就批量删除
-            if (oldDataList.Count > 0)
+            // 1. 清理旧数据
+            while (true)
             {
+                LCQuery<LCObject> query = new LCQuery<LCObject>("UserStructure");
+                query.WhereEqualTo("owner", currentUser);
+                query.Limit(1000);
+                var oldDataList = await query.Find();
+                if (oldDataList.Count == 0) break;
                 await LCObject.DeleteAll(oldDataList);
             }
 
+            Debug.Log("✅ 云端旧存档已清空");
+
+            // 2. 准备新数据
+            var allBuildings = placementHandler.GetAllBuildings();
             List<LCObject> cloudDataList = new List<LCObject>();
 
             foreach (var info in allBuildings)
@@ -76,63 +66,60 @@ public class BuildSaver : MonoBehaviour
                 LCObject item = new LCObject("UserStructure");
                 item["owner"] = currentUser;
                 item["prefabName"] = info.name;
+
+                // 保留世界坐标 (仅供参考或网页展示)
                 item["posX"] = info.position.x;
                 item["posZ"] = info.position.z;
                 item["rotY"] = info.rotation;
 
+                // ★★★ 核心修复：保存绝对网格坐标 (GridX, GridZ) ★★★
+                // 这是解决偏移的关键，整数坐标永远准确
+                item["gridX"] = info.gridPosition.x;
+                item["gridZ"] = info.gridPosition.z;
+
                 cloudDataList.Add(item);
 
-                // 名字清洗逻辑
-                string safeName = info.name
-                    .Replace(" ", "_")
-                    .Replace("(", "")
-                    .Replace(")", "")
-                    .Replace("-", "_");
-
+                // 统计
+                string safeName = info.name.Replace(" ", "_").Replace("(", "").Replace(")", "").Replace("-", "_");
                 currentUser.Increment("stat_" + safeName, 1);
             }
 
+            // 3. 上传云端
             if (cloudDataList.Count > 0)
             {
                 await LCObject.SaveAll(cloudDataList);
             }
-
             await currentUser.Save();
 
-            // =================================================
-            // ★★★ 【修改】 成功时弹窗！ ★★★
-            // =================================================
-            ShowTip("保存成功！");
-            Debug.Log("上传完成！");
+            // ★★★ 核心修复：顺便强制保存一份到本地！ ★★★
+            // 这样你下次登录时，本地存档就是最新的，完全不需要去云端拉，避免了加载逻辑的潜在问题
+            if (GameManager.Instance != null && GameManager.Instance.saveData != null)
+            {
+                SaveSystem.Save(GameManager.Instance.saveData);
+                Debug.Log("✅ 本地存档已同步更新");
+            }
+
+            ShowTip("上传成功！");
+            Debug.Log($"上传完成！共 {cloudDataList.Count} 个物体。");
 
             if (TaskService.Instance != null)
                 TaskService.Instance.MarkUploadCompleted();
         }
         catch (LCException e)
         {
-            // =================================================
-            // ★★★ 【修改】 失败时弹窗！ ★★★
-            // =================================================
-            ShowTip("❌ 上传失败: " + e.Message);
-            Debug.LogError("❌ 上传失败: " + e.Message);
+            ShowTip(" 上传失败: " + e.Message);
+            Debug.LogError("上传出错: " + e.Message);
         }
     }
 
-    // ★★★ 【新增 2】 控制提示框自动消失 ★★★
     void ShowTip(string message)
     {
         if (tipPanel != null && tipText != null)
         {
-            tipPanel.SetActive(true); // 显示
-            tipText.text = message;   // 改字
-
-            // 停止之前的倒计时，重新开始
+            tipPanel.SetActive(true);
+            tipText.text = message;
             CancelInvoke("HideTip");
-            Invoke("HideTip", 2.0f);  // 2秒后自动执行 HideTip
-        }
-        else
-        {
-            Debug.Log("提示(未绑定UI): " + message);
+            Invoke("HideTip", 2.0f);
         }
     }
 
@@ -140,5 +127,4 @@ public class BuildSaver : MonoBehaviour
     {
         if (tipPanel != null) tipPanel.SetActive(false);
     }
-
 }
