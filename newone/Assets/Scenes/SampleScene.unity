@@ -35230,8 +35230,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.000005385455
-  m_Size: 0.9433283
+  m_Value: 0
+  m_Size: 0.9431511
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -47875,7 +47875,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336363736}
   m_HandleRect: {fileID: 336363735}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -55703,7 +55703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.000048}
+  m_AnchoredPosition: {x: -0.000020980835, y: 16.999975}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -66734,7 +66734,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740284006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faaa7dc21a708e0488135ff1ad60f3b1, type: 3}
   m_Name: 
@@ -66751,10 +66751,10 @@ MonoBehaviour:
   submitBtnObj: {fileID: 202431052}
   feedbackText: {fileID: 498510324}
   inputFieldComponent: {fileID: 2077318196}
-  plotB_MinLat: 39.99573
-  plotB_MaxLat: 39.99579
-  plotB_MinLon: 116.3097
-  plotB_MaxLon: 116.31
+  plotB_MinLat: 39.8
+  plotB_MaxLat: 40.1
+  plotB_MinLon: 116
+  plotB_MaxLon: 117
   questionB_Text: "\u56FE\u4E2D\u753B\u7684\u662F\u5730\u5757\u4E2D\u7684\u54EA\u4E2A\u7269\u4EF6\uFF1F"
   questionB_Image: {fileID: 21300000, guid: a865f2524e30c1a429f59d6c63c477aa, type: 3}
   answerB_Correct: "\u4E95\u76D6"
