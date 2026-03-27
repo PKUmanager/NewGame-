@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
@@ -45,6 +45,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             ObjectGrouper.Instance.AddToGroup(obj, placeableObj.GridType);
             _placedObjectDictionary.Add(placedObject.data.guid, obj);
 
+            // 同步全局评分：仅在放置成功（物体已加入字典）后累加
+            if (GameManager.Instance != null) GameManager.Instance.AddObjectScore(placeableObj);
+
             var attr = placeableObj.Prefab.GetComponent<BuildingAttribute>();
             if (attr != null && NPCManager.Instance != null) NPCManager.Instance.AddBuildingCount(attr.type);
             if (UndoManager.Instance != null) UndoManager.Instance.RecordPlaceAction(placedObject.data.guid);
@@ -78,6 +81,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (!_placedObjectDictionary.ContainsKey(placedObject.data.guid))
             {
                 _placedObjectDictionary.Add(placedObject.data.guid, obj);
+
+                // 同步全局评分：仅在首次加入字典时累加（避免无法正确移除导致分数不同步）
+                if (GameManager.Instance != null) GameManager.Instance.AddObjectScore(placeableObj);
             }
 
             ObjectGrouper.Instance.AddToGroup(obj, placeableObj.GridType);
@@ -103,6 +109,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             var obj = _placedObjectDictionary[guid];
             if (!obj) return;
             var placedObjComp = obj.GetComponent<PlacedObject>();
+
+            // 同步全局评分：移除时扣除对应物品分数
+            if (GameManager.Instance != null && placedObjComp != null && placedObjComp.placeable != null)
+                GameManager.Instance.RemoveObjectScore(placedObjComp.placeable);
+
             if (UndoManager.Instance != null && placedObjComp != null) UndoManager.Instance.RecordRemoveAction(placedObjComp.data);
             if (NPCManager.Instance != null)
             {

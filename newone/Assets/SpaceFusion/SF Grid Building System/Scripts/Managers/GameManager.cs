@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
 using SpaceFusion.SF_Grid_Building_System.Scripts.SaveSystem;
+using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Utils;
 using UnityEngine;
 
@@ -20,6 +21,20 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         public Camera SceneCamera { get; private set; }
 
         public SaveData saveData;
+
+        [Header("当前总分")]
+        [SerializeField] private int _totalCost;
+        [SerializeField] private int _totalSafety;
+        [SerializeField] private int _totalAesthetics;
+        [SerializeField] private int _totalEnvironment;
+        [SerializeField] private int _totalComfort;
+
+        [Header("场地目标标准")]
+        [SerializeField] private int _targetCost = 150;         // Cost <= 150
+        [SerializeField] private int _targetSafety = 200;       // Safety >= 200
+        [SerializeField] private int _targetAesthetics = 100;  // Aesthetics >= 100
+        [SerializeField] private int _targetEnvironment = 150; // Environment >= 150
+        [SerializeField] private int _targetComfort = 80;      // Comfort >= 80
 
         private bool _enableSaveSystem;
 
@@ -82,6 +97,67 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
             {
                 SaveSystem.SaveSystem.Save(saveData);
             }
+        }
+
+        public void AddObjectScore(Placeable data)
+        {
+            if (data == null) return;
+
+            _totalCost += data.Cost;
+            _totalSafety += data.Safety;
+            _totalAesthetics += data.Aesthetics;
+            _totalEnvironment += data.Environment;
+            _totalComfort += data.Comfort;
+
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.UpdateTotalStatsUI(
+                    _totalCost,
+                    _totalSafety,
+                    _totalAesthetics,
+                    _totalEnvironment,
+                    _totalComfort,
+                    _targetCost,
+                    _targetSafety,
+                    _targetAesthetics,
+                    _targetEnvironment,
+                    _targetComfort);
+            }
+        }
+
+        public void RemoveObjectScore(Placeable data)
+        {
+            if (data == null) return;
+
+            _totalCost -= data.Cost;
+            _totalSafety -= data.Safety;
+            _totalAesthetics -= data.Aesthetics;
+            _totalEnvironment -= data.Environment;
+            _totalComfort -= data.Comfort;
+
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.UpdateTotalStatsUI(
+                    _totalCost,
+                    _totalSafety,
+                    _totalAesthetics,
+                    _totalEnvironment,
+                    _totalComfort,
+                    _targetCost,
+                    _targetSafety,
+                    _targetAesthetics,
+                    _targetEnvironment,
+                    _targetComfort);
+            }
+        }
+
+        public bool CheckLevelPass()
+        {
+            return _totalCost <= _targetCost
+                   && _totalSafety >= _targetSafety
+                   && _totalAesthetics >= _targetAesthetics
+                   && _totalEnvironment >= _targetEnvironment
+                   && _totalComfort >= _targetComfort;
         }
     }
 }

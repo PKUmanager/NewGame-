@@ -18,3 +18,8 @@ MonoBehaviour:
   <GridType>k__BackingField: 0
   <ObjectGroupInfo>k__BackingField: 1
   <DynamicSize>k__BackingField: 0
+  <Cost>k__BackingField: 30
+  <Safety>k__BackingField: -10
+  <Aesthetics>k__BackingField: 0
+  <Environment>k__BackingField: 0
+  <Comfort>k__BackingField: 15

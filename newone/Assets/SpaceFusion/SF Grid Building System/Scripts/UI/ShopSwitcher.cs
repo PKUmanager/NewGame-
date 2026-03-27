@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
+using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
+using TMPro;
 using UnityEngine;
 
 namespace SpaceFusion.SF_Grid_Building_System.Scripts.UI {
@@ -8,6 +10,17 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.UI {
     /// </summary>
     public class ShopSwitcher : MonoBehaviour {
         private readonly Dictionary<ObjectGroup, GameObject> _shopDir = new();
+
+        [Header("物品属性详情面板（点选物品时刷新）")]
+        [SerializeField] private TextMeshProUGUI _costText;
+        [SerializeField] private TextMeshProUGUI _safetyText;
+        [SerializeField] private TextMeshProUGUI _aestheticsText;
+        [SerializeField] private TextMeshProUGUI _environmentText;
+        [SerializeField] private TextMeshProUGUI _comfortText;
+
+        private static string FormatSigned(int value) {
+            return value > 0 ? $"+{value}" : value.ToString();
+        }
 
         public void Start() {
             var shops = GetComponentsInChildren<ShopInitializer>(true);
@@ -20,6 +33,16 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.UI {
             foreach (var kvp in _shopDir) {
                 kvp.Value.SetActive(kvp.Key == targetGroup);
             }
+        }
+
+        public void Setup(Placeable itemData) {
+            if (itemData == null) return;
+
+            if (_costText != null) _costText.text = $"成本: {itemData.Cost}";
+            if (_safetyText != null) _safetyText.text = $"安全: {FormatSigned(itemData.Safety)}";
+            if (_aestheticsText != null) _aestheticsText.text = $"美观: {FormatSigned(itemData.Aesthetics)}";
+            if (_environmentText != null) _environmentText.text = $"环境: {FormatSigned(itemData.Environment)}";
+            if (_comfortText != null) _comfortText.text = $"舒适: {FormatSigned(itemData.Comfort)}";
         }
     }
 }

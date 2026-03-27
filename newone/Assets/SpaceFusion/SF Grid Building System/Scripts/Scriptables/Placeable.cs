@@ -1,4 +1,4 @@
-﻿using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
+using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using UnityEngine;
 
 namespace SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables {
@@ -32,6 +32,27 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables {
                 "Objects with dynamic size will automatically adapt the transform scale to match the grid size (Especially useful for 1x1 terrain data in grids with different cell size, but works with every object)")]
         [field: SerializeField]
         public bool DynamicSize { get; private set; }
+
+        [field: Header("五维属性")]
+        [field: Range(0, 100)]
+        [field: SerializeField]
+        public int Cost { get; private set; }
+
+        [field: Range(-50, 50)]
+        [field: SerializeField]
+        public int Safety { get; private set; }
+
+        [field: Range(-50, 50)]
+        [field: SerializeField]
+        public int Aesthetics { get; private set; }
+
+        [field: Range(-50, 50)]
+        [field: SerializeField]
+        public int Environment { get; private set; }
+
+        [field: Range(-50, 50)]
+        [field: SerializeField]
+        public int Comfort { get; private set; }
 
         private Vector3 _autoCalculatedPivotOffset;
 
