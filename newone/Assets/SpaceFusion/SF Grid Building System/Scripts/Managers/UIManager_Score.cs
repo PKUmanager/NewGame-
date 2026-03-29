@@ -40,20 +40,37 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
             if (_totalCostText != null)
             {
                 _totalCostText.text = $"成本: {currentCost}/{targetCost}";
-                _totalCostText.color = currentCost > targetCost ? Color.red : Color.white;
+                // Cost 越大越糟：超过目标红色，否则绿色
+                _totalCostText.color = currentCost > targetCost ? Color.red : Color.green;
             }
 
             if (_totalSafetyText != null)
+            {
                 _totalSafetyText.text = $"安全: {currentSafety}/{targetSafety}";
+                // Safety 越大越好：未达标红色，达标绿色
+                _totalSafetyText.color = currentSafety < targetSafety ? Color.red : Color.green;
+            }
 
             if (_totalAestheticsText != null)
+            {
                 _totalAestheticsText.text = $"美观: {currentAesthetics}/{targetAesthetics}";
+                // Aesthetics 越大越好：未达标红色，达标绿色
+                _totalAestheticsText.color = currentAesthetics < targetAesthetics ? Color.red : Color.green;
+            }
 
             if (_totalEnvironmentText != null)
+            {
                 _totalEnvironmentText.text = $"环境: {currentEnvironment}/{targetEnvironment}";
+                // Environment 越大越好：未达标红色，达标绿色
+                _totalEnvironmentText.color = currentEnvironment < targetEnvironment ? Color.red : Color.green;
+            }
 
             if (_totalComfortText != null)
+            {
                 _totalComfortText.text = $"舒适: {currentComfort}/{targetComfort}";
+                // Comfort 越大越好：未达标红色，达标绿色
+                _totalComfortText.color = currentComfort < targetComfort ? Color.red : Color.green;
+            }
         }
     }
 }
