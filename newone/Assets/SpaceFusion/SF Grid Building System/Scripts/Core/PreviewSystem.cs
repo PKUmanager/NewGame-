@@ -19,6 +19,8 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         private GameObject _cellIndicator;
         private GameConfig _config;
         private float _cellSize;
+        
+        public Transform CurrentPreviewTransform => _previewObject != null ? _previewObject.transform : null;
 
         /// <summary>
         /// objects with dynamic size always use exactly 1 grid cell and their transform scale will be modified to fit into 1 cell, independent of the cellSize

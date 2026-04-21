@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Scriptables;
@@ -59,14 +59,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Utils
 
         public static ObjectDirection GetNextDir(ObjectDirection dir)
         {
-            return dir switch
-            {
-                ObjectDirection.Down => ObjectDirection.Left,
-                ObjectDirection.Left => ObjectDirection.Up,
-                ObjectDirection.Up => ObjectDirection.Right,
-                ObjectDirection.Right => ObjectDirection.Down,
-                _ => ObjectDirection.Down
-            };
+            // Enforce a strict 4-way 90° cycle: Down -> Left -> Up -> Right -> Down.
+            var normalized = ((int)dir % 4 + 4) % 4;
+            return (ObjectDirection)((normalized + 1) % 4);
         }
 
         // ★★★ 【修复】 新增此方法，用于 HomeLoader 反向解析旋转 ★★★

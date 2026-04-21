@@ -31,10 +31,10 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
 
         [Header("场地目标标准")]
         [SerializeField] private int _targetCost = 1000;         // 成本 ≤
-        [SerializeField] private int _targetSafety = 0;          // 安全 ≥
+        [SerializeField] private int _targetSafety = 100;        // 安全 ≥
         [SerializeField] private int _targetAesthetics = 500;    // 美观 ≥
-        [SerializeField] private int _targetEnvironment = 400;   // 环境 ≥
-        [SerializeField] private int _targetComfort = 200;       // 舒适 ≥
+        [SerializeField] private int _targetEnvironment = 500;   // 环境 ≥
+        [SerializeField] private int _targetComfort = 300;       // 舒适 ≥
 
         private bool _enableSaveSystem;
 

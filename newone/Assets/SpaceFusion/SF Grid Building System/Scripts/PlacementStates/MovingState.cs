@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Core;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Interfaces;
@@ -68,7 +68,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.PlacementStates {
 
         public void OnRotation() {
             _currentDirection = PlaceableUtils.GetNextDir(_currentDirection);
-            _correctedObjectSize = PlaceableUtils.GetOccupiedCells(_placeable.placeable, _placeable.data.direction, _grid.CellSize);
+            // Use the rotated direction for occupancy calculation, otherwise left/right states
+            // can be validated against stale size and appear to only flip front/back.
+            _correctedObjectSize = PlaceableUtils.GetOccupiedCells(_placeable.placeable, _currentDirection, _grid.CellSize);
             UpdateState(_currentGridPosition);
         }
 

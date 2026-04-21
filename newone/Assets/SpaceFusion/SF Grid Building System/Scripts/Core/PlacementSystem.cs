@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Enums;
 using SpaceFusion.SF_Grid_Building_System.Scripts.Interfaces;
@@ -21,6 +21,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 
         [SerializeField]
         private PlacementHandler placementHandler;
+        
+        [SerializeField]
+        private FloatingUIController floatingUIController;
 
         public event Action OnPlacementStateStart;
         public event Action OnPlacementStateEnd;
@@ -55,6 +58,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _gameConfig = GameConfig.Instance;
             _database = _gameConfig.PlaceableObjectDatabase;
             _inputManager = InputManager.Instance;
+            if (floatingUIController != null)
+            {
+                floatingUIController.BindActions(RotateStructure, OnFloatingConfirmClick, OnFloatingCancelClick);
+                floatingUIController.HideMenu();
+            }
 
             // 初始化时清空所有网格数据，防止残留
             foreach (GridDataType gridType in Enum.GetValues(typeof(GridDataType)))
@@ -112,6 +120,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _hasSelection = false;
             OnPlacementStateStart?.Invoke();
             UpdatePreviewAtScreenCenter();
+            ShowFloatingMenuOnPreview();
         }
 
         public void StartRemoving(GridDataType gridType)
@@ -157,11 +166,13 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _hasSelection = false;
             OnPlacementStateStart?.Invoke();
             UpdatePreviewAtScreenCenter();
+            ShowFloatingMenuOnPreview();
         }
 
         public void StopState()
         {
             _grid.SetVisualizationState(false);
+            if (floatingUIController != null) floatingUIController.HideMenu();
             if (_stateHandler == null) return;
 
             _stopStateAfterAction = false;
@@ -263,6 +274,31 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             StopState();
         }
 
+        public bool UndoRemovePlacedObjectByGuid(string guid)
+        {
+            if (placementHandler == null || string.IsNullOrEmpty(guid))
+            {
+                return false;
+            }
+
+            var placedObject = placementHandler.GetPlacedObjectByGuid(guid);
+            if (placedObject == null || placedObject.placeable == null)
+            {
+                return false;
+            }
+
+            var gridType = placedObject.placeable.GridType;
+            var gridPosition = placedObject.data.gridPosition;
+
+            if (_gridDataMap.TryGetValue(gridType, out var gridData) && !gridData.IsPlaceable(gridPosition, Vector2Int.one))
+            {
+                gridData.RemoveObjectPositions(gridPosition);
+            }
+
+            placementHandler.RemoveObjectPositions(guid);
+            return true;
+        }
+
         private void RotateStructure()
         {
             if (_stateHandler != null)
@@ -280,6 +316,28 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             return _stateHandler is RemoveState || _stateHandler is RemoveAllState;
         }
 
+        private void OnFloatingConfirmClick()
+        {
+            ConfirmPlacement();
+            if (floatingUIController != null) floatingUIController.HideMenu();
+        }
+
+        private void OnFloatingCancelClick()
+        {
+            CancelPlacement();
+            if (floatingUIController != null) floatingUIController.HideMenu();
+        }
+
+        private void ShowFloatingMenuOnPreview()
+        {
+            if (floatingUIController == null || previewSystem == null) return;
+            var previewTransform = previewSystem.CurrentPreviewTransform;
+            if (previewTransform != null)
+            {
+                floatingUIController.ShowMenu(previewTransform);
+            }
+        }
+
         private void ForceSaveGame()
         {
             if (GameManager.Instance != null && GameManager.Instance.saveData != null)
@@ -291,6 +349,10 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         private void Update()
         {
             if (_stateHandler == null) return;
+            if (!IsRemovalState())
+            {
+                ShowFloatingMenuOnPreview();
+            }
             if (_isSelectionLocked) return;
             if (InputManager.IsPointerOverUIObject()) return;
 

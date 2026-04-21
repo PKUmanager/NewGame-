@@ -86,12 +86,16 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
 
         public void Undo()
         {
+            var placementSystem = PlacementSystem.Instance;
+            if (placementSystem != null && placementSystem.UndoRemovePlacedObjectByGuid(_guid))
+            {
+                return;
+            }
+
+            // Fallback for scenes where PlacementSystem is unavailable.
             var handler = Object.FindObjectOfType<PlacementHandler>();
             if (handler != null)
             {
-                // 注意：这里只删除了物体，如果你有 GridData (红/绿格子占用)，
-                // 可能需要重置 GridData。但在目前的架构下，删除物体通常足够。
-                // 如果需要清除格子占用，可以在 PlacementHandler 中处理，或者玩家点击格子时会自动刷新。
                 handler.RemoveObjectPositions(_guid);
             }
         }
@@ -106,29 +110,35 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
 
         public void Undo()
         {
+            var placementSystem = PlacementSystem.Instance;
+            if (placementSystem != null)
+            {
+                placementSystem.InitializeLoadedObject(_data);
+                if (GameManager.Instance != null && GameManager.Instance.saveData != null)
+                {
+                    GameManager.Instance.saveData.AddData(_data);
+                }
+
+                return;
+            }
+
             var handler = Object.FindObjectOfType<PlacementHandler>();
             var config = GameConfig.Instance;
+            if (handler == null || config == null) return;
 
-            if (handler != null && config != null)
+            var db = config.PlaceableObjectDatabase;
+            Placeable placeable = db.GetPlaceable(_data.assetIdentifier);
+            if (placeable == null) return;
+
+            var grid = Object.FindObjectOfType<PlacementGrid>();
+            if (grid == null) return;
+
+            Vector3 worldPos = grid.CellToWorld(_data.gridPosition);
+            handler.PlaceLoadedObject(placeable, worldPos, _data, grid.CellSize);
+
+            if (GameManager.Instance != null && GameManager.Instance.saveData != null)
             {
-                var db = config.PlaceableObjectDatabase;
-                Placeable placeable = db.GetPlaceable(_data.assetIdentifier);
-
-                if (placeable != null)
-                {
-                    // 获取 Grid 引用以计算世界坐标
-                    var grid = Object.FindObjectOfType<PlacementGrid>();
-                    Vector3 worldPos = grid.CellToWorld(_data.gridPosition);
-
-                    // 重新生成物体
-                    handler.PlaceLoadedObject(placeable, worldPos, _data, grid.CellSize);
-
-                    // 恢复 SaveData (PlaceLoadedObject 内部通常会处理，或者 PlacementHandler 需要处理)
-                    if (GameManager.Instance != null)
-                    {
-                        GameManager.Instance.saveData.AddData(_data);
-                    }
-                }
+                GameManager.Instance.saveData.AddData(_data);
             }
         }
     }

@@ -19,7 +19,7 @@ MonoBehaviour:
   <ObjectGroupInfo>k__BackingField: 1
   <DynamicSize>k__BackingField: 0
   <Cost>k__BackingField: 10
-  <Safety>k__BackingField: 5
+  <Safety>k__BackingField: 50
   <Aesthetics>k__BackingField: 15
   <Environment>k__BackingField: 20
   <Comfort>k__BackingField: -20

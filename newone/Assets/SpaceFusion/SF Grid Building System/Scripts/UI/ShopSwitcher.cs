@@ -38,11 +38,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.UI {
         public void Setup(Placeable itemData) {
             if (itemData == null) return;
 
-            if (_costText != null) _costText.text = $"成本: {itemData.Cost}";
-            if (_safetyText != null) _safetyText.text = $"安全: {FormatSigned(itemData.Safety)}";
-            if (_aestheticsText != null) _aestheticsText.text = $"美观: {FormatSigned(itemData.Aesthetics)}";
-            if (_environmentText != null) _environmentText.text = $"环境: {FormatSigned(itemData.Environment)}";
-            if (_comfortText != null) _comfortText.text = $"舒适: {FormatSigned(itemData.Comfort)}";
+            if (_costText != null) _costText.text = $"{itemData.Cost}";
+            if (_safetyText != null) _safetyText.text = $"{FormatSigned(itemData.Safety)}";
+            if (_aestheticsText != null) _aestheticsText.text = $"{FormatSigned(itemData.Aesthetics)}";
+            if (_environmentText != null) _environmentText.text = $" {FormatSigned(itemData.Environment)}";
+            if (_comfortText != null) _comfortText.text = $"{FormatSigned(itemData.Comfort)}";
         }
     }
 }

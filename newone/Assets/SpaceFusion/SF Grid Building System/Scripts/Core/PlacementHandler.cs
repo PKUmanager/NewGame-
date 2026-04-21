@@ -125,6 +125,16 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             Destroy(obj);
         }
 
+        public PlacedObject GetPlacedObjectByGuid(string guid)
+        {
+            if (!_placedObjectDictionary.TryGetValue(guid, out var obj) || obj == null)
+            {
+                return null;
+            }
+
+            return obj.GetComponent<PlacedObject>();
+        }
+
         public void ClearEnvironment()
         {
             foreach (var kvp in _placedObjectDictionary)
