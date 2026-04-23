@@ -16436,6 +16436,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3650735185504098567, guid: aa9e7e529b1a78b4599782c8fad2e2f3, type: 3}
   m_PrefabInstance: {fileID: 432442938}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &433898319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 433898321}
+  - component: {fileID: 433898320}
+  m_Layer: 0
+  m_Name: GameManagerpartical
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &433898320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433898319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ac7c2e430293f48bdae94047658838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashPrefab: {fileID: 15183445183708112, guid: 5b0ec20474002e244b2d1bf6a2d3ff38, type: 3}
+--- !u!4 &433898321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433898319}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.1503582, y: 0, z: 185.35376}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &435117713
 GameObject:
   m_ObjectHideFlags: 0
@@ -23265,6 +23310,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SpaceFusion.SF_Grid_Building_System.Scripts.Core.PlacementSystem,
           Assembly-CSharp
         m_MethodName: ConfirmPlacement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 433898320}
+        m_TargetAssemblyTypeName: PlantingManager, Assembly-CSharp
+        m_MethodName: PlaySplashEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -36231,8 +36288,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.0000017951548
-  m_Size: 0.94333345
+  m_Value: -0.0000071806066
+  m_Size: 0.9433333
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -57132,7 +57189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.000036}
+  m_AnchoredPosition: {x: -0.000020980835, y: 17.00011}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -86697,6 +86754,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2086612671}
+  - {fileID: 433898321}
   - {fileID: 799104222}
   - {fileID: 1668955780}
   - {fileID: 170230689}
