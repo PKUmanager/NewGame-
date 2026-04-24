@@ -10,6 +10,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        public event Action<int, int, int, int, int> OnTotalStatsChanged;
 
         [field: SerializeField]
         public PlacementGrid PlacementGrid { get; private set; }
@@ -37,6 +38,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         [SerializeField] private int _targetComfort = 300;       // 舒适 ≥
 
         private bool _enableSaveSystem;
+
+        public int TotalSafety => _totalSafety;
+        public int TotalAesthetics => _totalAesthetics;
+        public int TotalEnvironment => _totalEnvironment;
+        public int TotalComfort => _totalComfort;
 
         private void Awake()
         {
@@ -123,6 +129,8 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                     _targetEnvironment,
                     _targetComfort);
             }
+
+            NotifyTotalStatsChanged();
         }
 
         public void RemoveObjectScore(Placeable data)
@@ -149,6 +157,18 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                     _targetEnvironment,
                     _targetComfort);
             }
+
+            NotifyTotalStatsChanged();
+        }
+
+        private void NotifyTotalStatsChanged()
+        {
+            OnTotalStatsChanged?.Invoke(
+                _totalCost,
+                _totalSafety,
+                _totalAesthetics,
+                _totalEnvironment,
+                _totalComfort);
         }
 
         public bool CheckLevelPass()

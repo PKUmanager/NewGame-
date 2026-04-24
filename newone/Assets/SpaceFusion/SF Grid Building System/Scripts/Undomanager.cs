@@ -11,10 +11,10 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
     {
         public static UndoManager Instance;
 
-        // ÀúÊ·¼ÇÂ¼Õ»
+        // ï¿½ï¿½Ê·ï¿½ï¿½Â¼Õ»
         private Stack<IUndoCommand> _undoStack = new Stack<IUndoCommand>();
 
-        // Ëø£º·ÀÖ¹ÔÚÖ´ÐÐ³·»Ø²Ù×÷Ê±£¬ÔÙ´Î´¥·¢¡°¼ÇÂ¼²Ù×÷¡±£¬µ¼ÖÂËÀÑ­»·
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½Ö´ï¿½Ð³ï¿½ï¿½Ø²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ù´Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
         public bool IsUndoing { get; private set; } = false;
 
         private void Awake()
@@ -23,62 +23,62 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
             Instance = this;
         }
 
-        // === Íâ²¿µ÷ÓÃ½Ó¿Ú ===
+        // === ï¿½â²¿ï¿½ï¿½ï¿½Ã½Ó¿ï¿½ ===
 
-        // ¼ÇÂ¼£º¸Õ·ÅÖÃÁËÒ»¸öÎïÌå -> ³·»ØÊ±ÐèÒªÉ¾³ýËü
+        // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Õ·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½
         public void RecordPlaceAction(string guid)
         {
             if (IsUndoing) return;
             _undoStack.Push(new UndoPlaceCommand(guid));
-            // Debug.Log($"[Undo] ¼ÇÂ¼·ÅÖÃ: {guid}, ÀúÊ·Õ»: {_undoStack.Count}");
+            // Debug.Log($"[Undo] ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½: {guid}, ï¿½ï¿½Ê·Õ»: {_undoStack.Count}");
         }
 
-        // ¼ÇÂ¼£º¸ÕÉ¾³ýÁËÒ»¸öÎïÌå -> ³·»ØÊ±ÐèÒªÖØÐÂ·ÅÖÃËü
+        // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Òªï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½
         public void RecordRemoveAction(PlaceableObjectData data)
         {
             if (IsUndoing) return;
             _undoStack.Push(new UndoRemoveCommand(data));
-            // Debug.Log($"[Undo] ¼ÇÂ¼É¾³ý: {data.assetIdentifier}, ÀúÊ·Õ»: {_undoStack.Count}");
+            // Debug.Log($"[Undo] ï¿½ï¿½Â¼É¾ï¿½ï¿½: {data.assetIdentifier}, ï¿½ï¿½Ê·Õ»: {_undoStack.Count}");
         }
 
-        // Ö´ÐÐ³·»Ø
+        // Ö´ï¿½Ð³ï¿½ï¿½ï¿½
         public void PerformUndo()
         {
             if (_undoStack.Count == 0)
             {
-                Debug.Log("Ã»ÓÐ¿ÉÒÔ³·»ØµÄ²Ù×÷¡£");
+                Debug.Log("Ã»ï¿½Ð¿ï¿½ï¿½Ô³ï¿½ï¿½ØµÄ²ï¿½ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
 
-            IsUndoing = true; // ÉÏËø
+            IsUndoing = true; // ï¿½ï¿½ï¿½ï¿½
 
             try
             {
                 IUndoCommand command = _undoStack.Pop();
                 command.Undo();
 
-                // ³·»ØºóÇ¿ÖÆ±£´æÒ»´Î£¬È·±£ SaveData Êý¾ÝÒ»ÖÂ
+                // ï¿½ï¿½ï¿½Øºï¿½Ç¿ï¿½Æ±ï¿½ï¿½ï¿½Ò»ï¿½Î£ï¿½È·ï¿½ï¿½ SaveData ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
                 if (GameManager.Instance != null && GameManager.Instance.saveData != null)
                     SaveSystem.SaveSystem.Save(GameManager.Instance.saveData);
             }
             catch (System.Exception e)
             {
-                Debug.LogError("³·»ØÊ§°Ü: " + e.Message);
+                Debug.LogError("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: " + e.Message);
             }
             finally
             {
-                IsUndoing = false; // ½âËø
+                IsUndoing = false; // ï¿½ï¿½ï¿½ï¿½
             }
         }
     }
 
-    // === ÃüÁîÄ£Ê½½Ó¿Ú ===
+    // === ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½Ó¿ï¿½ ===
     public interface IUndoCommand
     {
         void Undo();
     }
 
-    // ³·»Ø¡°·ÅÖÃ¡±²Ù×÷ -> Ö´ÐÐÉ¾³ý
+    // ï¿½ï¿½ï¿½Ø¡ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½ï¿½ï¿½ï¿½ï¿½ -> Ö´ï¿½ï¿½É¾ï¿½ï¿½
     public class UndoPlaceCommand : IUndoCommand
     {
         private string _guid;
@@ -101,11 +101,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         }
     }
 
-    // ³·»Ø¡°É¾³ý¡±²Ù×÷ -> Ö´ÐÐÖØÐÂ·ÅÖÃ
+    // ï¿½ï¿½ï¿½Ø¡ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> Ö´ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½
     public class UndoRemoveCommand : IUndoCommand
     {
         private PlaceableObjectData _data;
-        // ±£´æÊý¾Ý¸±±¾
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½
         public UndoRemoveCommand(PlaceableObjectData data) => _data = data;
 
         public void Undo()

@@ -47,11 +47,11 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             _previewObject = Instantiate(selectedObject.Prefab);
             _isDynamicSize = selectedObject.DynamicSize;
 
-            // [ºËÐÄÐÞ¸Ä] Ô¤ÀÀÊ±µÄËõ·ÅÂß¼­
+            // [ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½] Ô¤ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
             if (_isDynamicSize)
             {
-                // Èç¹ûÊÇµØÐÎ£¬Ê¹ÓÃÔ¤ÀÀÎïÌåµ±Ç°µÄ Y ÖáËõ·Å£»·ñÔòÊ¹ÓÃÍø¸ñ´óÐ¡±ä³ÉÕý·½Ìå
-                // ×¢Òâ£ºÇëÈ·±£ GridDataType.Terrain ÊÇÄãÃ¶¾ÙÀïµÄÕýÈ·Ãû³Æ
+                // ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½Î£ï¿½Ê¹ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½åµ±Ç°ï¿½ï¿½ Y ï¿½ï¿½ï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                // ×¢ï¿½â£ºï¿½ï¿½È·ï¿½ï¿½ GridDataType.Terrain ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½
                 float targetHeight = selectedObject.GridType == GridDataType.Terrain ? _previewObject.transform.localScale.y : gridCellSize;
                 _previewObject.transform.localScale = new Vector3(gridCellSize, targetHeight, gridCellSize);
             }
@@ -128,7 +128,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         /// </summary>
         public void UpdatePosition(Vector3 position, bool isValid, Placeable placeable, ObjectDirection direction = ObjectDirection.Down)
         {
-            // [ºËÐÄÐÞ¸Ä] »ñÈ¡Íø¸ñÐý×ª
+            // [ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½] ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
             Quaternion gridRot = PlacementSystem.Instance != null ? PlacementSystem.Instance.GridRotation : Quaternion.identity;
 
             if (_previewObject)
@@ -136,16 +136,16 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                 // only if obj is passed, RemoveState actually passes null because it's not needed there
                 if (placeable)
                 {
-                    // 1. ¼ÆËãÆ«ÒÆ
+                    // 1. ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½
                     var offset = PlaceableUtils.GetTotalOffset(_pivotOffset, direction);
-                    // [ºËÐÄÐÞ¸Ä] Æ«ÒÆÁ¿ÏòÁ¿Ò²ÒªÐý×ª£¡·ñÔòÎïÌå»áÆ«Àë
+                    // [ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½] Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½
                     Vector3 rotatedOffset = gridRot * offset;
 
-                    // 2. ÉèÖÃÎ»ÖÃ (×¢Òâ Y ÖáÆ«ÒÆÍ¨³£²»ÐèÒªÐý×ª£¬³ý·ÇÄãµÄÍø¸ñÊÇÐ±µÄ£¬ÕâÀïÔÝÊ±¼ÙÉèÍø¸ñÖ»ÊÇÈÆ Y ÖáÐý×ª)
+                    // 2. ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ (×¢ï¿½ï¿½ Y ï¿½ï¿½Æ«ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ Y ï¿½ï¿½ï¿½ï¿½×ª)
                     _previewObject.transform.position =
                         position + new Vector3(0, _config.PreviewYOffset, 0) + rotatedOffset;
 
-                    // [ºËÐÄÐÞ¸Ä] ÎïÌåÐý×ª = Íø¸ñÐý×ª * ÎïÌå×ÔÉíÂß¼­³¯Ïò
+                    // [ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½
                     _previewObject.transform.rotation = gridRot * Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
 
                     // RotationBasedObject size for cellIndicator
@@ -205,7 +205,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
         private void MoveCellIndicator(Vector3 position)
         {
             _cellIndicator.transform.position = position;
-            // [ºËÐÄÐÞ¸Ä] ÈÃµ××ùÖ¸Ê¾Æ÷¸úËæÍø¸ñÐý×ª
+            // [ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½] ï¿½Ãµï¿½ï¿½ï¿½Ö¸Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
             if (PlacementSystem.Instance != null)
             {
                 _cellIndicator.transform.rotation = PlacementSystem.Instance.GridRotation;
