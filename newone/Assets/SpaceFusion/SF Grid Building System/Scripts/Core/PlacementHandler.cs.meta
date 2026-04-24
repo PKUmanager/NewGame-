@@ -3,7 +3,9 @@ guid: 2fc472c4a4634ffeb3959d35dfb49f53
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - soilEffectPrefab: {fileID: 15183445183708112, guid: 5b0ec20474002e244b2d1bf6a2d3ff38, type: 3}
+  - waterEffectPrefab: {fileID: 15183445183708112, guid: 7a49578b2d77d6b4092136810e99360c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

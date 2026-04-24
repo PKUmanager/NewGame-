@@ -10,6 +10,14 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
 {
     public class PlacementHandler : MonoBehaviour
     {
+        // ==========================================
+        // ★ 特效设置 ★
+        // ==========================================
+        [Header("Effects Settings")]
+        public GameObject soilEffectPrefab;
+        public GameObject waterEffectPrefab;
+        public float effectYOffset = 0.1f;
+
         private readonly Dictionary<string, GameObject> _placedObjectDictionary = new();
         private PlacementGrid _cachedGrid;
 
@@ -18,6 +26,27 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (PlacementSystem.Instance != null) return PlacementSystem.Instance.GridRotation;
             if (_cachedGrid == null) _cachedGrid = FindObjectOfType<PlacementGrid>(true);
             return _cachedGrid != null ? _cachedGrid.transform.rotation : Quaternion.identity;
+        }
+
+        // --- 核心特效探测与生成逻辑 ---
+        private void SpawnAppropriateEffect(Vector3 spawnPos)
+        {
+            GameObject effectToSpawn = soilEffectPrefab;
+
+            RaycastHit hit;
+            // 从生成位置上方 1m 向下探测，探测范围 5m
+            if (Physics.Raycast(spawnPos + Vector3.up * 1.0f, Vector3.down, out hit, 5.0f))
+            {
+                if (hit.collider.CompareTag("Water"))
+                {
+                    effectToSpawn = waterEffectPrefab;
+                }
+            }
+
+            if (effectToSpawn != null)
+            {
+                Instantiate(effectToSpawn, spawnPos + new Vector3(0, effectYOffset, 0), Quaternion.identity);
+            }
         }
 
         public string PlaceObject(Placeable placeableObj, Vector3 worldPosition, Vector3Int gridPosition, ObjectDirection direction, Vector3 offset, float cellSize)
@@ -45,7 +74,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             ObjectGrouper.Instance.AddToGroup(obj, placeableObj.GridType);
             _placedObjectDictionary.Add(placedObject.data.guid, obj);
 
-            // 同步全局评分：仅在放置成功（物体已加入字典）后累加
+            // 放置建筑时生成特效
+            SpawnAppropriateEffect(obj.transform.position);
+
             if (GameManager.Instance != null) GameManager.Instance.AddObjectScore(placeableObj);
 
             var attr = placeableObj.Prefab.GetComponent<BuildingAttribute>();
@@ -81,8 +112,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (!_placedObjectDictionary.ContainsKey(placedObject.data.guid))
             {
                 _placedObjectDictionary.Add(placedObject.data.guid, obj);
-
-                // 同步全局评分：仅在首次加入字典时累加（避免无法正确移除导致分数不同步）
                 if (GameManager.Instance != null) GameManager.Instance.AddObjectScore(placeableObj);
             }
 
@@ -101,6 +130,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             obj.transform.rotation = gridRot * Quaternion.Euler(0, PlaceableUtils.GetRotationAngle(direction), 0);
             placedObject.data.gridPosition = gridPosition;
             placedObject.data.direction = direction;
+
+            // 移动放下时生成特效
+            SpawnAppropriateEffect(obj.transform.position);
         }
 
         public void RemoveObjectPositions(string guid)
@@ -110,7 +142,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             if (!obj) return;
             var placedObjComp = obj.GetComponent<PlacedObject>();
 
-            // 同步全局评分：移除时扣除对应物品分数
             if (GameManager.Instance != null && placedObjComp != null && placedObjComp.placeable != null)
                 GameManager.Instance.RemoveObjectScore(placedObjComp.placeable);
 
@@ -125,13 +156,10 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             Destroy(obj);
         }
 
+        // 核心辅助函数：获取已放置的对象
         public PlacedObject GetPlacedObjectByGuid(string guid)
         {
-            if (!_placedObjectDictionary.TryGetValue(guid, out var obj) || obj == null)
-            {
-                return null;
-            }
-
+            if (!_placedObjectDictionary.TryGetValue(guid, out var obj) || obj == null) return null;
             return obj.GetComponent<PlacedObject>();
         }
 
@@ -148,16 +176,13 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             }
         }
 
-        // ==========================================
-        // ★★★ 修改：结构体增加网格坐标 ★★★
-        // ==========================================
         [System.Serializable]
         public struct BuildingInfo
         {
             public string name;
             public Vector3 position;
             public float rotation;
-            public Vector3Int gridPosition; // 新增：绝对网格坐标
+            public Vector3Int gridPosition;
         }
 
         public List<BuildingInfo> GetAllBuildings()
@@ -167,7 +192,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
             {
                 GameObject obj = kvp.Value;
                 if (obj == null) continue;
-
                 PlacedObject placedObj = obj.GetComponent<PlacedObject>();
                 if (placedObj != null && placedObj.placeable != null)
                 {
@@ -175,7 +199,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Core
                     info.name = placedObj.placeable.Prefab.name;
                     info.position = obj.transform.position;
                     info.rotation = obj.transform.eulerAngles.y;
-                    // ★★★ 记录准确的网格坐标 ★★★
                     info.gridPosition = placedObj.data.gridPosition;
                     list.Add(info);
                 }
