@@ -21649,7 +21649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _totalSafety
-      value: 300
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _targetSafety
@@ -21661,7 +21661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _targetComfort
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _totalAesthetics
@@ -21669,7 +21669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _targetAesthetics
-      value: 500
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _totalEnvironment
@@ -21677,7 +21677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: _targetEnvironment
-      value: 500
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 8588428010788668058, guid: 4a10d29ea556a654d926afdd852f4806, type: 3}
       propertyPath: <SceneCamera>k__BackingField
@@ -36958,8 +36958,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802708879}
   m_HandleRect: {fileID: 1802708878}
   m_Direction: 2
-  m_Value: -0.000035903035
-  m_Size: 0.94329226
+  m_Value: -0.000019746669
+  m_Size: 0.9433248
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -49986,8 +49986,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336363736}
   m_HandleRect: {fileID: 336363735}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -57958,7 +57958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000020980835, y: 17.00064}
+  m_AnchoredPosition: {x: -0.000020980835, y: 17.00038}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1480488431
@@ -64794,42 +64794,42 @@ MonoBehaviour:
   _gameManager: {fileID: 1663501205}
   _milestones:
   - _statType: 0
-    _threshold: 150
+    _threshold: 100
     _animator: {fileID: 1683281973}
     _triggerName: 
     Triggered: 0
   - _statType: 0
-    _threshold: 50
+    _threshold: 300
     _animator: {fileID: 1057609619}
     _triggerName: 
     Triggered: 0
   - _statType: 1
-    _threshold: 250
+    _threshold: 800
     _animator: {fileID: 911227150}
     _triggerName: 
     Triggered: 0
   - _statType: 1
-    _threshold: 500
+    _threshold: 400
     _animator: {fileID: 726046139}
     _triggerName: 
     Triggered: 0
   - _statType: 2
-    _threshold: 500
+    _threshold: 800
     _animator: {fileID: 1761341457}
     _triggerName: 
     Triggered: 0
   - _statType: 2
-    _threshold: 250
+    _threshold: 400
     _animator: {fileID: 1312221550}
     _triggerName: 
     Triggered: 0
   - _statType: 3
-    _threshold: 150
+    _threshold: 300
     _animator: {fileID: 727407205}
     _triggerName: 
     Triggered: 0
   - _statType: 3
-    _threshold: 300
+    _threshold: 600
     _animator: {fileID: 1738723528}
     _triggerName: 
     Triggered: 0
