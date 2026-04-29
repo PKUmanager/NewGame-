@@ -21,7 +21,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
             [SerializeField] private int _threshold;
             [SerializeField] private Animator _animator;
             [SerializeField] private string _triggerName = "Play";
-            [SerializeField] private float _hideDelaySeconds = 2.2f;
 
             [HideInInspector] public bool Triggered;
 
@@ -43,9 +42,9 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 }
             }
 
-            public void Play(MonoBehaviour runner)
+            public void Play()
             {
-                if (_animator == null || runner == null) return;
+                if (_animator == null) return;
 
                 GameObject targetObject = _animator.gameObject;
                 // 必须激活物体，否则 Animator 指令无效
@@ -58,18 +57,6 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 {
                     _animator.SetTrigger(_triggerName);
                 }
-
-                if (targetObject != null)
-                {
-                    runner.StartCoroutine(HideAfterDelay(targetObject, _hideDelaySeconds));
-                }
-            }
-
-            private IEnumerator HideAfterDelay(GameObject obj, float delay)
-            {
-                if (obj == null) yield break;
-                yield return new WaitForSeconds(delay);
-                if (obj != null) obj.SetActive(false);
             }
         }
 
@@ -161,7 +148,7 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
                 if (milestone.ShouldTrigger(prev, curr))
                 {
                     milestone.Triggered = true;
-                    milestone.Play(this);
+                    milestone.Play();
                 }
             }
 

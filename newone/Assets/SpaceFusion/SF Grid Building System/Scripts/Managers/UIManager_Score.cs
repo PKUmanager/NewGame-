@@ -43,35 +43,35 @@ namespace SpaceFusion.SF_Grid_Building_System.Scripts.Managers
         {
             if (_totalCostText != null)
             {
-                _totalCostText.text = $"成本: {currentCost}/{targetCost}";
+                _totalCostText.text = $"{currentCost}/{targetCost}";
                 // Cost 越大越糟：超过目标红色，否则绿色
                 _totalCostText.color = currentCost > targetCost ? _failColor : _passColor;
             }
 
             if (_totalSafetyText != null)
             {
-                _totalSafetyText.text = $"安全: {currentSafety}/{targetSafety}";
+                _totalSafetyText.text = $"{currentSafety}/{targetSafety}";
                 // Safety 越大越好：未达标红色，达标绿色
                 _totalSafetyText.color = currentSafety < targetSafety ? _failColor : _passColor;
             }
 
             if (_totalAestheticsText != null)
             {
-                _totalAestheticsText.text = $"美观: {currentAesthetics}/{targetAesthetics}";
+                _totalAestheticsText.text = $"{currentAesthetics}/{targetAesthetics}";
                 // Aesthetics 越大越好：未达标红色，达标绿色
                 _totalAestheticsText.color = currentAesthetics < targetAesthetics ? _failColor : _passColor;
             }
 
             if (_totalEnvironmentText != null)
             {
-                _totalEnvironmentText.text = $"环境: {currentEnvironment}/{targetEnvironment}";
+                _totalEnvironmentText.text = $"{currentEnvironment}/{targetEnvironment}";
                 // Environment 越大越好：未达标红色，达标绿色
                 _totalEnvironmentText.color = currentEnvironment < targetEnvironment ? _failColor : _passColor;
             }
 
             if (_totalComfortText != null)
             {
-                _totalComfortText.text = $"舒适: {currentComfort}/{targetComfort}";
+                _totalComfortText.text = $"{currentComfort}/{targetComfort}";
                 // Comfort 越大越好：未达标红色，达标绿色
                 _totalComfortText.color = currentComfort < targetComfort ? _failColor : _passColor;
             }
